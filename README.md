@@ -4,7 +4,6 @@ légende :
 (opt) = optionnel, si on a le temps
 
 Règles du jeu : 
-    - Personnage avance avec 'z','q','s','d' ou les flèches directionnelles, clic gauche : attaque, clic droit : roulade, 'e' Ramasse un objet, barre espace use l’item.
     - Jeu composé de salles générée procéduralement s'enchainant et contenant des monstres ou des évenements.
     - Le personnage avance de salle en salle en éliminant tous les monstres présents dans les salles.
     - Le personnage améliore sa capacité au combat au fil des salles en ramassant des bonus.
