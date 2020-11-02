@@ -1,9 +1,10 @@
-Projet Roguelike (Nom du jeu)
+Projet Roguelike (Nom du jeu à définir)
 
 légende :
 (opt) = optionnel, si on a le temps
 
-Règles du jeu : 
+Règles du jeu :
+
     - Jeu composé de salles générée procéduralement s'enchainant et contenant des monstres ou des évenements.
     - Le personnage avance de salle en salle en éliminant tous les monstres présents dans les salles.
     - Le personnage améliore sa capacité au combat au fil des salles en ramassant des bonus.
@@ -11,6 +12,7 @@ Règles du jeu :
  
 
 Commandes :
+
     - Personnage avance avec 'z','q','s','d' ou les flèches directionnelles.
     - Personnage attaque avec le clic gauche de la souris et effectue une roulade avec le clic droit.
     - Personnage attaque dans la direction du curseur de la souris.
