@@ -21,6 +21,7 @@ Commandes :
 Personnage :
 
     - Plusieurs types d'attaques représentés par des armes (fusil, épée, ...). Le joueur choisit son arme au début d'une partie.
+    - Le joueur débloque les différents type d'armes et certains bonus en faisant des parties.
 
 Objets :
 
@@ -46,3 +47,15 @@ Objets :
             - Effet possible : augmentation ou diminution des statistiques de base du personnage pour toute la durée de la partie.
             - Effet possible : changement de statut positif ou néfaste pour une courte durée (plus rapide, poison, ...).
 
+Ennemis : 
+
+    - Utilsation du pathfinding pour se diriger vers le joueur
+    - Monstres différents selon la salle et l'étage où ils apparaissent
+    - Présence de Boss qui sont des monstres spéciaux apparaissant à des endroits fixes et qui sont bien plus fort que des monstres normaux
+    - Apparition de monstres d'élites peu fréquente (monstres normaux ayant des statistiques plus grandes)
+
+
+Mechaniques spéciales :
+
+    - Possibilité de flotter et donc d'éviter les trous ou pièges du sol (joueur et monstres)
+    - Eventualité d'un mode coopération à 2 joueurs
