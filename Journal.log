@@ -1,4 +1,5 @@
 Journal de bord
 Lundi 02/11/2020 : Réalisation du readme et du journal de bord.
 Lundi 09/11/2020 : Fin du readme et réalisation du diagramme de dépendence des différents modules.
-Lundi 16/11/2020 : Attente des résultats, commencer à coder
+Jeudi 12/11/2020 : Installation valgrind + création database.c et database.h, et import des fichiers sdl.
+Lundi 16/11/2020 :
