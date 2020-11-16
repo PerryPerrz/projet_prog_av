@@ -100,7 +100,7 @@ struct world_s
     sprite_t **enemies; /*!< Champ représentant les ennemis en jeu */
     int score;          /*!< Champ représentant le score du joueur */
     int etat_jeu;       /*!< Champ représentant l'état de la partie en cours (1 = J perdu / 2 = E tous détruits / 3 = partie pas finie) */
-}
+};
 
 /**
  * \brief Type qui correspond aux données du monde

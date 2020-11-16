@@ -2,6 +2,7 @@
  * \file fonctions_SDL.h
  * \brief Programme déclarant la fonction fonctions_SDL.h
  * \author IOPETI Hugo
+ * \author YVOZ Ludovic
  * \date 21 septembre 2020
  */
 
@@ -16,7 +17,7 @@
  * \return La surface de la texture chargée
  /
  */
-SDL_Texture *charger_image(const char *nomfichier, SDL_Renderer *renderer);
+SDL_Texture *load_image(const char *nomfichier, SDL_Renderer *renderer);
 
 /**
  * \brief Fonction qui charge une image transparente
@@ -28,7 +29,7 @@ SDL_Texture *charger_image(const char *nomfichier, SDL_Renderer *renderer);
  * \return La surface de la texture chargée
  /
  */
-SDL_Texture *charger_image_transparente(const char *nomfichier, SDL_Renderer *renderer, Uint8 r, Uint8 g, Uint8 b);
+SDL_Texture *load_transparent_image(const char *nomfichier, SDL_Renderer *renderer, Uint8 r, Uint8 g, Uint8 b);
 
 /**
  * \brief Fonction qui charge le texte
@@ -39,4 +40,18 @@ SDL_Texture *charger_image_transparente(const char *nomfichier, SDL_Renderer *re
  * \return La surface de la texture chargée
  /
  */
-SDL_Texture *charger_texte(const char *message, SDL_Renderer *renderer, TTF_Font *font, SDL_Color color);
+SDL_Texture *load_text(const char *message, SDL_Renderer *renderer, TTF_Font *font, SDL_Color color);
+
+/**
+ * \brief Fonction qui nettoie une image en mémoire
+ * \param image L'image à nettoyer
+ /
+ */
+void clean_image(SDL_Texture* image);
+
+/**
+ * \brief Fonction qui applique une image sur le renderer à une certaine position
+ * //fonction à changer
+ /
+ */
+void apply_image(SDL_Texture* image, SDL_Renderer* renderer, int x, int y);
