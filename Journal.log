@@ -3,4 +3,5 @@ Lundi 02/11/2020 : Réalisation du readme et du journal de bord.
 Lundi 09/11/2020 : Fin du readme et réalisation du diagramme de dépendence des différents modules.
 Jeudi 12/11/2020 : Installation valgrind + création database.c et database.h, et import des fichiers sdl.
 Lundi 16/11/2020 : Modifications des fichiers sdl (utilisations des fonctions crées lors du TP1) + création des fichiers graphique.c/.h
+Mercredi 18/11/2020 : Création du sprite background + correction de la fonction apply image
 Lundi 23/11/2020 : 
