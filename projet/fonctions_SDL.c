@@ -31,13 +31,11 @@ void clean_image(SDL_Texture* image) {
     }
 }
 
-void apply_image(SDL_Texture* image, SDL_Renderer* renderer, int x, int y) {
-    //A modifier
-    SDL_Rect SrcR = {0, 0, 0, 0};
+void apply_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect SrcR, int x, int y) {
+    SDL_Rect DestR = SrcR;
 
-    SDL_QueryTexture(image, NULL, NULL, &SrcR.w, &SrcR.h); //On cherche directement la taille de l'image (hauteur et largeur)
-    SrcR.x = x;
-    SrcR.y = y;
+    DestR.x = x; //On choisit les coordnonnées de l'endroit où on affiche le sprite sur la fenêtre
+    DestR.y = y;
 
-    SDL_RenderCopy(renderer, image, NULL, &SrcR);
+    SDL_RenderCopy(renderer, image, &SrcR, &DestR);
 }

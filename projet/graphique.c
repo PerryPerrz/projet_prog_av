@@ -9,11 +9,11 @@
 #include "graphique.h"
 
 
-void apply_sprite(SDL_Renderer * renderer, SDL_Texture * texture, sprite_t * sprite)
+void apply_sprite(SDL_Renderer * renderer, SDL_Texture * texture, SDL_Rect SrcR, sprite_t * sprite)
 {
     if (sprite->is_visible == 0)
     {
-        apply_image(texture, renderer, sprite->x - (sprite->h/2), sprite->y - (sprite->w/2)); //On donne les coordonnées du coin en haut à gauche du sprite à partir du centre du sprite
+        apply_image(texture, renderer, SrcR, sprite->x - (sprite->h/2), sprite->y - (sprite->w/2)); //On donne les coordonnées du coin en haut à gauche du sprite à partir du centre du sprite
     }
 }
 
@@ -32,7 +32,9 @@ void clean_resources(resources_t *resources){
 
 void apply_background(SDL_Renderer *renderer, resources_t *resources){
     if(resources->background != NULL){
-      apply_texture(resources->background, renderer, 0, 0);
+        SDL_Rect BackR = {0, 0, 0, 0};
+        SDL_QueryTexture(resources->background, NULL, NULL, &BackR.w, &BackR.h);
+        apply_image(resources->background, renderer,BackR, 0, 0);
     }
 }
 
@@ -44,8 +46,8 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,resources_t *resour
     
     //application des ressources dans le renderer
     apply_background(renderer, resources);
-    apply_sprite(renderer, resources->player, world->player);
-    apply_sprite(renderer, resources->ammo, world->ammo);
+    //apply_sprite(renderer, resources->player, world->player); mettre avec un SDL_Rect
+    //apply_sprite(renderer, resources->ammo, world->ammo); pareil
     
     // on met à jour l'écran
     update_screen(renderer);

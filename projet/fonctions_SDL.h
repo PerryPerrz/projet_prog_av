@@ -51,7 +51,11 @@ void clean_image(SDL_Texture* image);
 
 /**
  * \brief Fonction qui applique une image sur le renderer à une certaine position
- * //fonction à changer
+ * \param image L'image à afficher
+ * \param renderer Le renderer
+ * \param SrcR Stockage de la position et des dimensions du sprite à afficher
+ * \param x Position de l'image à afficher sur l'abscisse de la fenêtre
+ * \param y Position de l'image à afficher sur l'ordonnée de la fenêtre
  /
  */
-void apply_image(SDL_Texture* image, SDL_Renderer* renderer, int x, int y);
+void apply_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect SrcR, int x, int y);
