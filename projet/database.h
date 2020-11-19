@@ -80,6 +80,7 @@ struct sprite_s
     int w;          /*!< Champ indiquant la largeur du sprite */
     int v;          /*!< Champ indiquant la vitesse verticale du sprite */
     int is_visible; /*!< Champ indiquant si le sprite est visible (0) ou invisible (1) */
+    SDL_Rect SrcR;  /*!< Champ indiquant les coordonnées du sprite sur sa sprite sheet */
 };
 
 /**

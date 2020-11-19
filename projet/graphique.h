@@ -35,6 +35,16 @@ typedef struct resources_s resources_t;
 */
 void apply_sprite(SDL_Renderer * renderer, SDL_Texture * texture, sprite_t * sprite);
 
+/**
+ * \brief La procédure applique une texture sur le renderer à sa position
+ * \param renderer Le renderer actuel
+ * \param texture La texture à appliquer
+ * \param sprite Le sprite dont on doit appliquer la texture
+ * \param f facteur de changement de taille (négatif : réduction de taille / positif : augmantation de taille)
+ * \return La nouvelle hauteur et la nouvelle largeur du sprite sous forme de tableau d'entiers.
+*/
+int* apply_resized_sprite(SDL_Renderer * renderer, SDL_Texture * texture, sprite_t * sprite, int f);
+
 
 /**
  * \brief La fonction initialise les texures
