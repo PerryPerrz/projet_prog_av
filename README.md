@@ -1,14 +1,12 @@
-Projet Roguelike (Nom du jeu à définir)
-
-légende :
-(opt) = optionnel, si on a le temps
+Projet Roguelite (Nom du jeu à définir)
+Thème Medieval-Fantasy
 
 Règles du jeu :
 
     - Jeu composé d'étages ayant des thèmes différents composés de salles générée procéduralement s'enchainant et contenant des monstres ou des évenements.
     - Le personnage avance de salle en salle en éliminant tous les monstres présents dans les salles.
     - Le personnage améliore sa capacité au combat au fil des salles en ramassant des bonus.
-    - Quand le personnage meurt il perd tout ce qu'il à accumulé (pièces, bonus) mais il garde une monnaie qu'il peut échanger au point de départ pour devenir plus fort.
+    - Quand le personnage meurt il perds tout ce qu'il à accumulé (pièces, bonus) mais il garde une monnaie qu'il peut échanger au point de départ pour devenir plus fort.
  
 
 Commandes :
@@ -46,6 +44,11 @@ Objets :
             - Les potions apportent des bonus immédiats 
             - Effet possible : augmentation ou diminution des statistiques de base du personnage pour toute la durée de la partie.
             - Effet possible : changement de statut positif ou néfaste pour une courte durée (plus rapide, poison, ...).
+
+        - Clés :
+
+            - Les clés apparaissent une fois par étage et permettent d'accèder à la salle du Boss.
+            - Les clés apparaissent quand le joueur finit une certaine salle déterminée aléatoirement au début de l'étage.
 
 Ennemis : 
 
