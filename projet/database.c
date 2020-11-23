@@ -15,6 +15,9 @@ void init_sprite(sprite_t *sprite, int x, int y, int w, int h, int v)
     sprite->w = w;
     sprite->v = v;
     sprite->is_visible = 0;
+    sprite->wich_img = malloc(sizeof(int)*2);
+    sprite->wich_img[0] = 0;
+    sprite->wich_img[1] = 0;
 }
 
 int generate_number(int a, int b)

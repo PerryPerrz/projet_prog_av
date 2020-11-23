@@ -10,15 +10,26 @@
 #include "fonctions_SDL.h"
 #include <time.h>
 
+
 /**
  * \brief Largeur de l'écran de jeu
  */
-#define SCREEN_WIDTH 300
+#define SCREEN_WIDTH 700    
 
 /**
  * \brief Hauteur de l'écran de jeu
  */
-#define SCREEN_HEIGHT 480
+#define SCREEN_HEIGHT 400   
+
+/**
+ * \brief Largeur de la zone de jeu
+ */
+#define PLAY_ZONE_WIDTH 448  
+
+/**
+ * \brief Hauteur de la zone de jeu
+ */
+#define PLAY_ZONE_HEIGHT 224   
 
 /**
  * \brief Taille du personnage
@@ -31,6 +42,12 @@
 */
 
 #define AMMO_SIZE 8
+
+/**
+ * \brief Taille des ennemis
+ */
+
+#define ENNEMY_SIZE 32
 
 /**
  * \brief Vitesse de l'ennemi
@@ -54,19 +71,7 @@
  * \brief Nombre d'ennemis en jeu
 */
 
-#define NB_ENEMIES 20
-
-/**
- * \brief Nombre de boucles de jeu à faire avant de fermer la fenêtre de jeu (~2sec).
-*/
-
-#define NB_BOUCLES 200
-
-/**
- * \brief Points de vie initiaux du boss.
-*/
-
-#define PV_INITIAL_BOSS 20
+#define NB_ENEMIES 0
 
 /**
  * \brief Représentation d'un sprite du jeu
@@ -80,7 +85,7 @@ struct sprite_s
     int w;          /*!< Champ indiquant la largeur du sprite */
     int v;          /*!< Champ indiquant la vitesse verticale du sprite */
     int is_visible; /*!< Champ indiquant si le sprite est visible (0) ou invisible (1) */
-    SDL_Rect SrcR;  /*!< Champ indiquant les coordonnées du sprite sur sa sprite sheet */
+    int* wich_img;  /*!< Champ indiquant quel image doit être affichée pour le sprite à l'instant [0] = n° sur l'axe x et [1] = n° sur l'axe y */
 };
 
 /**

@@ -72,4 +72,20 @@ void apply_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect SrcR, int 
  * \param f facteur de changement de taille (négatif : réduction de taille / positif : augmantation de taille)
  * \return La nouvelle hauteur et la nouvelle largeur du sprite sous forme de tableau d'entiers.
  */
-int* apply_resized_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect SrcR, int x, int y, int f)
+int* apply_resized_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect SrcR, int x, int y, int f);
+
+/**
+ * \brief Fonction qui initialise la fenêtre graphique et le renderer
+ * \param window la fenêtre du jeu
+ * \param renderer le renderer
+ * \param width largeur de l'écran de jeu
+ * \param height hauteur de l'écran de jeu
+ */
+void init_sdl(SDL_Window **window, SDL_Renderer **renderer, int width, int height);
+
+/**
+ * \brief Fonction qui nettoie tout ce qui à été initialisé dans la fonction init_SDL et ferme la fenêtre graphique
+ * \param renderer Le renderer
+ * \param window La fenêtre graphique
+ */
+void clean_sdl(SDL_Renderer *renderer,SDL_Window *window);

@@ -63,3 +63,18 @@ int* apply_resized_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect Sr
 
     return w_et_h;
 }
+
+void init_sdl(SDL_Window **window, SDL_Renderer **renderer, int width, int height) {
+    SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
+    SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_SHOWN, window, renderer);
+}
+
+void clean_sdl(SDL_Renderer *renderer,SDL_Window *window){
+    if(renderer != NULL) {
+        SDL_DestroyRenderer(renderer);
+    }
+    if(window != NULL) {
+        SDL_DestroyWindow(window);
+    }
+    SDL_Quit();    
+}

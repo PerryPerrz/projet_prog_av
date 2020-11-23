@@ -10,7 +10,6 @@
 
 
 void handle_events(SDL_Event *event,world_t *world){
-    Uint8 *keystates;
     while( SDL_PollEvent( event ) ) {
         switch (event->type)
         {
