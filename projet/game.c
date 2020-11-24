@@ -10,6 +10,7 @@
 #include "graphique.h"
 #include "events.h"
 #include "init_and_clean.h"
+#include "update.h"
 
 //#include "update.h" à venir
 
@@ -72,7 +73,7 @@ int main(int argc, char* args[])
         handle_events(&event,&world);
 
         //mise à jour des données liée à la physique du monde
-        //update_data(&world); à coder
+        update_data(&world);
         
         //rafraichissement de l'écran
         refresh_graphics(renderer,&world,&resources);

@@ -8,6 +8,8 @@
   
 #ifndef update_data
 #include "database.h"
+#include "enemy.h"
+#include <math.h>
 
 
 /**

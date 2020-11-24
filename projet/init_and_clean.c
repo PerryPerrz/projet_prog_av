@@ -8,7 +8,6 @@
 
 #include "init_and_clean.h"
 
- 
 void init_data(world_t * world){
     srand(time(NULL));
 
@@ -18,7 +17,7 @@ void init_data(world_t * world){
     init_sprite(world->ammo, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - (0.5 /* * PLAYER_SIZE*/ ) - (AMMO_SIZE / 2), AMMO_SIZE, AMMO_SIZE, AMMO_SPEED);   //La position y du missile équivaut à la position y du joueur - 1/2joueur-1/2missile (il est juste au-dessus).
     set_invisible(world->ammo);
 
-    init_enemies(world); 
+    //init_enemies(world);
     init_player(world);
 
     world->gameover = 0;
@@ -28,7 +27,7 @@ void init_data(world_t * world){
 
 
 void clean_data(world_t *world){
-    free_player(world);
+    //free_player(world);
     free(world->ammo);
-    free_enemies(world);
+    //free_enemies(world);
 }

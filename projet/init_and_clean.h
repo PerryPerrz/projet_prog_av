@@ -8,6 +8,8 @@
  
 #ifndef init_data
 #include "database.h"
+#include "player.h"
+#include "enemy.h"
 
 
 /**

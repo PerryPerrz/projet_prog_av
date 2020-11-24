@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS   = -Wall -g -O3 `sdl2-config --cflags` # Compilation flags and include paths
-LIBS     = -lSDL2_ttf -lSDL2_image             # Additional Libraries
+LIBS     = -lSDL2_ttf -lSDL2_image -lm         # Additional Libraries
 LFLAGS   = `sdl2-config --libs`                # Library flags
-SRCS = game.c database.c events.c fonctions_SDL.c graphique.c init_and_clean.c
+SRCS = game.c database.c events.c fonctions_SDL.c graphique.c init_and_clean.c update.c player.c enemy.c
 OBJS = $(SRCS:.c=.o)
 BIN = main
 EXEC = $(BIN)
