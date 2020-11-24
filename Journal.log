@@ -7,4 +7,5 @@ Mercredi 18/11/2020 : Création du sprite background + correction de la fonction
 Jeudi 19/11/2020 : Fonctions d'affichage terminées et création des premiers sprites
 Lundi 23/11/2020 : Améliorations des fichiers suivants : Makefile, database.c/.h, events.c, fonctions_SDL.c/.h, graphique.c, 
                     création des fichiers suivants : game.c et init_and_clean.c/.h
+Mardi 24/11/2020 : Réalisation de player.c/.h, enemy.c/.h, update.c/.h et Modifications en conséquences.
 Lundi 30/11/2020 : 
