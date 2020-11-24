@@ -39,8 +39,8 @@ int* apply_resized_sprite(SDL_Renderer * renderer, SDL_Texture * texture, sprite
 
 void  init_resources(SDL_Renderer *renderer, resources_t *resources){
     resources->background = load_image("ressources/background1.bmp",renderer);
-    resources->player = load_transparent_image("ressources/player.bmp", renderer,230,80,235);
-    resources->ammo = load_transparent_image("ressources/ammo.bmp", renderer,230,80,235);
+    resources->player = load_transparent_image("ressources/chest_closed.bmp", renderer,230,80,235);
+    resources->ammo = load_transparent_image("ressources/key.bmp", renderer,230,80,235);
 }
 
 void clean_resources(resources_t *resources){
@@ -66,7 +66,7 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,resources_t *resour
     
     //application des ressources dans le renderer
     apply_background(renderer, resources);
-    apply_sprite(renderer, resources->player, world->player);
+    apply_sprite(renderer, resources->player, world->player->sprite);
     apply_sprite(renderer, resources->ammo, world->ammo);
     
     // on met à jour l'écran    

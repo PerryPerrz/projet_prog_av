@@ -9,6 +9,7 @@
 #ifndef SCREEN_WIDTH
 #include "fonctions_SDL.h"
 #include <time.h>
+#include <stdio.h>
 
 
 /**
@@ -32,46 +33,16 @@
 #define PLAY_ZONE_HEIGHT 224   
 
 /**
- * \brief Taille du personnage
- */
-
-#define PLAYER_SIZE 32
-
-/**
  * \brief Taille des munitions
 */
 
 #define AMMO_SIZE 8
 
 /**
- * \brief Taille des ennemis
- */
-
-#define ENNEMY_SIZE 32
-
-/**
- * \brief Vitesse de l'ennemi
-*/
-
-#define ENNEMY_SPEED 2
-
-/**
  * \brief Vitesse des munitions
 */
 
 #define AMMO_SPEED 10
-
-/**
- * \brief Vitesse du personnage
-*/
-
-#define PLAYER_SPEED 20
-
-/**
- * \brief Nombre d'ennemis en jeu
-*/
-
-#define NB_ENEMIES 0
 
 /**
  * \brief Représentation d'un sprite du jeu
@@ -94,18 +65,48 @@ struct sprite_s
 
 typedef struct sprite_s sprite_t;
 
+struct character_s
+{
+    sprite_t *sprite;   /*!< Champ représentant le sprite du personnage */
+    int hp;             /*!< Champ indiquant le nombre de points de vie du personnage */     
+    int atk_power;      /*!< Champ indiquant la puissance d'attaque du personnage */
+    int weapon;         /*!< Champ indiquant l'arme que tiens le personnage (1 = ... / 2 = ... / etc..) */
+    int atk_speed;      /*!< Champ indiquant la vitesse d'attaque du personnage */
+};
+
+/**
+ * \brief Type qui correspond aux données du personnage du joueur
+ */
+
+typedef struct character_s character_t;
+
+struct monster_s
+{
+    sprite_t *sprite;   /*!< Champ représentant le sprite du monstre */
+    int hp;             /*!< Champ indiquant le nombre de points de vie du monstre */     
+    int atk_power;      /*!< Champ indiquant la puissance d'attaque du monstre */
+    int type;           /*!< Champ indiquant le type du monstre (1 = ... / 2 = ... / etc..) */
+    int atk_speed;      /*!< Champ indiquant la vitesse d'attaque du monstre */
+};
+
+/**
+ * \brief Type qui correspond aux données des monstres
+ */
+
+typedef struct monster_s monster_t;
+
 /**
  * \brief Représentation du monde du jeu
 */
 
 struct world_s
 {
-    sprite_t *player;   /*!< Champ représentant le personnage du joueur */
-    sprite_t *ammo;     /*!< Champ représentant les munitions du joueur*/
-    int gameover;       /*!< Champ indiquant si l'on est à la fin du jeu */
-    sprite_t **enemies; /*!< Champ représentant les ennemis en jeu */
-    int score;          /*!< Champ représentant le score du joueur */
-    int etat_jeu;       /*!< Champ représentant l'état de la partie en cours (1 = J perdu / 2 = E tous détruits / 3 = partie pas finie) */
+    character_t *player;    /*!< Champ représentant le personnage du joueur */
+    sprite_t *ammo;         /*!< Champ représentant les munitions du joueur*/
+    int gameover;           /*!< Champ indiquant si l'on est à la fin du jeu */
+    monster_t **enemies;    /*!< Champ représentant les ennemis en jeu */
+    int score;              /*!< Champ représentant le score du joueur */
+    int game_state;         /*!< Champ représentant l'état de la partie en cours (1 = J perdu / 2 = E tous détruits / 3 = partie pas finie) */             
 };
 
 /**

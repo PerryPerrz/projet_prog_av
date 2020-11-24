@@ -25,16 +25,16 @@ void handle_events(SDL_Event *event,world_t *world){
                 break;
 
             case SDLK_UP:
-                world->player->y += PLAYER_SPEED;
+                world->player->sprite->y += world->player->sprite->v;
                 break;
             case SDLK_DOWN:
-                world->player->y -= PLAYER_SPEED;
+                world->player->sprite->y -= world->player->sprite->v;
                 break;
             case SDLK_RIGHT:
-                world->player->y += PLAYER_SPEED;
+                world->player->sprite->y += world->player->sprite->v;
                 break;
             case SDLK_LEFT:
-                world->player->y -= PLAYER_SPEED;
+                world->player->sprite->y -= world->player->sprite->v;
                 break;
 
             case SDLK_SPACE:
