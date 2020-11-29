@@ -11,10 +11,16 @@
 
 
 /**
- * \brief Taille des ennemis de type 1
+ * \brief Hauteur des ennemis de type 1 (slime)
  */
 
-#define ENEMY_1_SIZE 32
+#define ENEMY_1_HEIGHT 24
+
+/**
+ * \brief Largeur des ennemis de type 1 (slime)
+ */
+
+#define ENEMY_1_WIDTH 42
 
 /**
  * \brief Vitesse des ennemis de type 1
@@ -62,7 +68,7 @@ void create_enemies(world_t* world);
  * \brief La procédure nettoie les ennemis
  * \param world Les données du monde
  */
-void clear_enemies(world_t* world);
+void free_enemies(world_t* world);
 
 /**
  * \brief Procédure qui mets à jour les données des ennemis.

@@ -10,7 +10,12 @@
 
 void update_data(world_t *world){
     //mise à jour des déplacements des missiles etc.. à faire
+    if (world->room_state == 0) {   //On génère de nouveaux monstres si on est dans une nouvelle salle
+        create_enemies(world);
+        world->room_state = 1;
+    }
     update_enemies(world);
+
     compute_game(world);
 
 }

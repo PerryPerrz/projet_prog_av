@@ -23,14 +23,24 @@
 #define SCREEN_HEIGHT 400   
 
 /**
- * \brief Largeur de la zone de jeu
+ * \brief Coordonnée x du mur droit de la zone de jeu 
  */
-#define PLAY_ZONE_WIDTH 448  
+#define PLAY_ZONE_RIGHT_WALL 573
 
 /**
- * \brief Hauteur de la zone de jeu
+ * \brief Coordonnée x du mur gauche de la zone de jeu 
  */
-#define PLAY_ZONE_HEIGHT 224   
+#define PLAY_ZONE_LEFT_WALL 125
+
+/**
+ * \brief Coordonnée y du mur en haut de la zone de jeu 
+ */
+#define PLAY_ZONE_TOP_WALL 85  
+
+/**
+ * \brief Coordonnée y du mur en bas de la zone de jeu 
+ */
+#define PLAY_ZONE_BOTTOM_WALL 308
 
 /**
  * \brief Taille des munitions
@@ -105,8 +115,10 @@ struct world_s
     sprite_t *ammo;         /*!< Champ représentant les munitions du joueur*/
     int gameover;           /*!< Champ indiquant si l'on est à la fin du jeu */
     monster_t **enemies;    /*!< Champ représentant les ennemis en jeu */
+    int nb_enemies;         /*!< Champ représentant le nombre d'ennemis en jeu */
     int score;              /*!< Champ représentant le score du joueur */
-    int game_state;         /*!< Champ représentant l'état de la partie en cours (1 = J perdu / 2 = E tous détruits / 3 = partie pas finie) */             
+    int game_state;         /*!< Champ représentant l'état de la partie en cours (1 = J perdu / 2 = E tous détruits / 3 = partie pas finie) */
+    int room_state;         /*!< Champ représentant l'état de la salle actuelle (0 = entrée dans la salle / 1 = bataille en cours /2 = E tous détruits / etc... boos, shop,...) */             
 };
 
 /**
@@ -152,5 +164,14 @@ void set_invisible(sprite_t *sprite);
  * \return 1 si le jeu est fini, 0 sinon
  */
 int is_game_over(world_t *world);
+
+
+/**
+ * \brief La fonction regarde si le sprite donné est en dehors de la zone de jeu
+ * \param sprite Un sprite
+ * \return Retourne 0 si vrai et 1 si faux
+ */
+int sprite_is_out_of_bounds(sprite_t* sprite);
+
 
 #endif
