@@ -66,7 +66,6 @@ int main(int argc, char* args[])
 
     //initialisation du jeu
     init(&window,&renderer,&resources,&world);
-    printf("gameover = %d\n", world.gameover);
     while(!is_game_over(&world)){ //tant que le jeu n'est pas fini
         
         //gestion des évènements
@@ -79,7 +78,7 @@ int main(int argc, char* args[])
         refresh_graphics(renderer,&world,&resources);
         
         // pause de 10 ms pour controler la vitesse de rafraichissement
-        SDL_Delay(10);;
+        SDL_Delay(10);
     }
 
     //nettoyage final

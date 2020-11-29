@@ -41,12 +41,14 @@ void  init_resources(SDL_Renderer *renderer, resources_t *resources){
     resources->background = load_image("ressources/background1.bmp",renderer);
     resources->player = load_transparent_image("ressources/chest_closed.bmp", renderer,230,80,235);
     resources->ammo = load_transparent_image("ressources/key.bmp", renderer,230,80,235);
+    resources->slime = load_transparent_image("ressources/slime.bmp", renderer,230,80,235);
 }
 
 void clean_resources(resources_t *resources){
     clean_image(resources->background);
     clean_image(resources->player);
     clean_image(resources->ammo);
+    clean_image(resources->slime);
 }
 
 
@@ -69,6 +71,21 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,resources_t *resour
     apply_sprite(renderer, resources->player, world->player->sprite);
     apply_sprite(renderer, resources->ammo, world->ammo);
     
+    apply_monsters(renderer, world, resources);
+
+
     // on met à jour l'écran    
     SDL_RenderPresent(renderer);
+}
+
+void apply_monsters(SDL_Renderer* renderer, world_t* world, resources_t* resources) {
+    //applications des monstres dans le renderer
+    for (int i = 0; i < world->nb_enemies; i++) {
+        switch (world->enemies[i]->type) 
+        {
+            case 1:
+                apply_sprite(renderer, resources->slime, world->enemies[i]->sprite);
+                break;
+        }
+    }
 }

@@ -17,6 +17,7 @@ struct resources_s{
     SDL_Texture* background;            /*!< Texture liée à l'image du fond de l'écran. */
     SDL_Texture* player;                /*!< Texture liée à l'image du personnage. */
     SDL_Texture* ammo;                  /*!< Texture liée à l'image des munitions. */
+    SDL_Texture* slime;                 /*!< Texture liée à l'image des slimes. */
 };
 
 /**
@@ -76,5 +77,13 @@ void apply_background(SDL_Renderer *renderer, resources_t *resources);
  * \param resources les ressources
  */
 void refresh_graphics(SDL_Renderer *renderer, world_t *world,resources_t *resources);
+
+/**
+ * \brief La fonction applique les monstres sur le renderer
+ * \param renderer la surface de l'écran de jeu
+ * \param world les données du monde
+ * \param resources les ressources
+ */
+void apply_monsters(SDL_Renderer* renderer, world_t* world, resources_t* resources);
 
 #endif

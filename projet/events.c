@@ -26,15 +26,19 @@ void handle_events(SDL_Event *event,world_t *world){
 
             case SDLK_UP:
                 world->player->sprite->y += world->player->sprite->v;
+                //animation perso
                 break;
             case SDLK_DOWN:
                 world->player->sprite->y -= world->player->sprite->v;
+                //animation perso
                 break;
             case SDLK_RIGHT:
                 world->player->sprite->y += world->player->sprite->v;
+                //animation perso
                 break;
             case SDLK_LEFT:
                 world->player->sprite->y -= world->player->sprite->v;
+                //animation perso
                 break;
 
             case SDLK_SPACE:
@@ -42,7 +46,7 @@ void handle_events(SDL_Event *event,world_t *world){
                 break;
                 
             case SDLK_e:
-                //ramasse un objet actif proche du personnage
+                //ramasse un objet proche du personnage
                 break;
             default:
                 break;
@@ -53,9 +57,11 @@ void handle_events(SDL_Event *event,world_t *world){
             {
             case SDL_BUTTON_LEFT:
                 //Le joueur effectue une attaque
+                //animation perso
                 break;
             case SDL_BUTTON_RIGHT:
-                //Le joueur effectue une roulade
+                //Le joueur effectue un bond en avant
+                //animation perso
                 break;
             default:
                 break;
