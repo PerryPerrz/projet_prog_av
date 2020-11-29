@@ -1,4 +1,4 @@
-Journal de bord
+-Journal de bord-
 Lundi 02/11/2020 : Réalisation du readme et du journal de bord.
 Lundi 09/11/2020 : Fin du readme et réalisation du diagramme de dépendence des différents modules.
 Jeudi 12/11/2020 : Installation valgrind + création database.c et database.h, et import des fichiers sdl.
@@ -8,4 +8,5 @@ Jeudi 19/11/2020 : Fonctions d'affichage terminées et création des premiers sp
 Lundi 23/11/2020 : Améliorations des fichiers suivants : Makefile, database.c/.h, events.c, fonctions_SDL.c/.h, graphique.c, 
                     création des fichiers suivants : game.c et init_and_clean.c/.h
 Mardi 24/11/2020 : Réalisation de player.c/.h, enemy.c/.h, update.c/.h et Modifications en conséquences.
+Dimanche 29/11/2020 : Codage déplacement/initialisation des ennemis (1 pour le moment) + améliorations diverses et avancement des sprites.
 Lundi 30/11/2020 : 
