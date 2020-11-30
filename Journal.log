@@ -9,4 +9,5 @@ Lundi 23/11/2020 : Améliorations des fichiers suivants : Makefile, database.c/.
                     création des fichiers suivants : game.c et init_and_clean.c/.h
 Mardi 24/11/2020 : Réalisation de player.c/.h, enemy.c/.h, update.c/.h et Modifications en conséquences.
 Dimanche 29/11/2020 : Codage déplacement/affichage/initialisation des ennemis (1 pour le moment) + améliorations diverses et avancement des sprites.
-Lundi 30/11/2020 : 
+Lundi 30/11/2020 :
+Lundi 07/12/2020 : 
