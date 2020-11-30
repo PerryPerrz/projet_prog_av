@@ -53,7 +53,7 @@ void handle_item_collision(sprite_t *item, sprite_t *sp)
 void print_sprite(sprite_t * sprite)
 {
     printf("x = %d\ny = %d\nh = %d\nw = %d\nv = %d\n",
-        sprite->x,sprite->y,sprite->h,sprite->w,sprite->v);
+        sprite->x,sprite->y,sprite->h,sprite->w[sprite->wich_img[0]],sprite->v);
 }
 
 void compute_game(world_t *world)

@@ -14,19 +14,74 @@
  * \brief Hauteur du personnage
  */
 
-#define PLAYER_HEIGHT 32
+#define PLAYER_HEIGHT 38
 
 /**
- * \brief Largeur du personnage
+ * \brief Largeur du personnage pour les sprites de la colonne 1 du sprite sheet
  */
 
-#define PLAYER_WIDTH 16
+#define PLAYER_SPRITE_COLUMN_1_WIDTH 31
+
+/**
+ * \brief Largeur du personnage pour les sprites de la colonne 1 du sprite sheet
+ */
+
+#define PLAYER_SPRITE_COLUMN_2_WIDTH 41
+
+/**
+ * \brief Largeur du personnage pour les sprites de la colonne 1 du sprite sheet
+ */
+
+#define PLAYER_SPRITE_COLUMN_3_WIDTH 25
+
+/**
+ * \brief Largeur du personnage pour les sprites de la colonne 1 du sprite sheet
+ */
+
+#define PLAYER_SPRITE_COLUMN_4_WIDTH 40
+
+/**
+ * \brief Largeur du personnage pour les sprites de la colonne 1 du sprite sheet
+ */
+
+#define PLAYER_SPRITE_COLUMN_5_WIDTH 16
+
+/**
+ * \brief Largeur du personnage pour les sprites de la colonne 1 du sprite sheet
+ */
+
+#define PLAYER_SPRITE_COLUMN_6_WIDTH 16
+
+/**
+ * \brief Largeur du personnage pour les sprites de la colonne 1 du sprite sheet
+ */
+
+#define PLAYER_SPRITE_COLUMN_7_WIDTH 16
+
+/**
+ * \brief Largeur du personnage pour les sprites de la colonne 1 du sprite sheet
+ */
+
+#define PLAYER_SPRITE_COLUMN_8_WIDTH 16
 
 /**
  * \brief Vitesse du personnage
 */
 
 #define PLAYER_SPEED 20
+
+/**
+ * \brief Nombres de sprites sur la sprite cheet du personnage
+*/
+
+#define NB_SPRITES_PLAYER 48
+
+/**
+ * \brief Nombres de colonnes de sprites sur la sprite cheet du personnage
+*/
+
+#define NB_COLUMN_SPRITE_SHEET_PLAYER 8
+
 
 /**
  * \brief Points de vie du personnage

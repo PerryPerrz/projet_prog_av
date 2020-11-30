@@ -7,7 +7,7 @@
  */
 #include "database.h"
 
-void init_sprite(sprite_t *sprite, int x, int y, int w, int h, int v)
+void init_sprite(sprite_t *sprite, int x, int y, int* w, int h, int v)
 {
     sprite->x = x;
     sprite->y = y;
@@ -42,7 +42,7 @@ int is_game_over(world_t *world)
 
 int sprite_is_out_of_bounds(sprite_t* sprite)
 {
-    if ((sprite->x + sprite->w / 2 >= PLAY_ZONE_RIGHT_WALL)  ||  (sprite->x - sprite->w / 2 <= PLAY_ZONE_LEFT_WALL) || (sprite->y - sprite->h / 2 <= PLAY_ZONE_TOP_WALL) || (sprite->y + sprite->h / 2 >= PLAY_ZONE_BOTTOM_WALL)) {
+    if ((sprite->x + sprite->w[sprite->wich_img[0]] / 2 >= PLAY_ZONE_RIGHT_WALL)  ||  (sprite->x - sprite->w[sprite->wich_img[0]] / 2 <= PLAY_ZONE_LEFT_WALL) || (sprite->y - sprite->h/ 2 <= PLAY_ZONE_TOP_WALL) || (sprite->y + sprite->h / 2 >= PLAY_ZONE_BOTTOM_WALL)) {
         return 0;
     }
     return 1;

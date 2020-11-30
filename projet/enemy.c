@@ -20,11 +20,13 @@ void init_enemies(world_t* world) {
 void create_enemies(world_t* world) {
     world->nb_enemies = generate_number(2,NB_ENEMIES_MAX);
     int type; 
+    int* w = malloc(sizeof(int)); //* nombre colonne du sprite sheet avec le plus de colonne des monstres
     for (int i = 0; i < world->nb_enemies; i++) {
         type = generate_number(1,2); // 1 seul pour l'instant 
         switch (type) {
         case 1:
-            init_sprite(world->enemies[i]->sprite, SCREEN_WIDTH / 4, SCREEN_HEIGHT /3, ENEMY_1_WIDTH, ENEMY_1_HEIGHT, ENEMY_1_SPEED);
+            w[0] = ENEMY_1_WIDTH;
+            init_sprite(world->enemies[i]->sprite, SCREEN_WIDTH / 4, SCREEN_HEIGHT /3, w, ENEMY_1_HEIGHT, ENEMY_1_SPEED);
             world->enemies[i]->hp = ENEMY_1_HP; //+ bonus selon l'étage actuel
             world->enemies[i]->atk_power = ENEMY_1_ATK_POWER; //+ bonus selon l'étage actuel
             world->enemies[i]->atk_speed = ENEMY_1_ATK_SPEED;

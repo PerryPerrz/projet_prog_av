@@ -15,32 +15,32 @@
 /**
  * \brief Largeur de l'écran de jeu
  */
-#define SCREEN_WIDTH 700    
+#define SCREEN_WIDTH 1400   
 
 /**
  * \brief Hauteur de l'écran de jeu
  */
-#define SCREEN_HEIGHT 400   
+#define SCREEN_HEIGHT 800   
 
 /**
  * \brief Coordonnée x du mur droit de la zone de jeu 
  */
-#define PLAY_ZONE_RIGHT_WALL 573
+#define PLAY_ZONE_RIGHT_WALL 1146
 
 /**
  * \brief Coordonnée x du mur gauche de la zone de jeu 
  */
-#define PLAY_ZONE_LEFT_WALL 125
+#define PLAY_ZONE_LEFT_WALL 250
 
 /**
  * \brief Coordonnée y du mur en haut de la zone de jeu 
  */
-#define PLAY_ZONE_TOP_WALL 85  
+#define PLAY_ZONE_TOP_WALL 170  
 
 /**
  * \brief Coordonnée y du mur en bas de la zone de jeu 
  */
-#define PLAY_ZONE_BOTTOM_WALL 308
+#define PLAY_ZONE_BOTTOM_WALL 616
 
 /**
  * \brief Taille des munitions
@@ -63,10 +63,10 @@ struct sprite_s
     int x;          /*!< Champ indiquant la position du centre du sprite (sur l'abscisse) */
     int y;          /*!< Champ indiquant la position du centre du sprite (sur l'ordonnée) */
     int h;          /*!< Champ indiquant la hauteur du sprite */
-    int w;          /*!< Champ indiquant la largeur du sprite */
+    int* w;         /*!< Champ indiquant la largeur du sprite (varie selon la colonne sur laquelle se trouve le sprite dans la sprite sheet) */
     int v;          /*!< Champ indiquant la vitesse verticale du sprite */
     int is_visible; /*!< Champ indiquant si le sprite est visible (0) ou invisible (1) */
-    int* wich_img;  /*!< Champ indiquant quel image doit être affichée pour le sprite à l'instant [0] = n° sur l'axe x et [1] = n° sur l'axe y */
+    int* wich_img;  /*!< Champ indiquant quelle image doit être affichée pour le sprite à l'instant, [0] = n° sur l'axe x et [1] = n° sur l'axe y */
 };
 
 /**
@@ -112,7 +112,7 @@ typedef struct monster_s monster_t;
 struct world_s
 {
     character_t *player;    /*!< Champ représentant le personnage du joueur */
-    sprite_t *ammo;         /*!< Champ représentant les munitions du joueur*/
+    //sprite_t *ammo;         /*!< Champ représentant les munitions du joueur*/
     int gameover;           /*!< Champ indiquant si l'on est à la fin du jeu */
     monster_t **enemies;    /*!< Champ représentant les ennemis en jeu */
     int nb_enemies;         /*!< Champ représentant le nombre d'ennemis en jeu */
@@ -133,10 +133,10 @@ typedef struct world_s world_t;
  * \param x la position du centre du sprite (sur l'abscisse)
  * \param y la position du centre du sprite (sur l'ordonnée)
  * \param h la hauteur du sprite
- * \param w la largueur du sprites
- * \param v la vitesse verticale du sprite
+ * \param w tableau contenant les largeurs des sprites selon leur position sur la sprite cheet
+ * \param v la vitesse du sprite
  */
-void init_sprite(sprite_t *sprite, int x, int y, int w, int h, int v);
+void init_sprite(sprite_t *sprite, int x, int y, int* w, int h, int v);
 
 /**
  * \brief Fonction qui génère un nombre aléatoire.
