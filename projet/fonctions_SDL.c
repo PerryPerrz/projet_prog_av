@@ -40,7 +40,7 @@ void apply_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect SrcR, int 
     SDL_RenderCopy(renderer, image, &SrcR, &DestR); //Affichage du sprite
 }
 
-int* apply_resized_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect SrcR, int x, int y, int f) {
+void apply_resized_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect SrcR, int x, int y, int f) {
     SDL_Rect DestR = SrcR;
 
     DestR.x = x; //On choisit les coordonnées de l'endroit où on affiche le sprite sur la fenêtre
@@ -55,13 +55,7 @@ int* apply_resized_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect Sr
         DestR.h *= f;
     }
 
-    int* w_et_h = malloc(sizeof(int)*2);
-    w_et_h[0] = DestR.w;
-    w_et_h[1] = DestR.h;
-
     SDL_RenderCopy(renderer, image, &SrcR, &DestR); //Affichage du sprite
-
-    return w_et_h;
 }
 
 void init_sdl(SDL_Window **window, SDL_Renderer **renderer, int width, int height) {

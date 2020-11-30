@@ -70,9 +70,8 @@ void apply_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect SrcR, int 
  * \param x Position de l'image à afficher sur l'abscisse de la fenêtre
  * \param y Position de l'image à afficher sur l'ordonnée de la fenêtre
  * \param f facteur de changement de taille (négatif : réduction de taille / positif : augmantation de taille)
- * \return La nouvelle hauteur et la nouvelle largeur du sprite sous forme de tableau d'entiers.
  */
-int* apply_resized_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect SrcR, int x, int y, int f);
+void apply_resized_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect SrcR, int x, int y, int f);
 
 /**
  * \brief Fonction qui initialise la fenêtre graphique et le renderer

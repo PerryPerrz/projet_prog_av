@@ -10,13 +10,23 @@
 #include "database.h"
 
 /**
+ * \brief Ecart entre les lignes d'une sprite sheet
+ */
+#define SPACE_BETWEEN_ROWS 26
+
+/**
+ * \brief Ecart entre les colonnes d'une sprite sheet
+ */
+#define SPACE_BETWEEN_COLUMNS 4 
+
+/**
  * \brief Représentation pour stocker les ressources nécessaires à l'affichage graphique
 */
 
 struct resources_s{
     SDL_Texture* background;            /*!< Texture liée à l'image du fond de l'écran. */
     SDL_Texture* player;                /*!< Texture liée à l'image du personnage. */
-    SDL_Texture* ammo;                  /*!< Texture liée à l'image des munitions. */
+    //SDL_Texture* ammo;                  /*!< Texture liée à l'image des munitions. */
     SDL_Texture* slime;                 /*!< Texture liée à l'image des slimes. */
 };
 
@@ -42,9 +52,8 @@ void apply_sprite(SDL_Renderer * renderer, SDL_Texture * texture, sprite_t * spr
  * \param texture La texture à appliquer
  * \param sprite Le sprite dont on doit appliquer la texture
  * \param f facteur de changement de taille (négatif : réduction de taille / positif : augmantation de taille)
- * \return La nouvelle hauteur et la nouvelle largeur du sprite sous forme de tableau d'entiers.
 */
-int* apply_resized_sprite(SDL_Renderer * renderer, SDL_Texture * texture, sprite_t * sprite, int f);
+void apply_resized_sprite(SDL_Renderer * renderer, SDL_Texture * texture, sprite_t * sprite, int f);
 
 
 /**
