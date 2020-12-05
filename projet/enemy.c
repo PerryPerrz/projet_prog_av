@@ -25,8 +25,8 @@ void create_enemies(world_t* world) {
         type = generate_number(1,2); // 1 seul pour l'instant 
         switch (type) {
         case 1:
-            w[0] = ENEMY_1_WIDTH;
-            init_sprite(world->enemies[i]->sprite, SCREEN_WIDTH / 4, SCREEN_HEIGHT /3, w, ENEMY_1_HEIGHT, ENEMY_1_SPEED);
+            w[0] = ENEMY_1_WIDTH * ENEMY_1_RESIZE;
+            init_sprite(world->enemies[i]->sprite, SCREEN_WIDTH / 4, SCREEN_HEIGHT /3, w, ENEMY_1_HEIGHT * ENEMY_1_RESIZE, ENEMY_1_SPEED);
             world->enemies[i]->hp = ENEMY_1_HP; //+ bonus selon l'étage actuel
             world->enemies[i]->atk_power = ENEMY_1_ATK_POWER; //+ bonus selon l'étage actuel
             world->enemies[i]->atk_speed = ENEMY_1_ATK_SPEED;

@@ -47,6 +47,12 @@
 #define ENEMY_1_ATK_SPEED 5
 
 /**
+ * \brief Valeur par laquelle le sprite de l'ennemi 1 va être augmenté ou diminuée
+*/
+
+#define ENEMY_1_RESIZE 2
+
+/**
  * \brief Nombre d'ennemis maximum
 */
 

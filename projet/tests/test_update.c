@@ -84,7 +84,7 @@ void sprites_collide_test()
     //Test alors qu'ils ne sont pas en collision
     sp1->x = 0;
     sp1->y = 0;
-    sp2->x = PLAYER_WIDTH + 6;
+    sp2->x = PLAYER_SPRITE_COLUMN_1_WIDTH + 6;
     sp2->y = PLAYER_HEIGHT + 9;
     sprites_collide_test_param(sp1, sp2);
 
@@ -127,7 +127,7 @@ void handle_sprites_collision_test()
     //Test alors qu'ils ne sont pas en collision
     sp1->x = 0;
     sp1->y = 0;
-    sp2->x = PLAYER_WIDTH + 6;
+    sp2->x = PLAYER_SPRITE_COLUMN_1_WIDTH + 6;
     sp2->y = PLAYER_HEIGHT + 9;
     handle_sprites_collision_test_param(sp1, sp2);
 

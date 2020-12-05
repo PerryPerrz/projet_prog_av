@@ -25,20 +25,61 @@ void handle_events(SDL_Event *event,world_t *world){
                 break;
 
             case SDLK_UP:
-                world->player->sprite->y += world->player->sprite->v;
+                world->player->sprite->y -= world->player->sprite->v;
                 //animation perso
+                if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
+                    world->player->sprite->y += world->player->sprite->v;
+                }
                 break;
             case SDLK_DOWN:
-                world->player->sprite->y -= world->player->sprite->v;
-                //animation perso
-                break;
-            case SDLK_RIGHT:
                 world->player->sprite->y += world->player->sprite->v;
                 //animation perso
+                if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
+                    world->player->sprite->y -= world->player->sprite->v;
+                }
+                break;
+            case SDLK_RIGHT:
+                world->player->sprite->x += world->player->sprite->v;
+                //animation perso
+                if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
+                    world->player->sprite->x -= world->player->sprite->v;
+                }
                 break;
             case SDLK_LEFT:
+                world->player->sprite->x -= world->player->sprite->v;
+                //animation perso
+                if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
+                    world->player->sprite->x += world->player->sprite->v;
+                }
+                break;
+
+            case SDLK_z:
                 world->player->sprite->y -= world->player->sprite->v;
                 //animation perso
+                if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
+                    world->player->sprite->y += world->player->sprite->v;
+                }
+                break;
+            case SDLK_s:
+                world->player->sprite->y += world->player->sprite->v;
+                //animation perso
+                if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
+                    world->player->sprite->y -= world->player->sprite->v;
+                }
+                break;
+            case SDLK_d:
+                world->player->sprite->x += world->player->sprite->v;
+                //animation perso
+                if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
+                    world->player->sprite->x -= world->player->sprite->v;
+                }
+                break;
+            case SDLK_q:
+                world->player->sprite->x -= world->player->sprite->v;
+                //animation perso
+                if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
+                    world->player->sprite->x += world->player->sprite->v;
+                }
                 break;
 
             case SDLK_SPACE:

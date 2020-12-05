@@ -17,7 +17,7 @@
 /**
  * \brief Ecart entre les colonnes d'une sprite sheet
  */
-#define SPACE_BETWEEN_COLUMNS 4 
+#define SPACE_BETWEEN_COLUMNS 5
 
 /**
  * \brief Représentation pour stocker les ressources nécessaires à l'affichage graphique
@@ -51,7 +51,7 @@ void apply_sprite(SDL_Renderer * renderer, SDL_Texture * texture, sprite_t * spr
  * \param renderer Le renderer actuel
  * \param texture La texture à appliquer
  * \param sprite Le sprite dont on doit appliquer la texture
- * \param f facteur de changement de taille (négatif : réduction de taille / positif : augmantation de taille)
+ * \param f facteur de changement de taille (négatif : réduction de taille / positif : augmentation de taille)
 */
 void apply_resized_sprite(SDL_Renderer * renderer, SDL_Texture * texture, sprite_t * sprite, int f);
 
