@@ -23,46 +23,52 @@
 #define PLAYER_SPRITE_COLUMN_1_WIDTH 31
 
 /**
- * \brief Largeur du personnage pour les sprites de la colonne 1 du sprite sheet
+ * \brief Largeur du personnage pour les sprites de la colonne 2 du sprite sheet
  */
 
 #define PLAYER_SPRITE_COLUMN_2_WIDTH 41
 
 /**
- * \brief Largeur du personnage pour les sprites de la colonne 1 du sprite sheet
+ * \brief Largeur du personnage pour les sprites de la colonne 3 du sprite sheet
  */
 
 #define PLAYER_SPRITE_COLUMN_3_WIDTH 25
 
 /**
- * \brief Largeur du personnage pour les sprites de la colonne 1 du sprite sheet
+ * \brief Largeur du personnage pour les sprites de la colonne 4 du sprite sheet
  */
 
 #define PLAYER_SPRITE_COLUMN_4_WIDTH 40
 
 /**
- * \brief Largeur du personnage pour les sprites de la colonne 1 du sprite sheet
+ * \brief Largeur du personnage pour les sprites de la colonne 5 du sprite sheet
  */
 
-#define PLAYER_SPRITE_COLUMN_5_WIDTH 16
+#define PLAYER_SPRITE_COLUMN_5_WIDTH 27
 
 /**
- * \brief Largeur du personnage pour les sprites de la colonne 1 du sprite sheet
+ * \brief Largeur du personnage pour les sprites de la colonne 6 du sprite sheet
  */
 
-#define PLAYER_SPRITE_COLUMN_6_WIDTH 16
+#define PLAYER_SPRITE_COLUMN_6_WIDTH 36
 
 /**
- * \brief Largeur du personnage pour les sprites de la colonne 1 du sprite sheet
+ * \brief Largeur du personnage pour les sprites de la colonne 7 du sprite sheet
  */
 
-#define PLAYER_SPRITE_COLUMN_7_WIDTH 16
+#define PLAYER_SPRITE_COLUMN_7_WIDTH 32
 
 /**
- * \brief Largeur du personnage pour les sprites de la colonne 1 du sprite sheet
+ * \brief Largeur du personnage pour les sprites de la colonne 8 du sprite sheet
  */
 
-#define PLAYER_SPRITE_COLUMN_8_WIDTH 16
+#define PLAYER_SPRITE_COLUMN_8_WIDTH 37
+
+/**
+ * \brief Valeur par laquelle le sprite du joueur va être augmenté ou diminuée
+*/
+
+#define PLAYER_RESIZE 2
 
 /**
  * \brief Vitesse du personnage
@@ -106,5 +112,11 @@
  * \param world Les données du monde
  */
 void init_player(world_t* world);
+
+/**
+ * \brief La procédure nettoie le personnage du joueur
+ * \param world Les données du monde
+ */
+void free_player(world_t* world);
 
 #endif

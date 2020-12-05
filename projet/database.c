@@ -14,6 +14,7 @@ void init_sprite(sprite_t *sprite, int x, int y, int* w, int h, int v)
     sprite->h = h;
     sprite->w = w;
     sprite->v = v;
+    sprite->resize = 1;
     sprite->is_visible = 0;
     sprite->wich_img = malloc(sizeof(int)*2);
     sprite->wich_img[0] = 0;
@@ -46,4 +47,13 @@ int sprite_is_out_of_bounds(sprite_t* sprite)
         return 0;
     }
     return 1;
+}
+
+void set_img_sprite(sprite_t* sprite, int x, int y) {
+    sprite->wich_img[0] = x;
+    sprite->wich_img[1] = y;
+}
+
+void set_resize_sprite(sprite_t* sprite, int r) {
+    sprite->resize = r;
 }

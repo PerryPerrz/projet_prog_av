@@ -65,6 +65,7 @@ struct sprite_s
     int h;          /*!< Champ indiquant la hauteur du sprite */
     int* w;         /*!< Champ indiquant la largeur du sprite (varie selon la colonne sur laquelle se trouve le sprite dans la sprite sheet) */
     int v;          /*!< Champ indiquant la vitesse verticale du sprite */
+    int resize;     /*!< Champ indiquant le facteur utilisé pour redimensionner le sprite*/
     int is_visible; /*!< Champ indiquant si le sprite est visible (0) ou invisible (1) */
     int* wich_img;  /*!< Champ indiquant quelle image doit être affichée pour le sprite à l'instant, [0] = n° sur l'axe x et [1] = n° sur l'axe y */
 };
@@ -173,5 +174,21 @@ int is_game_over(world_t *world);
  */
 int sprite_is_out_of_bounds(sprite_t* sprite);
 
+
+/**
+ * \brief La fonction change l'image affichée du sprite
+ * \param sprite Un sprite
+ * \param x Le n° de l'image sur l'axe des abscisses dans son sprite sheet
+ * \param y Le n° de l'image sur l'axe des abscisses dans son sprite sheet
+ */
+void set_img_sprite(sprite_t* sprite, int x, int y);
+
+
+/**
+ * \brief La fonction change le facteur utilisé pour redimensionner l'image
+ * \param sprite Un sprite
+ * \param x Le facteur
+ */
+void set_resize_sprite(sprite_t* sprite, int r);
 
 #endif
