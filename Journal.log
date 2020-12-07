@@ -11,4 +11,4 @@ Mardi 24/11/2020 : Réalisation de player.c/.h, enemy.c/.h, update.c/.h et Modif
 Dimanche 29/11/2020 : Codage déplacement/affichage/initialisation des ennemis (1 pour le moment) + améliorations diverses et avancement des sprites.
 Lundi 30/11/2020 : Affichage du sprite personnage en cours de codage + changements relatifs à l'utilisation de sprite sheet + Modifications de certains modules pour s'occuper des sprite sheet et avancement des sprites.
 Samedi 05/12/2020 : Affichage du personnage et déplacement + fin Sprite Sheet du personnage.
-Lundi 07/12/2020 : Ajouts de sprites + Remise à l'échelle de base de tous les sprites et du fond avec modifications suite à l'utilisation de valgrind
+Lundi 07/12/2020 : Ajouts de sprites + Remise à l'échelle de base de tous les sprites et du fond avec modifications suite à l'utilisation de valgrind.
