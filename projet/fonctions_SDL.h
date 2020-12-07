@@ -61,18 +61,6 @@ void clean_image(SDL_Texture* image);
  */
 void apply_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect SrcR, int x, int y);
 
-
-/**
- * \brief Fonction qui applique une image sur le renderer à une certaine position et avec une taille changée
- * \param image L'image à afficher
- * \param renderer Le renderer
- * \param SrcR Stockage de la position et des dimensions du sprite à afficher
- * \param x Position de l'image à afficher sur l'abscisse de la fenêtre
- * \param y Position de l'image à afficher sur l'ordonnée de la fenêtre
- * \param f facteur de changement de taille (négatif : réduction de taille / positif : augmantation de taille)
- */
-void apply_resized_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect SrcR, int x, int y, int f);
-
 /**
  * \brief Fonction qui initialise la fenêtre graphique et le renderer
  * \param window la fenêtre du jeu

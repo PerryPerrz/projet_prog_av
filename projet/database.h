@@ -15,32 +15,32 @@
 /**
  * \brief Largeur de l'écran de jeu
  */
-#define SCREEN_WIDTH 1400   
+#define SCREEN_WIDTH 700
 
 /**
  * \brief Hauteur de l'écran de jeu
  */
-#define SCREEN_HEIGHT 800   
+#define SCREEN_HEIGHT 400  
 
 /**
  * \brief Coordonnée x du mur droit de la zone de jeu 
  */
-#define PLAY_ZONE_RIGHT_WALL 1146
+#define PLAY_ZONE_RIGHT_WALL 573
 
 /**
  * \brief Coordonnée x du mur gauche de la zone de jeu 
  */
-#define PLAY_ZONE_LEFT_WALL 250
+#define PLAY_ZONE_LEFT_WALL 125
 
 /**
  * \brief Coordonnée y du mur en haut de la zone de jeu 
  */
-#define PLAY_ZONE_TOP_WALL 170  
+#define PLAY_ZONE_TOP_WALL 84  
 
 /**
  * \brief Coordonnée y du mur en bas de la zone de jeu 
  */
-#define PLAY_ZONE_BOTTOM_WALL 616
+#define PLAY_ZONE_BOTTOM_WALL 308
 
 /**
  * \brief Taille des munitions
@@ -65,7 +65,6 @@ struct sprite_s
     int h;          /*!< Champ indiquant la hauteur du sprite */
     int* w;         /*!< Champ indiquant la largeur du sprite (varie selon la colonne sur laquelle se trouve le sprite dans la sprite sheet) */
     int v;          /*!< Champ indiquant la vitesse verticale du sprite */
-    int resize;     /*!< Champ indiquant le facteur utilisé pour redimensionner le sprite*/
     int is_visible; /*!< Champ indiquant si le sprite est visible (0) ou invisible (1) */
     int* wich_img;  /*!< Champ indiquant quelle image doit être affichée pour le sprite à l'instant, [0] = n° sur l'axe x et [1] = n° sur l'axe y */
 };
@@ -183,12 +182,5 @@ int sprite_is_out_of_bounds(sprite_t* sprite);
  */
 void set_img_sprite(sprite_t* sprite, int x, int y);
 
-
-/**
- * \brief La fonction change le facteur utilisé pour redimensionner l'image
- * \param sprite Un sprite
- * \param x Le facteur
- */
-void set_resize_sprite(sprite_t* sprite, int r);
 
 #endif

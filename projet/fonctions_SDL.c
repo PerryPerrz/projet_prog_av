@@ -40,24 +40,6 @@ void apply_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect SrcR, int 
     SDL_RenderCopy(renderer, image, &SrcR, &DestR); //Affichage du sprite
 }
 
-void apply_resized_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect SrcR, int x, int y, int f) {
-    SDL_Rect DestR = SrcR;
-
-    DestR.x = x; //On choisit les coordonnées de l'endroit où on affiche le sprite sur la fenêtre
-    DestR.y = y;
-    
-    if (f < 0) {
-        DestR.w /= -f;
-        DestR.h /= -f;
-    }
-    else {
-        DestR.w *= f;
-        DestR.h *= f;
-    }
-
-    SDL_RenderCopy(renderer, image, &SrcR, &DestR); //Affichage du sprite
-}
-
 void init_sdl(SDL_Window **window, SDL_Renderer **renderer, int width, int height) {
     SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
     SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_SHOWN, window, renderer);

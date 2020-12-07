@@ -32,5 +32,5 @@ void clean_data(world_t *world){
     free_player(world);
     //free(world->ammo);
     free_enemies(world);
-    free(world);
+    //free(world); marche pas pour une raison inconnue
 }

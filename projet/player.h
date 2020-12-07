@@ -65,12 +65,6 @@
 #define PLAYER_SPRITE_COLUMN_8_WIDTH 37
 
 /**
- * \brief Valeur par laquelle le sprite du joueur va être augmenté ou diminuée
-*/
-
-#define PLAYER_RESIZE 2
-
-/**
  * \brief Vitesse du personnage
 */
 
