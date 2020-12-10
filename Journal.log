@@ -12,3 +12,4 @@ Dimanche 29/11/2020 : Codage déplacement/affichage/initialisation des ennemis (
 Lundi 30/11/2020 : Affichage du sprite personnage en cours de codage + changements relatifs à l'utilisation de sprite sheet + Modifications de certains modules pour s'occuper des sprite sheet et avancement des sprites.
 Samedi 05/12/2020 : Affichage du personnage et déplacement + fin Sprite Sheet du personnage.
 Lundi 07/12/2020 : Ajouts de sprites + Remise à l'échelle de base de tous les sprites et du fond avec modifications suite à l'utilisation de valgrind.
+Jeudi 10/12/2020 : Animation de marche du personnage avec bug à régler (invisible).
