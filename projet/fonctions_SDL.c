@@ -36,6 +36,8 @@ void apply_image(SDL_Texture* image, SDL_Renderer* renderer, SDL_Rect SrcR, int 
 
     DestR.x = x; //On choisit les coordonnées de l'endroit où on affiche le sprite sur la fenêtre
     DestR.y = y;
+    DestR.h = SrcR.h;
+    DestR.w = SrcR.w;
 
     SDL_RenderCopy(renderer, image, &SrcR, &DestR); //Affichage du sprite
 }
