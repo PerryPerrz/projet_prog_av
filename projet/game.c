@@ -11,6 +11,8 @@
 #include "events.h"
 #include "init_and_clean.h"
 #include "update.h"
+#include "player.h"
+#include "enemy.h"
 
 //#include "update.h" à venir
 
@@ -30,10 +32,16 @@ void clean(SDL_Window *window, SDL_Renderer * renderer, resources_t *resources, 
  * \param window la fenêtre du jeu
  * \param renderer le renderer
  * \param resources les ressources
- * \param wordl le monde
+ * \param world le monde
  */
 void init(SDL_Window **window, SDL_Renderer ** renderer, resources_t *resources, world_t * world);
 
+
+/**
+ * \brief fonction Fonction qui gère les animations
+ * \param world le monde
+ */
+void handle_animations(world_t* world);
 
 /**
  *  \brief programme principal qui implémente la boucle du jeu
@@ -55,6 +63,10 @@ void init(SDL_Window **window, SDL_Renderer ** renderer, resources_t *resources,
     init_resources(*renderer,resources);
 }
 
+void handle_animations(world_t* world) {
+    handle_anim_player(world);
+}
+
 
 int main(int argc, char* args[])
 {
@@ -70,6 +82,9 @@ int main(int argc, char* args[])
         
         //gestion des évènements
         handle_events(&event,&world);
+
+        //Gestion des animations
+        handle_animations(&world);
 
         //mise à jour des données liée à la physique du monde
         update_data(&world);

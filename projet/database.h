@@ -82,6 +82,7 @@ struct character_s
     int atk_power;      /*!< Champ indiquant la puissance d'attaque du personnage */
     int weapon;         /*!< Champ indiquant l'arme que tiens le personnage (1 = ... / 2 = ... / etc..) */
     int atk_speed;      /*!< Champ indiquant la vitesse d'attaque du personnage */
+    int animation_timer;/*!< Champ indiquant le nombre de boucles nécessaires à l'animation du joueur */
 };
 
 /**
@@ -97,6 +98,7 @@ struct monster_s
     int atk_power;      /*!< Champ indiquant la puissance d'attaque du monstre */
     int type;           /*!< Champ indiquant le type du monstre (1 = ... / 2 = ... / etc..) */
     int atk_speed;      /*!< Champ indiquant la vitesse d'attaque du monstre */
+    int animation_timer;/*!< Champ indiquant le nombre de boucles nécessaires à l'animation du joueur */
 };
 
 /**

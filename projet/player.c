@@ -32,6 +32,14 @@ void init_player(world_t* world) {
     world->player->atk_power = PLAYER_ATK_POWER; //+ bonus écrit dans un fichier qui vient d'une partie précédente
     world->player->atk_speed = PLAYER_ATK_SPEED; //+ bonus écrit dans un fichier qui vient d'une partie précédente
     //world->player->weapon = ; à voir si on gère avec un fichier ou un bouton ou qqchose du genre
+    world->player->animation_timer = 0;
+}
+
+void handle_anim_player(world_t * world) {
+    if (world->player->animation_timer >= 1 || world->player->animation_timer < 7) {
+        world->player->sprite->wich_img[1]++;
+        world->player->animation_timer++;
+    }
 }
 
 void free_player(world_t* world) {

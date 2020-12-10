@@ -35,6 +35,7 @@ void handle_events(SDL_Event *event,world_t *world){
                 //animation perso
                 world->player->sprite->wich_img[0] = 6;
                 world->player->sprite->wich_img[1] = 0;
+                world->player->animation_timer = 1;
                 break;
                 
             case SDLK_DOWN:
@@ -48,6 +49,7 @@ void handle_events(SDL_Event *event,world_t *world){
                 //animation perso
                 world->player->sprite->wich_img[0] = 0;
                 world->player->sprite->wich_img[1] = 0;
+                world->player->animation_timer = 1;
                 break;
                
             case SDLK_RIGHT:
@@ -61,6 +63,7 @@ void handle_events(SDL_Event *event,world_t *world){
                 //animation perso
                 world->player->sprite->wich_img[0] = 2;
                 world->player->sprite->wich_img[1] = 0;
+                world->player->animation_timer = 1;
                 break;
                
             case SDLK_LEFT:
@@ -74,6 +77,7 @@ void handle_events(SDL_Event *event,world_t *world){
                 //animation perso
                 world->player->sprite->wich_img[0] = 4;
                 world->player->sprite->wich_img[1] = 0;
+                world->player->animation_timer = 1;
                 break;
 
             case SDLK_SPACE:

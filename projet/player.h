@@ -108,6 +108,12 @@
 void init_player(world_t* world);
 
 /**
+ * \brief La procédure gère l'animation du personnage
+ * \param world Les données du monde
+ */
+void handle_anim_player(world_t * world);
+
+/**
  * \brief La procédure nettoie le personnage du joueur
  * \param world Les données du monde
  */

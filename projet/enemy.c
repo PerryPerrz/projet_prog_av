@@ -38,6 +38,7 @@ void create_enemies(world_t* world) {
         default:
             break;
         }
+        world->enemies[i]->animation_timer = 0;
     }
 }
 
