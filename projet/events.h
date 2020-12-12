@@ -8,7 +8,7 @@
  
 #ifndef handle_events
 #include "database.h"
-
+#include <math.h>
 
 /**
  * \brief La fonction gère les évènements ayant eu lieu et qui n'ont pas encore été traités

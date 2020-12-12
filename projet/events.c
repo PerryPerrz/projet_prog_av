@@ -10,6 +10,7 @@
 
 
 void handle_events(SDL_Event *event,world_t *world){
+    float distance_x, distance_y;
     while( SDL_PollEvent( event ) ) {
         switch (event->type)
         {
@@ -95,6 +96,33 @@ void handle_events(SDL_Event *event,world_t *world){
             switch (event->button.button)
             {
             case SDL_BUTTON_LEFT:
+            distance_x = sqrt(pow(world->player->sprite->x - event->motion.x,2));   //La distance entre le "x" du joueur et le "x" de la souris
+            distance_y = sqrt(pow(world->player->sprite->y - event->motion.y,2));   //La distance entre le "y" du joueur et le "y" de la souris
+
+              if(distance_x >= distance_y){  //On sait que le curseur de la sourie est plus sur un des deux cotés du personnage que en bas ou en haut du personnage
+                    if(event->motion.x <= world->player->sprite->x){ //On sait que le curseur est à gauche du personnage
+                        world->player->sprite->wich_img[0] = 5;
+                        world->player->sprite->wich_img[1] = 0;
+                        world->player->animation_timer = 1;
+                    }
+                    else{   //On sait que le curseur est à droite du personnage
+                        world->player->sprite->wich_img[0] = 3;
+                        world->player->sprite->wich_img[1] = 0;
+                        world->player->animation_timer = 1;
+                    }
+               }
+               else{
+                    if(event->motion.y <= world->player->sprite->y){ //On sait que le curseur est en haut du personnage
+                        world->player->sprite->wich_img[0] = 7;
+                        world->player->sprite->wich_img[1] = 0;
+                        world->player->animation_timer = 1;
+                    }
+                    else{   //On sait que le curseur est en bas du personnage
+                        world->player->sprite->wich_img[0] = 1;
+                        world->player->sprite->wich_img[1] = 0;
+                        world->player->animation_timer = 1;
+                    }
+               }
                 //Le joueur effectue une attaque
                 //animation perso
                 break;
