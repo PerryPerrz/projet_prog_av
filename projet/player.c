@@ -36,9 +36,12 @@ void init_player(world_t* world) {
 }
 
 void handle_anim_player(world_t * world) {
-    if (world->player->animation_timer >= 1 || world->player->animation_timer < 7) {
+    if (world->player->animation_timer >= 1 && world->player->animation_timer < 7) {
         world->player->sprite->wich_img[1]++;
         world->player->animation_timer++;
+    }
+    else {
+        world->player->sprite->wich_img[1] = 2;
     }
 }
 
