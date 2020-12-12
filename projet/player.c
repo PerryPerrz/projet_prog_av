@@ -36,8 +36,10 @@ void init_player(world_t* world) {
 }
 
 void handle_anim_player(world_t * world) {
-    if (world->player->animation_timer >= 1 && world->player->animation_timer < 7) {
-        world->player->sprite->wich_img[1]++;
+    if (world->player->animation_timer >= 1 && world->player->animation_timer < 21) { //21 = 5*4 + 1 car on fait un changement de sprite toutes les 4 boucles de jeu pour une animation lente et on a 6 sprites dans une animation (notés de 0 à 5) 
+        if (world->player->animation_timer%4 == 0) {
+            world->player->sprite->wich_img[1]++;
+        }
         world->player->animation_timer++;
     }
     else {
