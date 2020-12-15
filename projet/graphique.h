@@ -26,7 +26,8 @@
 struct resources_s{
     SDL_Texture* background;            /*!< Texture liée à l'image du fond de l'écran. */
     SDL_Texture* player;                /*!< Texture liée à l'image du personnage. */
-    //SDL_Texture* ammo;                  /*!< Texture liée à l'image des munitions. */
+    SDL_Texture* player_attack_hori;    /*!< Texture liée à l'image de l'attaque du personnage (forme horizontale) */
+    SDL_Texture* player_attack_verti;    /*!< Texture liée à l'image de l'attaque du personnage (forme verticale)*/   
     SDL_Texture* slime;                 /*!< Texture liée à l'image des slimes. */
 };
 
