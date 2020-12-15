@@ -13,3 +13,6 @@ Lundi 30/11/2020 : Affichage du sprite personnage en cours de codage + changemen
 Samedi 05/12/2020 : Affichage du personnage et déplacement + fin Sprite Sheet du personnage.
 Lundi 07/12/2020 : Ajouts de sprites + Remise à l'échelle de base de tous les sprites et du fond avec modifications suite à l'utilisation de valgrind.
 Jeudi 10/12/2020 : Animation de marche du personnage avec bug à régler (invisible).
+Samedi 12/12/2020 : Animation d'attaque + bug réglé.
+Mardi 15/12/2020 : Création des spritesheets du boss/de ses attaques, des attaques du personnage + Attaque retravaillée et animée + résolution de nombreux bugs + création de sprite sheets.
+
