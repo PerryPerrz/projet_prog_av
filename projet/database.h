@@ -35,7 +35,7 @@
 /**
  * \brief Coordonnée y du mur en haut de la zone de jeu 
  */
-#define PLAY_ZONE_TOP_WALL 84  
+#define PLAY_ZONE_TOP_WALL 97
 
 /**
  * \brief Coordonnée y du mur en bas de la zone de jeu 
@@ -64,7 +64,7 @@ struct sprite_s
     int y;          /*!< Champ indiquant la position du centre du sprite (sur l'ordonnée) */
     int h;          /*!< Champ indiquant la hauteur du sprite */
     int* w;         /*!< Champ indiquant la largeur du sprite (varie selon la colonne sur laquelle se trouve le sprite dans la sprite sheet) */
-    int v;          /*!< Champ indiquant la vitesse verticale du sprite */
+    int v;          /*!< Champ indiquant la vitesse du sprite */
     int is_visible; /*!< Champ indiquant si le sprite est visible (0) ou invisible (1) */
     int* wich_img;  /*!< Champ indiquant quelle image doit être affichée pour le sprite à l'instant, [0] = n° sur l'axe x et [1] = n° sur l'axe y */
 };
@@ -77,12 +77,14 @@ typedef struct sprite_s sprite_t;
 
 struct character_s
 {
-    sprite_t *sprite;   /*!< Champ représentant le sprite du personnage */
-    int hp;             /*!< Champ indiquant le nombre de points de vie du personnage */     
-    int atk_power;      /*!< Champ indiquant la puissance d'attaque du personnage */
-    int weapon;         /*!< Champ indiquant l'arme que tiens le personnage (1 = ... / 2 = ... / etc..) */
-    int atk_speed;      /*!< Champ indiquant la vitesse d'attaque du personnage */
-    int animation_timer;/*!< Champ indiquant le nombre de boucles nécessaires à l'animation du joueur */
+    sprite_t *sprite;           /*!< Champ représentant le sprite du personnage */
+    sprite_t *atk_sprite_hori;  /*!< Champ représentant le sprite de l'attaque du personnage (forme horizontale) */
+    sprite_t *atk_sprite_verti; /*!< Champ représentant le sprite de l'attaque du personnage (forme verticale) */
+    int hp;                     /*!< Champ indiquant le nombre de points de vie du personnage */     
+    int atk_power;              /*!< Champ indiquant la puissance d'attaque du personnage */
+    int weapon_element;         /*!< Champ indiquant le type de l'arme du personnage (0 = normal / 1 = feu / 2 = eau / 3 = nature) */
+    int atk_speed;              /*!< Champ indiquant la vitesse d'attaque du personnage */
+    int animation_timer;        /*!< Champ indiquant le nombre de boucles nécessaires à l'animation du joueur */
 };
 
 /**
@@ -93,12 +95,12 @@ typedef struct character_s character_t;
 
 struct monster_s
 {
-    sprite_t *sprite;   /*!< Champ représentant le sprite du monstre */
-    int hp;             /*!< Champ indiquant le nombre de points de vie du monstre */     
-    int atk_power;      /*!< Champ indiquant la puissance d'attaque du monstre */
-    int type;           /*!< Champ indiquant le type du monstre (1 = ... / 2 = ... / etc..) */
-    int atk_speed;      /*!< Champ indiquant la vitesse d'attaque du monstre */
-    int animation_timer;/*!< Champ indiquant le nombre de boucles nécessaires à l'animation du joueur */
+    sprite_t *sprite;       /*!< Champ représentant le sprite du monstre */
+    int hp;                 /*!< Champ indiquant le nombre de points de vie du monstre */     
+    int atk_power;          /*!< Champ indiquant la puissance d'attaque du monstre */
+    int type;               /*!< Champ indiquant le type du monstre (1 = ... / 2 = ... / etc..) */
+    int atk_speed;          /*!< Champ indiquant la vitesse d'attaque du monstre */
+    int animation_timer;    /*!< Champ indiquant le nombre de boucles nécessaires à l'animation du joueur */
 };
 
 /**
@@ -114,7 +116,6 @@ typedef struct monster_s monster_t;
 struct world_s
 {
     character_t *player;    /*!< Champ représentant le personnage du joueur */
-    //sprite_t *ammo;         /*!< Champ représentant les munitions du joueur*/
     int gameover;           /*!< Champ indiquant si l'on est à la fin du jeu */
     monster_t **enemies;    /*!< Champ représentant les ennemis en jeu */
     int nb_enemies;         /*!< Champ représentant le nombre d'ennemis en jeu */

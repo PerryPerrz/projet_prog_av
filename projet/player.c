@@ -13,6 +13,8 @@ void init_player(world_t* world) {
 
     world->player = malloc(sizeof(character_t));
     world->player->sprite = malloc(sizeof(sprite_t));
+    world->player->atk_sprite_hori = malloc(sizeof(sprite_t));
+    world->player->atk_sprite_verti = malloc(sizeof(sprite_t));
 
     int* w = malloc(sizeof(int)*NB_COLUMN_SPRITE_SHEET_PLAYER);
     //On initialise les valeurs de w selon les largeurs des sprites dans la sprite sheet
@@ -28,10 +30,23 @@ void init_player(world_t* world) {
     init_sprite(world->player->sprite, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, w, PLAYER_HEIGHT, PLAYER_SPEED);
     set_img_sprite(world->player->sprite, 0, 2); //On affiche l'image de repos du personnage en premier
 
+    //On initialise l'attaque du personnage
+    int* atk_w_h = malloc(sizeof(int)*NB_COLUMN_SPRITE_SHEET_PLAYER_ATTACK);
+    atk_w_h[0] = PLAYER_ATTACK_HORI_WIDTH; 
+    atk_w_h[1] = PLAYER_ATTACK_HORI_WIDTH;
+    init_sprite(world->player->atk_sprite_hori, 0, 0, atk_w_h, PLAYER_ATTACK_HORI_HEIGHT, 0);
+    set_invisible(world->player->atk_sprite_hori);
+
+    int* atk_w_v = malloc(sizeof(int)*NB_COLUMN_SPRITE_SHEET_PLAYER_ATTACK);
+    atk_w_v[0] = PLAYER_ATTACK_VERTI_WIDTH; 
+    atk_w_v[1] = PLAYER_ATTACK_VERTI_WIDTH;
+    init_sprite(world->player->atk_sprite_verti, 0, 0, atk_w_v, PLAYER_ATTACK_VERTI_HEIGHT, 0);
+    set_invisible(world->player->atk_sprite_verti);
+
     world->player->hp = PLAYER_HP; //+ bonus écrit dans un fichier qui vient d'une partie précédente
     world->player->atk_power = PLAYER_ATK_POWER; //+ bonus écrit dans un fichier qui vient d'une partie précédente
     world->player->atk_speed = PLAYER_ATK_SPEED; //+ bonus écrit dans un fichier qui vient d'une partie précédente
-    //world->player->weapon = ; à voir si on gère avec un fichier ou un bouton ou qqchose du genre
+    world->player->weapon_element = 0;
     world->player->animation_timer = 0;
 }
 
@@ -42,8 +57,10 @@ void handle_anim_player(world_t * world) {
         }
         world->player->animation_timer++;
     }
-    else {
-        world->player->sprite->wich_img[1] = 2;
+    else { //bug se remet à son état initial après chaque action, tenter avec un else if
+        set_img_sprite(world->player->sprite, world->player->sprite->wich_img[0], 2); //On remet le sprite dans une position détente après son attaque (le -1 c'est parce que la colonne détente est à indice -1 de la colonne attaque)
+        set_invisible(world->player->atk_sprite_hori);
+        set_invisible(world->player->atk_sprite_verti);
     }
 }
 
@@ -51,5 +68,11 @@ void free_player(world_t* world) {
     free(world->player->sprite->w);
     free(world->player->sprite->wich_img);
     free(world->player->sprite);
+    free(world->player->atk_sprite_hori->w);
+    free(world->player->atk_sprite_hori->wich_img);
+    free(world->player->atk_sprite_hori);
+    free(world->player->atk_sprite_verti->w);
+    free(world->player->atk_sprite_verti->wich_img);
+    free(world->player->atk_sprite_verti);
     free(world->player);
 }

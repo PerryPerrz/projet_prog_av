@@ -65,23 +65,46 @@
 #define PLAYER_SPRITE_COLUMN_8_WIDTH 37
 
 /**
- * \brief Vitesse du personnage
-*/
-
-#define PLAYER_SPEED 20
-
-/**
- * \brief Nombres de sprites sur la sprite cheet du personnage
-*/
-
-#define NB_SPRITES_PLAYER 48
-
-/**
  * \brief Nombres de colonnes de sprites sur la sprite cheet du personnage
 */
 
 #define NB_COLUMN_SPRITE_SHEET_PLAYER 8
 
+/**
+ * \brief Nombres de colonnes de sprites sur la sprite cheet de l'attaque du personnage
+*/
+
+#define NB_COLUMN_SPRITE_SHEET_PLAYER_ATTACK 2
+
+/**
+ * \brief Largeur de l'attaque du personnage
+ */
+
+#define PLAYER_ATTACK_HORI_WIDTH 38
+
+/**
+ * \brief Hauteur de l'attaque du personnage
+ */
+
+#define PLAYER_ATTACK_HORI_HEIGHT 9
+
+/**
+ * \brief Largeur de l'attaque du personnage
+ */
+
+#define PLAYER_ATTACK_VERTI_WIDTH 9
+
+/**
+ * \brief Hauteur de l'attaque du personnage
+ */
+
+#define PLAYER_ATTACK_VERTI_HEIGHT 38
+
+/**
+ * \brief Vitesse du personnage
+*/
+
+#define PLAYER_SPEED 20
 
 /**
  * \brief Points de vie du personnage
