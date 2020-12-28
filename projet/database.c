@@ -42,7 +42,7 @@ int is_game_over(world_t *world)
 
 int sprite_is_out_of_bounds(sprite_t* sprite)
 {
-    if ((sprite->x + sprite->w[sprite->wich_img[0]] / 2 >= PLAY_ZONE_RIGHT_WALL)  ||  (sprite->x - sprite->w[sprite->wich_img[0]] / 2 <= PLAY_ZONE_LEFT_WALL) || (sprite->y <= PLAY_ZONE_TOP_WALL) || (sprite->y + sprite->h / 2 >= PLAY_ZONE_BOTTOM_WALL)) { //Pour le haut, on mets la limite à la moitié du sprite car la tête du joueur peut apparaître sur le mur du haut
+    if ((sprite->x + sprite->w[sprite->wich_img[0]] / 2 >= PLAY_ZONE_RIGHT_WALL)  ||  (sprite->x - sprite->w[sprite->wich_img[0]] / 2 <= PLAY_ZONE_LEFT_WALL) || (sprite->y <= PLAY_ZONE_TOP_WALL) || (sprite->y - sprite->h/2 >= PLAY_ZONE_BOTTOM_WALL)) { //Pour le haut, on mets la limite à la moitié du sprite car le haut du joueur peut apparaître sur le mur du haut
         return 0;
     }
     return 1;

@@ -110,7 +110,7 @@
  * \brief Points de vie du personnage
 */
 
-#define PLAYER_HP 3
+#define PLAYER_HP 100
 
 /**
  * \brief Dégats du personnage

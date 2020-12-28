@@ -8,7 +8,6 @@
  
 #include "events.h"
 
-
 void handle_events(SDL_Event *event,world_t *world){
     float distance_x, distance_y;
     while( SDL_PollEvent( event ) ) {
@@ -108,76 +107,75 @@ void handle_events(SDL_Event *event,world_t *world){
             switch (event->button.button)
             {
             case SDL_BUTTON_LEFT:
+            //Le joueur effectue une attaque
             distance_x = sqrt(pow(world->player->sprite->x - event->motion.x,2));   //La distance entre le "x" du joueur et le "x" de la souris
             distance_y = sqrt(pow(world->player->sprite->y - event->motion.y,2));   //La distance entre le "y" du joueur et le "y" de la souris
 
-                if(distance_x >= distance_y){  //On sait que le curseur de la sourie est plus sur un des deux cotés du personnage que en bas ou en haut du personnage
-                    if(event->motion.x <= world->player->sprite->x){ //On sait que le curseur est à gauche du personnage
-                        set_img_sprite(world->player->sprite, 5, 0);
-                        world->player->animation_timer = 1;
+            if(distance_x >= distance_y){  //On sait que le curseur de la sourie est plus sur un des deux cotés du personnage que en bas ou en haut du personnage
+                if(event->motion.x <= world->player->sprite->x){ //On sait que le curseur est à gauche du personnage
+                    set_img_sprite(world->player->sprite, 5, 0);
+                    world->player->animation_timer = 1;
 
-                        //On fait apparaître l'attaque
-                        set_img_sprite(world->player->atk_sprite_verti, 1, world->player->weapon_element);
-                        world->player->atk_sprite_verti->x = world->player->sprite->x - world->player->atk_sprite_verti->w[1]*2; //On fait apparaitre l'attaque en face du personnage
-                        world->player->atk_sprite_verti->y = world->player->sprite->y - world->player->atk_sprite_verti->h/2.5; //On fait apparaitre l'attaque en face du personnage
-                        set_visible(world->player->atk_sprite_verti);
+                    //On fait apparaître l'attaque
+                    set_img_sprite(world->player->atk_sprite_verti, 1, world->player->weapon_element);
+                    world->player->atk_sprite_verti->x = world->player->sprite->x - world->player->sprite->w[3]/2 - world->player->atk_sprite_verti->w[1]*2; //On fait apparaitre l'attaque en face du personnage
+                    world->player->atk_sprite_verti->y = world->player->sprite->y; //On fait apparaitre l'attaque en face du personnage
+                    set_visible(world->player->atk_sprite_verti);
 
-                        //On fait disparaitre les autres attaques en cas d'attaques rapides successives
-                        set_invisible(world->player->atk_sprite_hori);
-                    }
-                    else{   //On sait que le curseur est à droite du personnage
-                        set_img_sprite(world->player->sprite, 3, 0);
-                        world->player->animation_timer = 1;
+                    //On fait disparaitre les autres attaques en cas d'attaques rapides successives
+                    set_invisible(world->player->atk_sprite_hori);
+                }
+                else{   //On sait que le curseur est à droite du personnage
+                    set_img_sprite(world->player->sprite, 3, 0);
+                    world->player->animation_timer = 1;
 
-                        //On fait apparaître l'attaque
-                        set_img_sprite(world->player->atk_sprite_verti, 0, world->player->weapon_element);
-                        world->player->atk_sprite_verti->x = world->player->sprite->x + world->player->sprite->w[3] + world->player->atk_sprite_verti->w[1]; //On fait apparaitre l'attaque en face du personnage
-                        world->player->atk_sprite_verti->y = world->player->sprite->y - world->player->atk_sprite_verti->h/2.5; //On fait apparaitre l'attaque en face du personnage
-                        set_visible(world->player->atk_sprite_verti);    
-                        
-                        //On fait disparaitre les autres attaques en cas d'attaques rapides successives
-                        set_invisible(world->player->atk_sprite_hori);                
-                    }
-               }
-               else{
-                    if(event->motion.y <= world->player->sprite->y){ //On sait que le curseur est en haut du personnage
-                        set_img_sprite(world->player->sprite, 7, 0);
-                        world->player->animation_timer = 1;
-
-                        //On fait apparaître l'attaque
-                        set_img_sprite(world->player->atk_sprite_hori, 1, world->player->weapon_element);
-                        world->player->atk_sprite_hori->x = world->player->sprite->x - world->player->atk_sprite_hori->w[1]/2; //On fait apparaitre l'attaque en face du personnage
-                        world->player->atk_sprite_hori->y = world->player->sprite->y - world->player->atk_sprite_hori->h*2; //On fait apparaitre l'attaque en face du personnage
-                        set_visible(world->player->atk_sprite_hori);
-
-                        //On fait disparaitre les autres attaques en cas d'attaques rapides successives
-                        set_invisible(world->player->atk_sprite_verti);
-                    }
-                    else{   //On sait que le curseur est en bas du personnage
-                        set_img_sprite(world->player->sprite, 1, 0);
-                        world->player->animation_timer = 1;
-
-                        //On fait apparaître l'attaque
-                        set_img_sprite(world->player->atk_sprite_hori, 0, world->player->weapon_element);
-                        world->player->atk_sprite_hori->x = world->player->sprite->x - world->player->atk_sprite_hori->w[0]/2.5; //On fait apparaitre l'attaque en face du personnage
-                        world->player->atk_sprite_hori->y = world->player->sprite->y + world->player->sprite->h + world->player->atk_sprite_hori->h; //On fait apparaitre l'attaque en face du personnage
-                        set_visible(world->player->atk_sprite_hori);
-
-
-                        //On fait disparaitre les autres attaques en cas d'attaques rapides successives
-                        set_invisible(world->player->atk_sprite_verti);
-                    }
-               }
-                //Le joueur effectue une attaque
-                //animation perso
-                break;
-            case SDL_BUTTON_RIGHT:
-                //Le joueur effectue un bond en avant
-                //animation perso
-                break;
-            default:
-                break;
+                    //On fait apparaître l'attaque
+                    set_img_sprite(world->player->atk_sprite_verti, 0, world->player->weapon_element);
+                    world->player->atk_sprite_verti->x = world->player->sprite->x + world->player->sprite->w[3]/2 + world->player->atk_sprite_verti->w[1]*2; //On fait apparaitre l'attaque en face du personnage
+                    world->player->atk_sprite_verti->y = world->player->sprite->y; //On fait apparaitre l'attaque en face du personnage
+                    set_visible(world->player->atk_sprite_verti);    
+                    
+                    //On fait disparaitre les autres attaques en cas d'attaques rapides successives
+                    set_invisible(world->player->atk_sprite_hori);                }
             }
+            else{
+                if(event->motion.y <= world->player->sprite->y){ //On sait que le curseur est en haut du personnage
+                    set_img_sprite(world->player->sprite, 7, 0);
+                    world->player->animation_timer = 1;
+
+                    //On fait apparaître l'attaque
+                    set_img_sprite(world->player->atk_sprite_hori, 1, world->player->weapon_element);
+                    world->player->atk_sprite_hori->x = world->player->sprite->x; //On fait apparaitre l'attaque en face du personnage
+                    world->player->atk_sprite_hori->y = world->player->sprite->y - world->player->sprite->h/2 - world->player->atk_sprite_hori->h*2; //On fait apparaitre l'attaque en face du personnage
+                    set_visible(world->player->atk_sprite_hori);
+
+                    //On fait disparaitre les autres attaques en cas d'attaques rapides successives
+                    set_invisible(world->player->atk_sprite_verti);
+                }
+                else{   //On sait que le curseur est en bas du personnage
+                    set_img_sprite(world->player->sprite, 1, 0);
+                    world->player->animation_timer = 1;
+
+                    //On fait apparaître l'attaque
+                    set_img_sprite(world->player->atk_sprite_hori, 0, world->player->weapon_element);
+                    world->player->atk_sprite_hori->x = world->player->sprite->x; //On fait apparaitre l'attaque en face du personnage
+                    world->player->atk_sprite_hori->y = world->player->sprite->y + world->player->sprite->h/2 + world->player->atk_sprite_hori->h*2; //On fait apparaitre l'attaque en face du personnage
+                    set_visible(world->player->atk_sprite_hori);
+
+
+                    //On fait disparaitre les autres attaques en cas d'attaques rapides successives
+                    set_invisible(world->player->atk_sprite_verti);
+                }
+            }
+            break;
+
+        case SDL_BUTTON_RIGHT:
+            //Le joueur effectue un bond en avant
+            //animation perso
+            break;
+        default:
+            break;
+        }
         
         default:
             break;

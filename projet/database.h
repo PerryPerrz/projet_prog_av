@@ -35,7 +35,7 @@
 /**
  * \brief Coordonnée y du mur en haut de la zone de jeu 
  */
-#define PLAY_ZONE_TOP_WALL 97
+#define PLAY_ZONE_TOP_WALL 84
 
 /**
  * \brief Coordonnée y du mur en bas de la zone de jeu 
@@ -85,6 +85,8 @@ struct character_s
     int weapon_element;         /*!< Champ indiquant le type de l'arme du personnage (0 = normal / 1 = feu / 2 = eau / 3 = nature) */
     int atk_speed;              /*!< Champ indiquant la vitesse d'attaque du personnage */
     int animation_timer;        /*!< Champ indiquant le nombre de boucles nécessaires à l'animation du joueur */
+    int invincibility_timer;    /*!< Champ indiquant le nombre de boucles durant lesquelles le joueur est invincible */
+    int is_invincible;          /*!< Champ indiquant si le joueur est actuellement invincible ou non (1 si oui, 0 si non)*/
 };
 
 /**
@@ -101,6 +103,8 @@ struct monster_s
     int type;               /*!< Champ indiquant le type du monstre (1 = ... / 2 = ... / etc..) */
     int atk_speed;          /*!< Champ indiquant la vitesse d'attaque du monstre */
     int animation_timer;    /*!< Champ indiquant le nombre de boucles nécessaires à l'animation du joueur */
+    int invincibility_timer;/*!< Champ indiquant le nombre de boucles durant lesquelles le monstre est invincible */
+    int is_invincible;      /*!< Champ indiquant si le monstre est actuellement invincible ou non (1 si oui, 0 si non)*/
 };
 
 /**

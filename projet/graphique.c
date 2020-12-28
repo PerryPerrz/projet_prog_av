@@ -8,7 +8,6 @@
  
 #include "graphique.h"
 
-
 void apply_sprite(SDL_Renderer * renderer, SDL_Texture * texture, sprite_t * sprite){
     if (sprite->is_visible == 0)
     {
@@ -23,7 +22,7 @@ void apply_sprite(SDL_Renderer * renderer, SDL_Texture * texture, sprite_t * spr
 
         SrcR.y = sprite->wich_img[1] * (SPACE_BETWEEN_ROWS + sprite->h);
 
-        apply_image(texture, renderer, SrcR, sprite->x - sprite->h/2, sprite->y - sprite->w[sprite->wich_img[0]]/2); //On donne les coordonnées du coin en haut à gauche du sprite à partir du centre du sprite
+        apply_image(texture, renderer, SrcR, sprite->x - sprite->w[sprite->wich_img[0]]/2, sprite->y -sprite->h/2); //On donne les coordonnées du coin en haut à gauche du sprite à partir du centre du sprite
     }
 }
 
