@@ -48,6 +48,8 @@ void init_player(world_t* world) {
     world->player->atk_speed = PLAYER_ATK_SPEED; //+ bonus écrit dans un fichier qui vient d'une partie précédente
     world->player->weapon_element = 0;
     world->player->animation_timer = 0;
+    world->player->invincibility_timer = 0;
+    world->player->is_invincible = 0;
 }
 
 void handle_anim_player(world_t * world) {

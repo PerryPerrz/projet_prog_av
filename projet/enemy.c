@@ -39,6 +39,8 @@ void create_enemies(world_t* world) {
             break;
         }
         world->enemies[i]->animation_timer = 0;
+        world->enemies[i]->invincibility_timer = 0;
+        world->enemies[i]->is_invincible = 0;
     }
 }
 

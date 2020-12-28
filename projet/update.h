@@ -29,11 +29,25 @@ int sprites_collide(sprite_t *sp2, sprite_t *sp1);
 
 
 /**
+ * \brief Procédure qui gère les attaques du personnage et des monstres
+ * \param world Les données du monde
+ */
+void handle_attacks(world_t* world);
+
+
+/**
+ * \brief Procédure qui gère l'invincibilité du personnage et des monstres
+ * \param world Les données du monde
+ */
+void handle_invincibility(world_t* world);
+
+
+/**
  * \brief Procédure qui annule la vitesse de deux sprites en collision et qui les rends invisible.
  * \param sp1 sprite n°1
  * \param sp2 sprite n°2
  */
-void handle_sprites_collision(sprite_t *sp2, sprite_t *sp1);
+//void handle_sprites_collision(sprite_t *sp2, sprite_t *sp1);
 
 
 /**

@@ -32,19 +32,19 @@
  * \brief Points de vie des ennemis de type 1
 */
 
-#define ENEMY_1_HP 3
+#define ENEMY_1_HP 51
 
 /**
  * \brief Dégats des ennemis de type 1
 */
 
-#define ENEMY_1_ATK_POWER 50
+#define ENEMY_1_ATK_POWER 5
 
 /**
  * \brief Vitesse d'attaque des ennemis de type 1
 */
 
-#define ENEMY_1_ATK_SPEED 5
+#define ENEMY_1_ATK_SPEED 1
 
 /**
  * \brief Nombre d'ennemis maximum
