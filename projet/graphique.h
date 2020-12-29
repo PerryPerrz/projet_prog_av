@@ -19,12 +19,39 @@
  */
 #define SPACE_BETWEEN_COLUMNS 5
 
+
+/**
+ * \brief Représentation pour stocker les ressources nécessaires à l'affichage graphique des salles
+*/
+
+struct room_resources_s{
+    SDL_Texture* background;            /*!< Texture liée à l'image du fond de l'écran */
+    SDL_Texture* door_down_close;       /*!< Texture liée à l'image de la porte du bas fermée */
+    SDL_Texture* door_up_close;         /*!< Texture liée à l'image de la porte du haut fermée */
+    SDL_Texture* door_up_down_open;     /*!< Texture liée à l'image des portes du haut et du bas losqu'elles sont fermées */
+    SDL_Texture* door_right_close;      /*!< Texture liée à l'image de la porte de droite fermée */ 
+    SDL_Texture* door_right_open;       /*!< Texture liée à l'image de la porte de droite ouvert */  
+    SDL_Texture* door_left_close;       /*!< Texture liée à l'image de la porte de gauche fermée */
+    SDL_Texture* door_left_open;        /*!< Texture liée à l'image de la porte de gauche ouverte */
+    SDL_Texture* wall_down;             /*!< Texture liée à l'image du mur du bas */
+    SDL_Texture* wall_up;               /*!< Texture liée à l'image du mur du haut */
+    SDL_Texture* wall_right;            /*!< Texture liée à l'image du mur de droite */ 
+    SDL_Texture* wall_left;             /*!< Texture liée à l'image du mur de gauche */
+};
+
+/**
+ * \brief Type qui correspond aux ressources du jeu
+*/
+
+typedef struct room_resources_s room_resources_t;
+
+
 /**
  * \brief Représentation pour stocker les ressources nécessaires à l'affichage graphique
 */
 
 struct resources_s{
-    SDL_Texture* background;            /*!< Texture liée à l'image du fond de l'écran. */
+    room_resources_t* room;             /*!< Textures liées à l'image de la salle */
     SDL_Texture* player;                /*!< Texture liée à l'image du personnage. */
     SDL_Texture* player_attack_hori;    /*!< Texture liée à l'image de l'attaque du personnage (forme horizontale) */
     SDL_Texture* player_attack_verti;    /*!< Texture liée à l'image de l'attaque du personnage (forme verticale)*/   

@@ -11,25 +11,20 @@
 void init_data(world_t * world){
     srand(time(NULL));
 
-    //world->ammo = malloc(sizeof(sprite_t));
-
-    /* A faire si on implémente une attaque à distance pour le personnage
-    int* ammo_w = malloc(sizeof(int));
-    init_sprite(world->ammo, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - (0.5  * PLAYER_SIZE ) - (AMMO_SIZE / 2), AMMO_SIZE, AMMO_SIZE, AMMO_SPEED);   //La position y du missile équivaut à la position y du joueur - 1/2joueur-1/2missile (il est juste au-dessus).
-    set_invisible(world->ammo);*/
-
     init_enemies(world);
     init_player(world);
+
+    init_floor(world);
+    world->room_state = 0;
 
     world->gameover = 0;
     world->score = 0;
     world->game_state = 0;
-    world->room_state = 0;
 }
 
 
 void clean_data(world_t *world){
     free_player(world);
     free_enemies(world);
-    //free(world); marche pas pour une raison inconnue
+    free_floor(world->floor);
 }

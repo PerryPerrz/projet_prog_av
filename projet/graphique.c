@@ -27,27 +27,53 @@ void apply_sprite(SDL_Renderer * renderer, SDL_Texture * texture, sprite_t * spr
 }
 
 void  init_resources(SDL_Renderer *renderer, resources_t *resources){
-    resources->background = load_image("ressources/map/background1.bmp",renderer);
     resources->player = load_transparent_image("ressources/player/sprite_sheet.bmp", renderer,230,80,235);
     resources->player_attack_hori = load_transparent_image("ressources/player/atk_hori_sprite_sheet.bmp", renderer,230,80,235);
     resources->player_attack_verti = load_transparent_image("ressources/player/atk_verti_sprite_sheet.bmp", renderer,230,80,235);
     resources->slime = load_transparent_image("ressources/monsters/slime.bmp", renderer,230,80,235);
+    //On s'occupe des textures de la salle
+    resources->room = malloc(sizeof(room_resources_t));
+    resources->room->background = load_image("ressources/map/background1.bmp",renderer);
+    resources->room->door_down_close = load_image("ressources/map/door_down_close.bmp", renderer);
+    resources->room->door_up_close = load_image("ressources/map/door_up_close.bmp", renderer);
+    resources->room->door_right_close = load_image("ressources/map/door_right_close.bmp", renderer);
+    resources->room->door_left_close = load_image("ressources/map/door_left_close.bmp", renderer);
+    resources->room->door_up_down_open = load_image("ressources/map/door_up_down_open.bmp", renderer);
+    resources->room->door_right_open = load_image("ressources/map/door_right_open.bmp", renderer);
+    resources->room->door_left_open = load_image("ressources/map/door_left_open.bmp", renderer);
+    resources->room->wall_down = load_image("ressources/map/wall_down.bmp", renderer);
+    resources->room->wall_up = load_image("ressources/map/wall_up.bmp", renderer);
+    resources->room->wall_right = load_image("ressources/map/wall_right.bmp", renderer);
+    resources->room->wall_left = load_image("ressources/map/wall_left.bmp", renderer);
 }
 
 void clean_resources(resources_t *resources){
-    clean_image(resources->background);
     clean_image(resources->player);
     clean_image(resources->player_attack_hori);
     clean_image(resources->player_attack_verti);
     clean_image(resources->slime);
+    //On s'occupe des textures de la salle
+    clean_image(resources->room->background);
+    clean_image(resources->room->door_down_close);
+    clean_image(resources->room->door_up_close); 
+    clean_image(resources->room->door_right_close);
+    clean_image(resources->room->door_left_close);
+    clean_image(resources->room->door_up_down_open);
+    clean_image(resources->room->door_right_open);
+    clean_image(resources->room->door_left_open);
+    clean_image(resources->room->wall_down);
+    clean_image(resources->room->wall_up);
+    clean_image(resources->room->wall_right);
+    clean_image(resources->room->wall_left);
+    free(resources->room);
 }
 
 
 void apply_background(SDL_Renderer *renderer, resources_t *resources){
-    if(resources->background != NULL){
+    if(resources->room->background != NULL){
         SDL_Rect SrcR = {0, 0, 0, 0};
-        SDL_QueryTexture(resources->background, NULL, NULL, &SrcR.w, &SrcR.h);  //On demande directement les dimensions du background
-        apply_image(resources->background, renderer, SrcR, 0, 0);
+        SDL_QueryTexture(resources->room->background, NULL, NULL, &SrcR.w, &SrcR.h);  //On demande directement les dimensions du background
+        apply_image(resources->room->background, renderer, SrcR, 0, 0);
     }
 }
 

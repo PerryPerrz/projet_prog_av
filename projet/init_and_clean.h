@@ -10,13 +10,7 @@
 #include "database.h"
 #include "player.h"
 #include "enemy.h"
-
-
-/**
- * \brief Points de vie (nombre de coeurs) initiaux du joueur.
-*/
-
-#define PV_INITIAL 3
+#include "map.h"
 
 
 /**

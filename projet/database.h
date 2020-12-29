@@ -55,6 +55,24 @@
 #define AMMO_SPEED 10
 
 /**
+ * \brief Type qui correspond à un étage du jeu sous forme de liste
+ */
+
+typedef struct Liste_s Liste_t;
+
+/**
+ * \brief Représentation d'un étage du jeu sous forme de liste chaînée
+*/
+
+struct Liste_s
+{
+    Liste_t* suivant;   /*!< Champ représentant l'élément suivant dans la liste */
+    int direction;      /*!< Champ représentant la direction dans laquelle se trouve la chambre suivante (0 : bas, 1 : droite, 2 : gauche, 3 : haut) */
+    int type;           /*!< Champ représentant le type de salle (0 : salle normale, 1 : salle de boss)*/
+};
+
+
+/**
  * \brief Représentation d'un sprite du jeu
 */
 
@@ -126,6 +144,7 @@ struct world_s
     int score;              /*!< Champ représentant le score du joueur */
     int game_state;         /*!< Champ représentant l'état de la partie en cours (1 = J perdu / 2 = E tous détruits / 3 = partie pas finie) */
     int room_state;         /*!< Champ représentant l'état de la salle actuelle (0 = entrée dans la salle / 1 = bataille en cours /2 = E tous détruits / etc... boos, shop,...) */             
+    Liste_t* floor;         /*!< Champ représentant un étage du jeu sous forme de liste chaînée */
 };
 
 /**
