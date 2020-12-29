@@ -27,9 +27,11 @@ void handle_events(SDL_Event *event,world_t *world){
             case SDLK_UP:
                 //pareil que pour z
             case SDLK_z:
-                world->player->sprite->y -= world->player->sprite->v;
+                //On fait avancer juste un peu le personnage car son mouvement sera complété lors de son animation
+                world->player->sprite->y -= world->player->sprite->v/7;
+                //Le sprite est déjà le plus large, il n'est donc pas nécessaire de le changer
                 if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
-                    world->player->sprite->y += world->player->sprite->v;
+                    world->player->sprite->y += world->player->sprite->v/7;
                 }
 
                 //animation perso
@@ -44,9 +46,12 @@ void handle_events(SDL_Event *event,world_t *world){
             case SDLK_DOWN:
             //pareil que pour s
             case SDLK_s:
-                world->player->sprite->y += world->player->sprite->v;
+                //On fait avancer juste un peu le personnage car son mouvement sera complété lors de son animation
+                world->player->sprite->y += world->player->sprite->v/7;
+                //Je change temporairement le sprite en celui qui est le plus large sprite de marche pour éviter que le personnage reste coincé contre le mur dans certaines circonstances
+                set_img_sprite(world->player->sprite, 6, world->player->sprite->wich_img[1]);
                 if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
-                    world->player->sprite->y -= world->player->sprite->v;
+                    world->player->sprite->y -= world->player->sprite->v/7;
                 }
 
                 //animation perso
@@ -61,9 +66,12 @@ void handle_events(SDL_Event *event,world_t *world){
             case SDLK_RIGHT:
             //pareil que pour d
             case SDLK_d:
-                world->player->sprite->x += world->player->sprite->v;
+                //On fait avancer juste un peu le personnage car son mouvement sera complété lors de son animation
+                world->player->sprite->x += world->player->sprite->v/7;
+                //Je change temporairement le sprite en celui qui est le plus large sprite de marche pour éviter que le personnage reste coincé contre le mur dans certaines circonstances
+                set_img_sprite(world->player->sprite, 6, world->player->sprite->wich_img[1]);
                 if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
-                    world->player->sprite->x -= world->player->sprite->v;
+                    world->player->sprite->x -= world->player->sprite->v/7;
                 }
 
                 //animation perso
@@ -78,9 +86,12 @@ void handle_events(SDL_Event *event,world_t *world){
             case SDLK_LEFT:
             //pareil que pour q    
             case SDLK_q:
-                world->player->sprite->x -= world->player->sprite->v;
+                //On fait avancer juste un peu le personnage car son mouvement sera complété lors de son animation
+                world->player->sprite->x -= world->player->sprite->v/7;
+                //Je change temporairement le sprite en celui qui est le plus large sprite de marche pour éviter que le personnage reste coincé contre le mur dans certaines circonstances
+                set_img_sprite(world->player->sprite, 6, world->player->sprite->wich_img[1]);
                 if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
-                    world->player->sprite->x += world->player->sprite->v;
+                    world->player->sprite->x += world->player->sprite->v/7;
                 }
 
                 //animation perso

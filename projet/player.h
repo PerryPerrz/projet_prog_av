@@ -104,7 +104,7 @@
  * \brief Vitesse du personnage
 */
 
-#define PLAYER_SPEED 20
+#define PLAYER_SPEED 28
 
 /**
  * \brief Points de vie du personnage

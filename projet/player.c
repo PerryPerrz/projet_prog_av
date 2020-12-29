@@ -56,6 +56,49 @@ void handle_anim_player(world_t * world) {
     if (world->player->animation_timer >= 1 && world->player->animation_timer < 21) { //21 = 5*4 + 1 car on fait un changement de sprite toutes les 4 boucles de jeu pour une animation lente et on a 6 sprites dans une animation (notés de 0 à 5) 
         if (world->player->animation_timer%4 == 0) {
             world->player->sprite->wich_img[1]++;
+            //On fait avancer le joueur si on en train d'avancer et non pas en train d'attaquer
+            switch(world->player->sprite->wich_img[0]) {
+                case 0 :
+                    world->player->sprite->y += world->player->sprite->v/7;
+                    //Je change temporairement le sprite en celui qui est le plus large sprite de marche pour éviter que le personnage reste coincé contre le mur dans certaines circonstances
+                    set_img_sprite(world->player->sprite, 6, world->player->sprite->wich_img[1]);
+                    if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
+                        world->player->sprite->y -= world->player->sprite->v/7;
+                    }
+                    //Je le remets dans son êtat normal
+                    set_img_sprite(world->player->sprite, 0, world->player->sprite->wich_img[1]);
+                    break;
+
+                case 2 :
+                    world->player->sprite->x += world->player->sprite->v/7;
+                    //Je change temporairement le sprite en celui qui est le plus large sprite de marche pour éviter que le personnage reste coincé contre le mur dans certaines circonstances
+                    set_img_sprite(world->player->sprite, 6, world->player->sprite->wich_img[1]);
+                    if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
+                        world->player->sprite->x -= world->player->sprite->v/7;
+                    }
+                    //Je le remets dans son êtat normal
+                    set_img_sprite(world->player->sprite, 2, world->player->sprite->wich_img[1]);
+                    break;
+
+                case 4 :
+                    world->player->sprite->x -= world->player->sprite->v/7;
+                    //Je change temporairement le sprite en celui qui est le plus large sprite de marche pour éviter que le personnage reste coincé contre le mur dans certaines circonstances
+                    set_img_sprite(world->player->sprite, 6, world->player->sprite->wich_img[1]);
+                    if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
+                        world->player->sprite->x += world->player->sprite->v/7;
+                    }
+                    //Je le remets dans son êtat normal
+                    set_img_sprite(world->player->sprite, 4, world->player->sprite->wich_img[1]);
+                    break;
+
+                case 6 :
+                    world->player->sprite->y -= world->player->sprite->v/7;
+                    //Le sprite est déjà le plus large, il n'est donc pas nécessaire de le changer
+                    if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
+                        world->player->sprite->y += world->player->sprite->v/7;
+                    }
+                    break;
+            }
         }
         world->player->animation_timer++;
     }
