@@ -28,7 +28,8 @@ struct room_resources_s{
     SDL_Texture* background;            /*!< Texture liée à l'image du fond de l'écran */
     SDL_Texture* door_down_close;       /*!< Texture liée à l'image de la porte du bas fermée */
     SDL_Texture* door_up_close;         /*!< Texture liée à l'image de la porte du haut fermée */
-    SDL_Texture* door_up_down_open;     /*!< Texture liée à l'image des portes du haut et du bas losqu'elles sont fermées */
+    SDL_Texture* door_down_open;        /*!< Texture liée à l'image de la porte du bas fermée */
+    SDL_Texture* door_up_open;          /*!< Texture liée à l'image de la porte du haut fermée */
     SDL_Texture* door_right_close;      /*!< Texture liée à l'image de la porte de droite fermée */ 
     SDL_Texture* door_right_open;       /*!< Texture liée à l'image de la porte de droite ouvert */  
     SDL_Texture* door_left_close;       /*!< Texture liée à l'image de la porte de gauche fermée */
@@ -99,12 +100,32 @@ void apply_background(SDL_Renderer *renderer, resources_t *resources);
 
 
 /**
+ * \brief La procédure applique une texture sur le renderer à une position donnée en paramètres
+ * \param renderer Le renderer actuel
+ * \param texture La texture à appliquer
+ * \param x la coordonnée en abscisse de l'endroit où on compte afficher la texture
+ * \param y la coordonnée en ordonnée de l'endroit où on compte afficher la texture
+*/
+void apply_part_of_background(SDL_Renderer *renderer, SDL_Texture *texture, int x, int y);
+
+
+/**
  * \brief La fonction rafraichit l'écran en fonction de l'état des données du monde
  * \param renderer la surface de l'écran de jeu
  * \param world les données du monde
  * \param resources les ressources
  */
 void refresh_graphics(SDL_Renderer *renderer, world_t *world,resources_t *resources);
+
+
+/**
+ * \brief La fonction s'occupe de l'affichage des portes et murs sur les côtés
+ * \param renderer la surface de l'écran de jeu
+ * \param world les données du monde
+ * \param resources les ressources
+ */
+void refresh_room(SDL_Renderer *renderer, world_t *world, resources_t *resources);
+
 
 /**
  * \brief La fonction applique les monstres sur le renderer

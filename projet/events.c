@@ -31,7 +31,9 @@ void handle_events(SDL_Event *event,world_t *world){
                 world->player->sprite->y -= world->player->sprite->v/7;
                 //Le sprite est déjà le plus large, il n'est donc pas nécessaire de le changer
                 if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
-                    world->player->sprite->y += world->player->sprite->v/7;
+                    if (sprite_is_out_of_additional_bounds(world->player->sprite, world->floor->direction, world->room_state) == 0) {
+                        world->player->sprite->y += world->player->sprite->v/7;
+                    }
                 }
 
                 //animation perso
@@ -51,7 +53,9 @@ void handle_events(SDL_Event *event,world_t *world){
                 //Je change temporairement le sprite en celui qui est le plus large sprite de marche pour éviter que le personnage reste coincé contre le mur dans certaines circonstances
                 set_img_sprite(world->player->sprite, 6, world->player->sprite->wich_img[1]);
                 if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
-                    world->player->sprite->y -= world->player->sprite->v/7;
+                    if (sprite_is_out_of_additional_bounds(world->player->sprite, world->floor->direction, world->room_state) == 0) {
+                        world->player->sprite->y -= world->player->sprite->v/7;
+                    }
                 }
 
                 //animation perso
@@ -71,7 +75,9 @@ void handle_events(SDL_Event *event,world_t *world){
                 //Je change temporairement le sprite en celui qui est le plus large sprite de marche pour éviter que le personnage reste coincé contre le mur dans certaines circonstances
                 set_img_sprite(world->player->sprite, 6, world->player->sprite->wich_img[1]);
                 if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
-                    world->player->sprite->x -= world->player->sprite->v/7;
+                    if (sprite_is_out_of_additional_bounds(world->player->sprite, world->floor->direction, world->room_state) == 0) {
+                        world->player->sprite->x -= world->player->sprite->v/7;
+                    }
                 }
 
                 //animation perso
@@ -91,7 +97,9 @@ void handle_events(SDL_Event *event,world_t *world){
                 //Je change temporairement le sprite en celui qui est le plus large sprite de marche pour éviter que le personnage reste coincé contre le mur dans certaines circonstances
                 set_img_sprite(world->player->sprite, 6, world->player->sprite->wich_img[1]);
                 if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
-                    world->player->sprite->x += world->player->sprite->v/7;
+                    if (sprite_is_out_of_additional_bounds(world->player->sprite, world->floor->direction, world->room_state) == 0) {
+                        world->player->sprite->x += world->player->sprite->v/7;
+                    }
                 }
 
                 //animation perso
@@ -104,7 +112,20 @@ void handle_events(SDL_Event *event,world_t *world){
                 break;
 
             case SDLK_SPACE:
-                //active un objet actif
+                if (sprite_is_out_of_additional_bounds(world->player->sprite, world->floor->direction, world->room_state) == 1) {
+                    //On passe à la prochaine salle si on n'est pas dans la dernière
+                    if (world->floor->type == 0) {
+                        Liste_t* temp = world->floor;
+                        world->floor = world->floor->suivant;
+                        free(temp);
+                        world->room_state = 0;
+                        world->player->sprite->x = SCREEN_WIDTH/2;
+                        world->player->sprite->y = SCREEN_HEIGHT/2;
+                    }
+                    else {  //On est dans la salle du boss
+                        //Affichage d'un message de fin avec les bonus gagnés ?
+                    }
+                }
                 break;
                 
             case SDLK_e:

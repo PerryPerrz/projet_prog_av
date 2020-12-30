@@ -38,7 +38,8 @@ void  init_resources(SDL_Renderer *renderer, resources_t *resources){
     resources->room->door_up_close = load_image("ressources/map/door_up_close.bmp", renderer);
     resources->room->door_right_close = load_image("ressources/map/door_right_close.bmp", renderer);
     resources->room->door_left_close = load_image("ressources/map/door_left_close.bmp", renderer);
-    resources->room->door_up_down_open = load_image("ressources/map/door_up_down_open.bmp", renderer);
+    resources->room->door_down_open = load_image("ressources/map/door_down_open.bmp", renderer);
+    resources->room->door_up_open = load_image("ressources/map/door_up_open.bmp", renderer);
     resources->room->door_right_open = load_image("ressources/map/door_right_open.bmp", renderer);
     resources->room->door_left_open = load_image("ressources/map/door_left_open.bmp", renderer);
     resources->room->wall_down = load_image("ressources/map/wall_down.bmp", renderer);
@@ -58,7 +59,8 @@ void clean_resources(resources_t *resources){
     clean_image(resources->room->door_up_close); 
     clean_image(resources->room->door_right_close);
     clean_image(resources->room->door_left_close);
-    clean_image(resources->room->door_up_down_open);
+    clean_image(resources->room->door_down_open);
+    clean_image(resources->room->door_up_open);
     clean_image(resources->room->door_right_open);
     clean_image(resources->room->door_left_open);
     clean_image(resources->room->wall_down);
@@ -77,22 +79,83 @@ void apply_background(SDL_Renderer *renderer, resources_t *resources){
     }
 }
 
+void apply_part_of_background(SDL_Renderer *renderer, SDL_Texture *texture, int x, int y){
+    SDL_Rect SrcR = {0, 0, 0, 0};
+    SDL_QueryTexture(texture, NULL, NULL, &SrcR.w, &SrcR.h);  //On demande directement les dimensions de l'image à afficher
+    apply_image(texture, renderer, SrcR, x, y);
+}
 
-void refresh_graphics(SDL_Renderer *renderer, world_t *world,resources_t *resources){
-    
+
+void refresh_graphics(SDL_Renderer *renderer, world_t *world, resources_t *resources){
     //on vide le renderer
     SDL_RenderClear(renderer);
     
     //application des ressources dans le renderer
+    //On gère l'affichage de la salle
     apply_background(renderer, resources);
+    refresh_room(renderer, world, resources);
+    //On gère l'affichage des sprites
     apply_sprite(renderer, resources->player, world->player->sprite);
+    apply_monsters(renderer, world, resources);
     apply_sprite(renderer, resources->player_attack_hori, world->player->atk_sprite_hori);
     apply_sprite(renderer, resources->player_attack_verti, world->player->atk_sprite_verti);
-    apply_monsters(renderer, world, resources);
 
-
+    
     // on met à jour l'écran    
     SDL_RenderPresent(renderer);
+}
+
+void refresh_room(SDL_Renderer *renderer, world_t *world, resources_t *resources){
+    switch(world->floor->direction) {
+
+        case 0 :
+            if (world->room_state != 1) {  //Si le combat est terminé, la porte est ouverte
+                apply_part_of_background(renderer, resources->room->door_down_open, PLAY_ZONE_ADD_TOP_X + 1, PLAY_ZONE_BOTTOM_WALL - 1);
+            }
+            else {  //Sinon, elle est fermée
+                apply_part_of_background(renderer, resources->room->door_down_close, PLAY_ZONE_ADD_TOP_X + 1, PLAY_ZONE_BOTTOM_WALL - 1);
+            }
+            apply_part_of_background(renderer, resources->room->wall_up, PLAY_ZONE_ADD_TOP_X, 0);
+            apply_part_of_background(renderer, resources->room->wall_right, PLAY_ZONE_RIGHT_WALL, PLAY_ZONE_ADD_LEFT_Y + 1);
+            apply_part_of_background(renderer, resources->room->wall_left, 0, PLAY_ZONE_ADD_LEFT_Y);           
+            break;
+
+        case 1 :
+            if (world->room_state != 1) {
+                apply_part_of_background(renderer, resources->room->door_right_open, PLAY_ZONE_RIGHT_WALL, PLAY_ZONE_ADD_LEFT_Y + 1);
+            }
+            else {
+                apply_part_of_background(renderer, resources->room->door_right_close, PLAY_ZONE_RIGHT_WALL, PLAY_ZONE_ADD_LEFT_Y + 1);
+            }
+            apply_part_of_background(renderer, resources->room->wall_up, PLAY_ZONE_ADD_TOP_X, 0);
+            apply_part_of_background(renderer, resources->room->wall_down, PLAY_ZONE_ADD_TOP_X + 1, PLAY_ZONE_BOTTOM_WALL - 1);
+            apply_part_of_background(renderer, resources->room->wall_left, 0, PLAY_ZONE_ADD_LEFT_Y);
+            break;
+
+        case 2 :
+            if (world->room_state != 1) {
+                apply_part_of_background(renderer, resources->room->door_left_open, 0, PLAY_ZONE_ADD_LEFT_Y);
+            }
+            else {
+                apply_part_of_background(renderer, resources->room->door_left_close, 0, PLAY_ZONE_ADD_LEFT_Y);
+            }
+            apply_part_of_background(renderer, resources->room->wall_up, PLAY_ZONE_ADD_TOP_X, 0);
+            apply_part_of_background(renderer, resources->room->wall_right, PLAY_ZONE_RIGHT_WALL, PLAY_ZONE_ADD_LEFT_Y + 1);
+            apply_part_of_background(renderer, resources->room->wall_down, PLAY_ZONE_ADD_TOP_X + 1, PLAY_ZONE_BOTTOM_WALL - 1);
+            break;
+
+        case 3 :
+            if (world->room_state != 1) {
+                apply_part_of_background(renderer, resources->room->door_up_open, PLAY_ZONE_ADD_TOP_X, 0);
+            }
+            else {
+                apply_part_of_background(renderer, resources->room->door_up_close, PLAY_ZONE_ADD_TOP_X, 0);
+            }
+            apply_part_of_background(renderer, resources->room->wall_down, PLAY_ZONE_ADD_TOP_X + 1, PLAY_ZONE_BOTTOM_WALL - 1);
+            apply_part_of_background(renderer, resources->room->wall_right, PLAY_ZONE_RIGHT_WALL, PLAY_ZONE_ADD_LEFT_Y + 1);
+            apply_part_of_background(renderer, resources->room->wall_left, 0, PLAY_ZONE_ADD_LEFT_Y);
+            break;
+    }
 }
 
 void apply_monsters(SDL_Renderer* renderer, world_t* world, resources_t* resources) {

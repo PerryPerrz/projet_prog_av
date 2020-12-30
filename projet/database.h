@@ -43,6 +43,46 @@
 #define PLAY_ZONE_BOTTOM_WALL 308
 
 /**
+ * \brief Coordonnée x de la porte en haut
+ */
+#define PLAY_ZONE_ADD_TOP_X 284
+
+/**
+ * \brief Coordonnée x de la porte en haut et en bas mais de l'autre côté
+ */
+#define PLAY_ZONE_ADD_TOP_BOT_X_2 413
+
+/**
+ * \brief Epaisseur des murs vus de haut
+ */
+#define WALL_WIDTH 22
+
+/**
+ * \brief Epaisseur du poteau qui tient la porte
+ */
+#define POST_WIDTH 11
+
+/**
+ * \brief Coordonnée y de la porte à gauche
+ */
+#define PLAY_ZONE_ADD_LEFT_Y 83
+
+/**
+ * \brief Coordonnée x de la porte à gauche et à droite mais de l'autre côté
+ */
+#define PLAY_ZONE_ADD_LEFT_RIGHT_Y_2 244
+
+/**
+ * \brief Epaisseur des murs du haut à gauche vus de côté
+ */
+#define WALL_WITDH_LEFT 66
+
+/**
+ * \brief Epaisseur des murs du bas à gauche vus de côté
+ */
+#define WALL_WITDH_LEFT_2 64
+
+/**
  * \brief Taille des munitions
 */
 
@@ -198,6 +238,16 @@ int is_game_over(world_t *world);
  * \return Retourne 0 si vrai et 1 si faux
  */
 int sprite_is_out_of_bounds(sprite_t* sprite);
+
+
+/**
+ * \brief La fonction regarde si le sprite donné est en dehors des zones de jeu additionelles si la salle est finie
+ * \param sprite Un sprite
+ * \param direction La direction dans laquelle se trouve la prochaine salle
+ * \param room_state L'état de la salle
+ * \return Retourne 0 si vrai et 1 si faux
+ */
+int sprite_is_out_of_additional_bounds(sprite_t* sprite, int direction, int room_state);
 
 
 /**
