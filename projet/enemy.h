@@ -26,7 +26,7 @@
  * \brief Vitesse des ennemis de type 1
 */
 
-#define ENEMY_1_SPEED 2
+#define ENEMY_1_SPEED 1
 
 /**
  * \brief Points de vie des ennemis de type 1
@@ -51,6 +51,12 @@
 */
 
 #define NB_ENEMIES_MAX 10
+
+/**
+ * \brief La distance entre l'apparition des monstres et le joueur au début d'une salle
+*/
+
+#define SPAWN_DISTANCE 100
 
 /**
  * \brief La procédure initialise les ennemis

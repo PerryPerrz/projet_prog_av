@@ -19,24 +19,34 @@ void init_enemies(world_t* world) {
 
 void create_enemies(world_t* world) {
     world->nb_enemies = generate_number(2,NB_ENEMIES_MAX);
-    int type; 
+    int type, x_temp, y_temp, too_close; 
     int* w = malloc(sizeof(int)); //* nombre colonne du sprite sheet avec le plus de colonne des monstres
     for (int i = 0; i < world->nb_enemies; i++) {
         type = generate_number(1,2); // 1 seul pour l'instant 
+        //On gère le fait de faire apparaitre les monstres au hasard sur l'écran et également le fait qu'un monstre ne peut pas apparaîte trop près du joueur
+        too_close = 0;
+        while(too_close == 0) {
+            x_temp = generate_number(PLAY_ZONE_LEFT_WALL, PLAY_ZONE_RIGHT_WALL - ENEMY_1_HEIGHT/2);//hauteur du plus grand monstre
+            y_temp = generate_number(PLAY_ZONE_TOP_WALL, PLAY_ZONE_BOTTOM_WALL - ENEMY_1_WIDTH/2);//largeur du plus large monstre
+            if (!(x_temp < world->player->sprite->x + SPAWN_DISTANCE && x_temp > world->player->sprite->x - SPAWN_DISTANCE && y_temp < world->player->sprite->y + SPAWN_DISTANCE && y_temp < world->player->sprite->y - SPAWN_DISTANCE)) {
+                too_close = 1;
+            }
+        }
+        
         switch (type) {
-        case 1:
-            w[0] = ENEMY_1_WIDTH;
-            init_sprite(world->enemies[i]->sprite, SCREEN_WIDTH / 4, SCREEN_HEIGHT /3, w, ENEMY_1_HEIGHT, ENEMY_1_SPEED);
-            world->enemies[i]->hp = ENEMY_1_HP; //+ bonus selon l'étage actuel
-            world->enemies[i]->atk_power = ENEMY_1_ATK_POWER; //+ bonus selon l'étage actuel
-            world->enemies[i]->atk_speed = ENEMY_1_ATK_SPEED;
-            world->enemies[i]->type = 1;
-            break;
+            case 1:
+                w[0] = ENEMY_1_WIDTH;
+                init_sprite(world->enemies[i]->sprite, x_temp, y_temp, w, ENEMY_1_HEIGHT, ENEMY_1_SPEED);
+                world->enemies[i]->hp = ENEMY_1_HP; //+ bonus selon l'étage actuel
+                world->enemies[i]->atk_power = ENEMY_1_ATK_POWER; //+ bonus selon l'étage actuel
+                world->enemies[i]->atk_speed = ENEMY_1_ATK_SPEED;
+                world->enemies[i]->type = 1;
+                break;
 
             //à développer
 
-        default:
-            break;
+            default:
+                break;
         }
         world->enemies[i]->animation_timer = 0;
         world->enemies[i]->invincibility_timer = 0;
@@ -56,8 +66,23 @@ void update_enemies(world_t* world)
 {
     for (int i = 0; i < world->nb_enemies; ++i)
     {
-        if (world->enemies[i]->type == 0) {
-            //Faire avancer le monstre vers le perso avec l'algorithme de pathfinding pour tous les monstres de corps à corps
+        if (world->enemies[i]->type == 1) {
+            int speed_restraint = generate_number(1,3); //On donne une chance sur deux aux monstres d'avancer pour qu'ils ne soient pas trop rapides et pour su'ils n'avancent pas tous à la même vitesse
+            if (speed_restraint == 1) {
+                //On fait avancer les monstres vers le joueur
+                if (world->player->sprite->x > world->enemies[i]->sprite->x) {
+                    world->enemies[i]->sprite->x += world->enemies[i]->sprite->v;
+                }
+                else {
+                    world->enemies[i]->sprite->x -= world->enemies[i]->sprite->v;
+                }
+                if (world->player->sprite->y > world->enemies[i]->sprite->y) {
+                    world->enemies[i]->sprite->y += world->enemies[i]->sprite->v;
+                }
+                else {
+                    world->enemies[i]->sprite->y -= world->enemies[i]->sprite->v;
+                }
+            }
         }
         else {
             //Monstres à distance se déplaçant au hasard

@@ -72,4 +72,12 @@ void print_sprite(sprite_t * sprite);
 void compute_game(world_t *world);
 
 
+/**
+ * \brief Procédure qui retourne le nombre d'ennemis en vie
+ * \param world Données du monde.
+ * \return Le nombre d'ennemis en vie.
+ */
+int nb_enemies_alive(world_t* world);
+
+
 #endif

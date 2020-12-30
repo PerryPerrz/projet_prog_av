@@ -19,6 +19,11 @@ void update_data(world_t *world){
     handle_attacks(world);
     handle_invincibility(world);
 
+    //On gère le fait de finir une salle
+    if (nb_enemies_alive(world) == 0 && world->room_state == 1) {
+        world->room_state = 2;
+    }
+
     update_enemies(world);
 
     compute_game(world);
@@ -115,4 +120,14 @@ void print_sprite(sprite_t * sprite)
 void compute_game(world_t *world)
 {
     //Pour l'instant pas de score d'implémenté etc...
+}
+
+int nb_enemies_alive(world_t* world) {
+    int nb_enemies_alive = 0;
+    for (int i = 0; i < world->nb_enemies; i++) {
+        if (world->enemies[i]->sprite->is_visible == 0) {
+            nb_enemies_alive++;
+        }
+    }
+    return nb_enemies_alive;
 }
