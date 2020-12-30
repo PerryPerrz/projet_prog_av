@@ -16,4 +16,5 @@ Samedi 12/12/2020 : Animation d'attaque + bug réglé.
 Mardi 15/12/2020 : Création des spritesheets du boss/de ses attaques, des attaques du personnage + Attaque retravaillée et animée + résolution de nombreux bugs + création de sprite sheets.
 Lundi 28/12/2020 : Résolution d'un bug majeur + Ajout du système d'attaque pour le joueur et les personnages.
 Mardi 29/12/2020 : Ecriture du système de création de carte (étage), en attente d'une implémentation concrète + Rework déplacement personnage et plus de problème de limites.
+Mercredi 30/12/2020 : Gestion finale des slimes + apparition aléatoire des monstres + gestion élimination de tous les monstres + affichage des couloirs qui menent aux salles et codage du passage entre elles.
 
