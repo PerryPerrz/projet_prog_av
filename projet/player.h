@@ -8,6 +8,7 @@
 
 #ifndef init_player
 #include "database.h"
+#include "fonctions_fichiers.h"
 
 
 /**
@@ -135,6 +136,12 @@ void init_player(world_t* world);
  * \param world Les données du monde
  */
 void handle_anim_player(world_t * world);
+
+/**
+ * \brief La procédure gère la vitesse d'attaque du personnage
+ * \param world Les données du monde
+ */
+void handle_atk_speed_player (world_t* world);
 
 /**
  * \brief La procédure nettoie le personnage du joueur

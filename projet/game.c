@@ -86,6 +86,9 @@ int main(int argc, char* args[])
         //Gestion des animations
         handle_animations(&world);
 
+        //Gestion des données qui ont besoin d'un timer
+        handle_atk_speed_player(&world);
+
         //mise à jour des données liée à la physique du monde
         update_data(&world);
         

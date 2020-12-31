@@ -43,9 +43,12 @@ void init_player(world_t* world) {
     init_sprite(world->player->atk_sprite_verti, 0, 0, atk_w_v, PLAYER_ATTACK_VERTI_HEIGHT, 0);
     set_invisible(world->player->atk_sprite_verti);
 
-    world->player->hp = PLAYER_HP; //+ bonus écrit dans un fichier qui vient d'une partie précédente
-    world->player->atk_power = PLAYER_ATK_POWER; //+ bonus écrit dans un fichier qui vient d'une partie précédente
-    world->player->atk_speed = PLAYER_ATK_SPEED; //+ bonus écrit dans un fichier qui vient d'une partie précédente
+    read_saved_file(world);
+
+    world->player->hp = PLAYER_HP + world->player->bonus_hp;
+    world->player->atk_power = PLAYER_ATK_POWER + world->player->bonus_atk_power;
+    world->player->atk_speed = PLAYER_ATK_SPEED + world->player->bonus_atk_speed;
+    world->player->atk_speed_timer = 0;
     world->player->weapon_element = 0;
     world->player->animation_timer = 0;
     world->player->invincibility_timer = 0;
@@ -116,6 +119,15 @@ void handle_anim_player(world_t * world) {
         set_invisible(world->player->atk_sprite_verti);
     }
 }
+
+void handle_atk_speed_player (world_t* world) {
+    if (world->player->atk_speed_timer >= 1 && world->player->atk_speed_timer < 20) {
+        world->player->atk_speed_timer++;
+    }
+    else {
+        world->player->atk_speed_timer = 0;
+    }
+} 
 
 void free_player(world_t* world) {
     free(world->player->sprite->w);
