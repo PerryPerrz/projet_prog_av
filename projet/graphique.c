@@ -31,6 +31,7 @@ void  init_resources(SDL_Renderer *renderer, resources_t *resources){
     resources->player_attack_hori = load_transparent_image("ressources/player/atk_hori_sprite_sheet.bmp", renderer,230,80,235);
     resources->player_attack_verti = load_transparent_image("ressources/player/atk_verti_sprite_sheet.bmp", renderer,230,80,235);
     resources->slime = load_transparent_image("ressources/monsters/slime.bmp", renderer,230,80,235);
+
     //On s'occupe des textures de la salle
     resources->room = malloc(sizeof(room_resources_t));
     resources->room->background = load_image("ressources/map/background1.bmp",renderer);
@@ -46,6 +47,14 @@ void  init_resources(SDL_Renderer *renderer, resources_t *resources){
     resources->room->wall_up = load_image("ressources/map/wall_up.bmp", renderer);
     resources->room->wall_right = load_image("ressources/map/wall_right.bmp", renderer);
     resources->room->wall_left = load_image("ressources/map/wall_left.bmp", renderer);
+
+    //On s'occupe de la police d'écriture
+    init_ttf();
+    resources->font = load_font("ressources/font/arial.ttf", 12);
+    resources->color.a = 0;
+    resources->color.r = 250;
+    resources->color.b = 250;
+    resources->color.g = 250;
 }
 
 void clean_resources(resources_t *resources){
@@ -68,6 +77,9 @@ void clean_resources(resources_t *resources){
     clean_image(resources->room->wall_right);
     clean_image(resources->room->wall_left);
     free(resources->room);
+
+    //On s'occupe de la police d'écriture
+    clean_font(resources->font);
 }
 
 
@@ -100,6 +112,20 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world, resources_t *resou
     apply_sprite(renderer, resources->player_attack_hori, world->player->atk_sprite_hori);
     apply_sprite(renderer, resources->player_attack_verti, world->player->atk_sprite_verti);
 
+    //On gère l'affichage des textes 
+    char player_hp_string[8];
+    sprintf(player_hp_string, "HP = %d", world->player->hp);
+    apply_text(renderer, resources->font, resources->color, player_hp_string, 50, 50);
+
+    //On gère l'affichage d'un message pour passer d'une salle à l'autre
+    if (sprite_is_out_of_additional_bounds(world->player->sprite, world->floor->direction, world->room_state) == 1) {
+        if (world->floor->type == 0) {
+            apply_text(renderer, resources->font, resources->color, "Appuyez sur la barre espace pour avancer vers la prochaine salle !", SCREEN_WIDTH/2 - 180, SCREEN_HEIGHT/2 - 12);
+        }
+        else {
+            //Message de fin
+        }
+    }
     
     // on met à jour l'écran    
     SDL_RenderPresent(renderer);
@@ -168,4 +194,11 @@ void apply_monsters(SDL_Renderer* renderer, world_t* world, resources_t* resourc
                 break;
         }
     }
+}
+
+void apply_text(SDL_Renderer * renderer, TTF_Font* font, SDL_Color color, char * string, int x, int y) {
+    SDL_Texture* texture = load_text(string, renderer, font, color);
+    SDL_Rect rect = {0,0,0,0};
+    SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+    apply_image(texture, renderer, rect, x, y);
 }

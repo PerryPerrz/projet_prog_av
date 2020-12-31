@@ -6,6 +6,7 @@
  * \date 21 septembre 2020
  */
 
+#ifndef load_image
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <stdio.h>
@@ -76,3 +77,23 @@ void init_sdl(SDL_Window **window, SDL_Renderer **renderer, int width, int heigh
  * \param window La fenêtre graphique
  */
 void clean_sdl(SDL_Renderer *renderer,SDL_Window *window);
+
+/**
+ * \brief La fonction charge une police
+ * \param path le chemin du fichier correpondant à la police
+ * \param font_size la taille de la police
+ * \return la police chargée
+*/
+TTF_Font * load_font(const char *path, int font_size);
+
+/**
+ * \brief La fonction nettoie une police
+ * \param font La police à nettoyer
+ */
+void clean_font(TTF_Font * font);
+
+/**
+ * \brief Fonction qui initialise l'environnement ttf
+ */
+void init_ttf();
+#endif

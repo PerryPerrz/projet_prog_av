@@ -52,25 +52,25 @@ int sprite_is_out_of_additional_bounds(sprite_t* sprite, int direction, int room
     if (room_state != 1) {
         switch (direction) {
         case 0:
-            if ((sprite->x + sprite->w[sprite->wich_img[0]] / 2 <= PLAY_ZONE_ADD_TOP_BOT_X_2 - WALL_WIDTH - POST_WIDTH)  &&  (sprite->x - sprite->w[sprite->wich_img[0]] / 2 >= PLAY_ZONE_ADD_TOP_X + 1 + WALL_WIDTH + POST_WIDTH) && (sprite->y + sprite->h/2 >= PLAY_ZONE_BOTTOM_WALL - 50) && (sprite->y + sprite->h/2 <= SCREEN_HEIGHT)) { //On regarde si le joueur est dans le couloir en bas quand tous les monstres sont morts
+            if ((sprite->x + sprite->w[sprite->wich_img[0]] / 2 <= PLAY_ZONE_ADD_TOP_BOT_X_2 - WALL_WIDTH - POST_WIDTH)  &&  (sprite->x - sprite->w[sprite->wich_img[0]] / 2 >= PLAY_ZONE_ADD_TOP_X + 1 + WALL_WIDTH + POST_WIDTH) && (sprite->y + sprite->h/2 >= PLAY_ZONE_BOTTOM_WALL - 10) && (sprite->y + sprite->h/2 <= SCREEN_HEIGHT)) { //On regarde si le joueur est dans le couloir en bas quand tous les monstres sont morts
                 return 1;
             }
             break;
 
         case 1:
-            if ((sprite->x + sprite->w[sprite->wich_img[0]] / 2 <= SCREEN_WIDTH)  &&  (sprite->x - sprite->w[sprite->wich_img[0]] / 2 >= PLAY_ZONE_RIGHT_WALL - 50) && (sprite->y + sprite->h/2 >= PLAY_ZONE_ADD_LEFT_Y + 1 + WALL_WITDH_LEFT) && (sprite->y + sprite->h/2 <= PLAY_ZONE_ADD_LEFT_RIGHT_Y_2 - WALL_WITDH_LEFT_2)) { //On regarde si le joueur est dans le couloir à droite quand tous les monstres sont mort
+            if ((sprite->x + sprite->w[sprite->wich_img[0]] / 2 <= SCREEN_WIDTH)  &&  (sprite->x - sprite->w[sprite->wich_img[0]] / 2 >= PLAY_ZONE_RIGHT_WALL - 40) && (sprite->y + sprite->h/2 >= PLAY_ZONE_ADD_LEFT_Y + 1 + WALL_WITDH_LEFT) && (sprite->y + sprite->h/2 <= PLAY_ZONE_ADD_LEFT_RIGHT_Y_2 - WALL_WITDH_LEFT_2)) { //On regarde si le joueur est dans le couloir à droite quand tous les monstres sont mort
                 return 1;
             }
             break;
 
         case 2:
-            if ((sprite->x + sprite->w[sprite->wich_img[0]] / 2 <= PLAY_ZONE_LEFT_WALL + 50)  &&  (sprite->x - sprite->w[sprite->wich_img[0]] / 2 >= 0) && (sprite->y + sprite->h/2 >= PLAY_ZONE_ADD_LEFT_Y + WALL_WITDH_LEFT) & (sprite->y + sprite->h/2 <= PLAY_ZONE_ADD_LEFT_RIGHT_Y_2 - WALL_WITDH_LEFT_2)) { //On regarde si le joueur est dans le couloir à gauche quand tous les monstres sont mort
+            if ((sprite->x + sprite->w[sprite->wich_img[0]] / 2 <= PLAY_ZONE_LEFT_WALL + 40)  &&  (sprite->x - sprite->w[sprite->wich_img[0]] / 2 >= 0) && (sprite->y + sprite->h/2 >= PLAY_ZONE_ADD_LEFT_Y + WALL_WITDH_LEFT) & (sprite->y + sprite->h/2 <= PLAY_ZONE_ADD_LEFT_RIGHT_Y_2 - WALL_WITDH_LEFT_2)) { //On regarde si le joueur est dans le couloir à gauche quand tous les monstres sont mort
                 return 1;
             }
             break;
 
         case 3:
-            if ((sprite->x + sprite->w[sprite->wich_img[0]] / 2 <= PLAY_ZONE_ADD_TOP_BOT_X_2 - WALL_WIDTH - POST_WIDTH)  &&  (sprite->x - sprite->w[sprite->wich_img[0]] / 2 >= PLAY_ZONE_ADD_TOP_X + WALL_WIDTH + POST_WIDTH) && (sprite->y - sprite->h/2 >= 0) && (sprite->y + sprite->h/2 <= PLAY_ZONE_TOP_WALL + 50)) { //On regarde si le joueur est dans le couloir en haut quand tous les monstres sont mort
+            if ((sprite->x + sprite->w[sprite->wich_img[0]] / 2 <= PLAY_ZONE_ADD_TOP_BOT_X_2 - WALL_WIDTH - POST_WIDTH)  &&  (sprite->x - sprite->w[sprite->wich_img[0]] / 2 >= PLAY_ZONE_ADD_TOP_X + WALL_WIDTH + POST_WIDTH) && (sprite->y - sprite->h/2 >= 0) && (sprite->y + sprite->h/2 <= PLAY_ZONE_TOP_WALL + 20)) { //On regarde si le joueur est dans le couloir en haut quand tous les monstres sont mort
                 return 1;
             }
             break;

@@ -55,8 +55,10 @@ struct resources_s{
     room_resources_t* room;             /*!< Textures liées à l'image de la salle */
     SDL_Texture* player;                /*!< Texture liée à l'image du personnage. */
     SDL_Texture* player_attack_hori;    /*!< Texture liée à l'image de l'attaque du personnage (forme horizontale) */
-    SDL_Texture* player_attack_verti;    /*!< Texture liée à l'image de l'attaque du personnage (forme verticale)*/   
+    SDL_Texture* player_attack_verti;   /*!< Texture liée à l'image de l'attaque du personnage (forme verticale)*/   
     SDL_Texture* slime;                 /*!< Texture liée à l'image des slimes. */
+    TTF_Font* font;                     /*!< Police de caractères utilisées por les textes à afficher sur la fenêtre */
+    SDL_Color color;                    /*!< Couleur de la police d'écriture */
 };
 
 /**
@@ -134,5 +136,16 @@ void refresh_room(SDL_Renderer *renderer, world_t *world, resources_t *resources
  * \param resources les ressources
  */
 void apply_monsters(SDL_Renderer* renderer, world_t* world, resources_t* resources);
+
+/**
+ * \brief La procédure applique un texte sur le renderer
+ * \param renderer Le renderer actuel
+ * \param font La police d'écriture à appliquer
+ * \param color La couleur du texte à appliquer
+ * \param strin Le texte à appliquer
+ * \param x la coordonnée en abscisse de l'endroit où on compte afficher le texte
+ * \param y la coordonnée en ordonnée de l'endroit où on compte afficher le texte
+*/
+void apply_text(SDL_Renderer * renderer, TTF_Font* font, SDL_Color color, char * string, int x, int y);
 
 #endif

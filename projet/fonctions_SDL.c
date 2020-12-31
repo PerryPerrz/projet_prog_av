@@ -56,3 +56,21 @@ void clean_sdl(SDL_Renderer *renderer,SDL_Window *window){
     }
     SDL_Quit();    
 }
+
+TTF_Font * load_font(const char *path, int font_size){
+    TTF_Font *font = TTF_OpenFont(path, font_size);
+    if(font == NULL){
+        fprintf(stderr, "Erreur pendant chargement font: %s\n", SDL_GetError());
+    }
+    return font;
+}
+
+void clean_font(TTF_Font * font){
+    TTF_CloseFont(font);
+}
+
+void init_ttf(){
+    if(TTF_Init()==-1) {
+        printf("TTF_Init: %s\n", TTF_GetError());
+    }
+}

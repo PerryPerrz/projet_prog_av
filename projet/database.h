@@ -138,13 +138,17 @@ struct character_s
     sprite_t *sprite;           /*!< Champ représentant le sprite du personnage */
     sprite_t *atk_sprite_hori;  /*!< Champ représentant le sprite de l'attaque du personnage (forme horizontale) */
     sprite_t *atk_sprite_verti; /*!< Champ représentant le sprite de l'attaque du personnage (forme verticale) */
-    int hp;                     /*!< Champ indiquant le nombre de points de vie du personnage */     
+    int hp;                     /*!< Champ indiquant le nombre de points de vie du personnage */   
     int atk_power;              /*!< Champ indiquant la puissance d'attaque du personnage */
     int weapon_element;         /*!< Champ indiquant le type de l'arme du personnage (0 = normal / 1 = feu / 2 = eau / 3 = nature) */
     int atk_speed;              /*!< Champ indiquant la vitesse d'attaque du personnage */
+    int atk_speed_timer;        /*!< Champ indiquant le nombre de boucles nécessaires à l'attaque du joueur */
     int animation_timer;        /*!< Champ indiquant le nombre de boucles nécessaires à l'animation du joueur */
     int invincibility_timer;    /*!< Champ indiquant le nombre de boucles durant lesquelles le joueur est invincible */
     int is_invincible;          /*!< Champ indiquant si le joueur est actuellement invincible ou non (1 si oui, 0 si non)*/
+    int bonus_hp;               /*!< Champ indiquant le bonus de pv du personnage (obtenu en finissant une partie) */
+    int bonus_atk_power;        /*!< Champ indiquant le bonus d'attaque du personnage (obtenu en finissant une partie) */   
+    int bonus_atk_speed;        /*!< Champ indiquant le bonus de vitesse d'attaque du personnage (obtenu en finissant une partie) */   
 };
 
 /**
