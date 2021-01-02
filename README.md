@@ -3,18 +3,18 @@ Thème Medieval-Fantasy
 
 Règles du jeu :
 
-    - Jeu composé d'étages ayant des thèmes différents composés de salles générée procéduralement s'enchainant et contenant des monstres ou des évenements.
-    - Le personnage avance de salle en salle en éliminant tous les monstres présents dans les salles.
-    - Le personnage améliore sa capacité au combat au fil des salles en ramassant des bonus.
-    - Quand le personnage meurt il perds tout ce qu'il à accumulé (pièces, bonus) mais il garde une monnaie qu'il peut échanger au point de départ pour devenir plus fort.
+    - Jeu composé de salles générée procéduralement s'enchainant et contenant des monstres à vaincre.
+    - Le personnage avance de salle en salle en éliminant tous les monstres présents dans les salles, une fois arrivé à la dernière salle, il doit vaincre le dragon "pupuce" pour finir le jeu.
+    - Le personnage paut améliorer ses statistiques quand il bat le boss, ces bonus sont sauvegardés pour la prochaine fois.
  
 
 Commandes :
 
-    - Personnage avance avec 'z','q','s','d' ou les flèches directionnelles.
-    - Personnage attaque avec le clic gauche de la souris et effectue une roulade avec le clic droit.
-    - Personnage attaque dans la direction du curseur de la souris.
-    - Personnage ramasse un objet avec 'e' et l'utilise avec la barre espace.
+    - Le personnage avance avec 'z','q','s','d' ou les flèches directionnelles.
+    - Le personnage attaque avec le clic gauche de la souris.
+    - Le personnage attaque dans la direction du curseur de la souris.
+    - La touche "echap" mets en pause le jeu
+    - Appuyer sur la croix  permet de quitter le jeu
 
 Personnage :
 
