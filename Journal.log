@@ -18,4 +18,5 @@ Lundi 28/12/2020 : Résolution d'un bug majeur + Ajout du système d'attaque pou
 Mardi 29/12/2020 : Ecriture du système de création de carte (étage), en attente d'une implémentation concrète + Rework déplacement personnage et plus de problème de limites.
 Mercredi 30/12/2020 : Gestion finale des slimes + apparition aléatoire des monstres + gestion élimination de tous les monstres + affichage des couloirs qui menent aux salles et codage du passage entre elles.
 Jeudi 31/12/2020 : Implémentation affichage de texte sur l'écran + petite modification de coordonnées dans database.c + 
-Implémentation lecture de fichier de sauvegarde (en attente écriture) + vitesse d'attaque du personnage
+Implémentation lecture de fichier de sauvegarde (en attente écriture) + vitesse d'attaque du personnage.
+Samedi 02/01/2021 : Implémentation missiles + Amélioration et complétion de la sauvegarde + petits ajouts diverses
