@@ -44,7 +44,7 @@
  * \brief Vitesse d'attaque des ennemis de type 1
 */
 
-#define ENEMY_1_ATK_SPEED 1
+#define ENEMY_1_ATK_SPEED 101
 
 /**
  * \brief Hauteur des ennemis de type 2
@@ -74,7 +74,7 @@
  * \brief Vitesse d'attaque des ennemis de type 2
 */
 
-#define ENEMY_2_ATK_SPEED 1
+#define ENEMY_2_ATK_SPEED 51
 
 /**
  * \brief Points de vie des ennemis de type 2
@@ -110,7 +110,7 @@
  * \brief Vitesse d'attaque des ennemis de type 3
 */
 
-#define ENEMY_3_ATK_SPEED 45
+#define ENEMY_3_ATK_SPEED 145
 
 /**
  * \brief Points de vie des ennemis de type 3
@@ -143,7 +143,7 @@
 #define MISSILE_ATK_POWER 25
 
 /**
- * \brief Nombre d'ennemis maximum
+ * \brief Nombre d'ennemis maximum pour la première salle
 */
 
 #define NB_ENEMIES_MAX 10

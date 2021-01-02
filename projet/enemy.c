@@ -15,10 +15,12 @@ void init_enemies(world_t* world) {
         world->enemies[i] = malloc(sizeof(monster_t));
         world->enemies[i]->sprite = malloc(sizeof(sprite_t));
     }
+    world->nb_enemies_max = 5;//Nombre d'ennemis maximum pour la première salle
+    world->nb_enemies_min = 2;//Nombre d'ennemis minimum pour la première salle
 }
 
 void create_enemies(world_t* world) {
-    world->nb_enemies = generate_number(2,NB_ENEMIES_MAX);
+    world->nb_enemies = generate_number(world->nb_enemies_min, world->nb_enemies_max);
 
     int type, x_temp, y_temp, too_close; 
     int* w1 = malloc(sizeof(int)); //largeur du monstre 1
@@ -28,7 +30,23 @@ void create_enemies(world_t* world) {
     int* w3 = malloc(sizeof(int)); //largeur du monstre 3
     w3[0] = ENEMY_3_WIDTH;
     for (int i = 0; i < world->nb_enemies; i++) {
-        type = generate_number(1,4); // 3 ennemis différents
+
+        //On gère la création de certains type de monstres
+        switch (world->nb_enemies_min)
+        {
+        case 2:
+            type = 1; // Que des slimes pour la première salle
+            break;
+        
+        case 3:
+            type = generate_number(1,3); //Que des slimes et des crânes pour la deuxième salle
+            break;
+        
+        default:
+            type = generate_number(1,4); // 3 ennemis différents pour les autres salles
+            break;
+        }
+        
         //On gère le fait de faire apparaitre les monstres au hasard sur l'écran et également le fait qu'un monstre ne peut pas apparaîte trop près du joueur
         too_close = 0;
         while(too_close == 0) {
@@ -65,6 +83,9 @@ void create_enemies(world_t* world) {
         world->enemies[i]->is_invincible = 1;
         world->enemies[i]->type = type;
     }
+
+    world->nb_enemies_min++;
+    world->nb_enemies_max++;
 }
 
 void init_missiles(world_t* world) {
@@ -85,8 +106,7 @@ void create_missiles(world_t* world) {
             set_invisible(world->missiles[world->nb_missiles]->sprite);
             world->missiles[world->nb_missiles]->nb_turret = i;
             world->missiles[world->nb_missiles]->atk_power = MISSILE_ATK_POWER;
-            world->missiles[world->nb_missiles]->timer_missile = 0;
-            world->missiles[world->nb_missiles]->turret_is_alive = 0;
+            world->missiles[world->nb_missiles]->timer_missile = 200;
             world->nb_missiles++;
         }
     }
@@ -143,12 +163,12 @@ void update_enemies(world_t* world)
 
 void update_missiles(world_t* world) {
     for (int i = 0; i < world->nb_missiles; i++) {
-        if (world->missiles[i]->sprite->is_visible == 1 && world->missiles[i]->turret_is_alive == 0) {  //Si le missile précédent est détruit, on le fait réapparaitre
+        if (world->missiles[i]->sprite->is_visible == 1 && world->enemies[world->missiles[i]->nb_turret]->sprite->is_visible == 0 && world->missiles[i]->timer_missile >= 200) {  //Si le missile précédent est détruit, on le fait réapparaitre
             world->missiles[i]->sprite->x = world->enemies[world->missiles[i]->nb_turret]->sprite->x;
             world->missiles[i]->sprite->y = world->enemies[world->missiles[i]->nb_turret]->sprite->y;
             world->missiles[i]->target_x = world->player->sprite->x;
             world->missiles[i]->target_y = world->player->sprite->y;
-            world->missiles[i]->timer_missile = 1;
+            world->missiles[i]->timer_missile = 0;
             set_visible(world->missiles[i]->sprite);
         }
         else {
@@ -171,7 +191,7 @@ void update_missiles(world_t* world) {
 
 void handle_missile_timer(world_t* world) {
     for (int i = 0; i < world->nb_missiles; i++) {
-        if (world->missiles[i]->timer_missile >= 1 && world->missiles[i]->timer_missile < 200) {
+        if (world->missiles[i]->timer_missile < 200) {
             world->missiles[i]->timer_missile++;
         }
         else {

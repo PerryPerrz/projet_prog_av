@@ -154,7 +154,6 @@ struct missile_s
     int target_y;           /*!< Champ indiquant la coordonnée en ordonnée de la cible du missile */
     int nb_turret;          /*!< Champ indiquant la coordonnée en abscisse de la tourelle du missile */
     int timer_missile;      /*!< Champ indiquant un compteur avant la disparition du missile ce qui simule une portée maximum à la tourelle */
-    int turret_is_alive;    /*!< Champ indiquant si la tourelle reliée à ce missile est encore en vie (0 si oui, 1 si non) */
 };
 
 /**
@@ -188,16 +187,20 @@ typedef struct monster_s monster_t;
 struct world_s
 {
     character_t *player;    /*!< Champ représentant le personnage du joueur */
-    int gameover;           /*!< Champ indiquant si l'on est à la fin du jeu */
+    int play_again;         /*!< Champ indiquant si le joueur souhaite rejouer (1 si oui, 0 si non, 2 si on ne sait pas encore) */
+    int gameover;           /*!< Champ indiquant si l'on est à la fin du jeu (1 si oui, 0 si non) */
     missile_t** missiles;   /*!< Champ représentant les missiles des monstre tourelle */
     int nb_missiles;        /*!< Champ représentant le nombre de missiles en jeu */
     monster_t **enemies;    /*!< Champ représentant les ennemis en jeu */
     int nb_enemies;         /*!< Champ représentant le nombre d'ennemis en jeu */
+    int nb_enemies_max;     /*!< Champ représentant le nombre d'ennemis maximum pour la salle actuelle */
+    int nb_enemies_min;     /*!< Champ représentant le nombre d'ennemis minimum pour la salle actuelle */
     int score;              /*!< Champ représentant le score du joueur */
     int game_state;         /*!< Champ représentant l'état de la partie en cours (1 = J perdu / 2 = E tous détruits / 3 = partie pas finie) */
     int room_state;         /*!< Champ représentant l'état de la salle actuelle (0 = entrée dans la salle / 1 = bataille en cours /2 = E tous détruits / etc... boos, shop,...) */             
     Liste_t* floor;         /*!< Champ représentant un étage du jeu sous forme de liste chaînée */
-    int wants_reward;      /*!< Champ représentant le fait que le joueur ait demandé sa récompense (utile pour l'affichage) (0 si oui, 1 si non) */
+    int wants_reward;       /*!< Champ représentant le fait que le joueur ait demandé sa récompense (utile pour l'affichage) (0 si oui, 1 si non) */
+    int is_paused;          /*!< Champ représentant le  fait que le jeu soit mis en pause (0 si oui, 1 si non) */
 };
 
 /**

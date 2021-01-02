@@ -11,6 +11,8 @@
 void read_saved_file(world_t* world) {
     FILE* pfile = fopen("sauvegarde/sauvegarde.txt", "r");
     if (pfile == NULL) {    //Si il n'y a pas de fichier où que l'on arrive pas à ouvrir le fichier, il n'y a pas de sauvegarde, donc le joueur n'a pas de bonus
+        //On affiche un message pour indiquer que le fichier s'est mal ouvert
+        printf("Le fichier de sauvegarde ne s'est pas bien ouvert où n'existais pas, un nouveau fichier vierge sera crée à la fin de la partie !\n");
         world->player->bonus_hp = 0;
         world->player->bonus_atk_power = 0;
         world->player->bonus_atk_speed = 0;

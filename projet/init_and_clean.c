@@ -22,6 +22,7 @@ void init_data(world_t * world){
     world->score = 0;
     world->game_state = 0;
     world->wants_reward = 1;
+    world->is_paused = 1;
 }
 
 

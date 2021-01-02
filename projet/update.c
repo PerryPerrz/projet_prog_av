@@ -13,9 +13,10 @@ void update_data(world_t *world){
     if (world->room_state == 0) {   //On génère de nouveaux monstres si on est dans une nouvelle salle
         create_enemies(world);
         create_missiles(world);
+        world->player->is_invincible = 0;   //On rends le joueur invincible quand il rentre dans une salle pour éviter de mourir sans pouvoir réagir
+        world->player->invincibility_timer = 1;
         world->room_state = 1;
     }
-
     //On gère les attaques du personnage et des ennemis
     handle_attacks(world);
     handle_invincibility(world);
@@ -29,7 +30,6 @@ void update_data(world_t *world){
     update_missiles(world);
 
     compute_game(world);
-
 }
 
 int sprites_collide(sprite_t *sp2, sprite_t *sp1)
@@ -54,7 +54,6 @@ void handle_attacks(world_t* world) {
                     if (world->enemies[i]->type == 3) {
                         for (int j = 0; j < world->nb_missiles; j++) {
                             if (world->missiles[j]->nb_turret == i) {
-                                world->missiles[j]->turret_is_alive = 1;
                                 set_invisible(world->missiles[j]->sprite);
                             }
                         }
@@ -78,24 +77,39 @@ void handle_attacks(world_t* world) {
         }
     }
 
-    //On gère le fait qu'un missile touche le joueur
+    
     for (int i = 0; i < world->nb_missiles; i++) {
+    //On gère le fait que le joueur attaque un missile
+        if (world->missiles[i]->sprite->is_visible == 0) {
+            if ((sprites_collide(world->player->atk_sprite_hori, world->missiles[i]->sprite) == 1 && world->player->atk_sprite_hori->is_visible == 0) || (sprites_collide(world->player->atk_sprite_verti, world->missiles[i]->sprite) == 1 && world->player->atk_sprite_verti->is_visible == 0)) {
+                set_invisible(world->missiles[i]->sprite);
+                world->missiles[i]->timer_missile = 1;  //On reset le timer du missile pour que le joueur ait le temps de s'approcher des tourelles
+            }
+        }
+
+        //On gère le fait qu'un missile touche le joueur
         if (sprites_collide(world->player->sprite, world->missiles[i]->sprite) == 1 && world->player->is_invincible == 1 && world->missiles[i]->sprite->is_visible == 0) {
             world->player->hp -= world->missiles[i]->atk_power;
             set_invisible(world->missiles[i]->sprite);
+            world->missiles[i]->timer_missile = 1;  //On reset le timer du missile pour que le joueur ait le temps de s'approcher des tourelles
             if (world->player->hp <= 0) {
                 world->gameover = 1;
             }
             //On le rends invincible pendant un court instant pour simuler la vitesse d'attaque des monstres
             world->player->is_invincible = 0;
-            world->player->invincibility_timer = world->enemies[i]->atk_speed; 
+            world->player->invincibility_timer = 1; //Le joueur est invincible pendant pas mal de temps car il à pris un gros coup
         }
+
+        
     }
+
+    
+
 }
 
 void handle_invincibility(world_t* world) {
     //On gère l'invicibilité du joueur
-    if (world->player->invincibility_timer >= 1 && world->player->invincibility_timer <= 50) {
+    if (world->player->invincibility_timer >= 1 && world->player->invincibility_timer <= 150) {
         world->player->invincibility_timer += 1;
     }
     else {
