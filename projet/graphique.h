@@ -41,10 +41,33 @@ struct room_resources_s{
 };
 
 /**
- * \brief Type qui correspond aux ressources du jeu
+ * \brief Type qui correspond aux ressources des salles
 */
 
 typedef struct room_resources_s room_resources_t;
+
+
+/**
+ * \brief Représentation pour stocker les ressources nécessaires à l'affichage des images additionnelles
+*/
+
+struct add_disp_s{
+    SDL_Texture* pause_screen;          /*!< Texture liée à l'image diffusée lorsque le jeu est en pause */
+    SDL_Texture* black_background;      /*!< Texture liée à l'image d'un fond entièrement noir */
+    SDL_Texture* death_screen;          /*!< Texture liée à l'image diffusée lorsque le joueur meurt */
+    SDL_Texture* rules;                 /*!< Texture liée à l'image diffusée avant que la partie commence pour lui expliquer les règles */
+    SDL_Texture* end_screen;            /*!< Texture liée à l'image diffusée lorsque le joueur quitte le jeu */
+    SDL_Texture* welcome_screen;        /*!< Texture liée à l'image diffusée lorsque le joueur commence le jeu */
+    SDL_Texture* waiting_screen_1;      /*!< Texture liée à l'image diffusée lorsque le compte à rebours avant que le jeu démarre en est à 1 */
+    SDL_Texture* waiting_screen_2;      /*!< Texture liée à l'image diffusée lorsque le compte à rebours avant que le jeu démarre en est à 2 */
+    SDL_Texture* waiting_screen_3;      /*!< Texture liée à l'image diffusée lorsque le compte à rebours avant que le jeu démarre en est à 3 */
+};
+
+/**
+ * \brief Type qui correspond aux ressources additionnelles du jeu
+*/
+
+typedef struct add_disp_s add_disp_t;
 
 
 /**
@@ -53,6 +76,7 @@ typedef struct room_resources_s room_resources_t;
 
 struct resources_s{
     room_resources_t* room;             /*!< Textures liées à l'image de la salle */
+    add_disp_t* add_disp;               /*!< Textures liées aux images additionelles à afficher */
     SDL_Texture* player;                /*!< Texture liée à l'image du personnage. */
     SDL_Texture* player_attack_hori;    /*!< Texture liée à l'image de l'attaque du personnage (forme horizontale) */
     SDL_Texture* player_attack_verti;   /*!< Texture liée à l'image de l'attaque du personnage (forme verticale)*/   
@@ -60,7 +84,8 @@ struct resources_s{
     SDL_Texture* vertical_skull;        /*!< Texture liée à l'image des crânes qui trversent la salle verticalement */
     SDL_Texture* skull_turret;          /*!< Texture liée à l'image de la tourelle. */
     SDL_Texture* skull_projectile;      /*!< Texture liée à l'image des projectiles de la tourelle. */
-    TTF_Font* font;                     /*!< Police de caractères utilisées por les textes à afficher sur la fenêtre */
+    TTF_Font* font;                     /*!< Police de caractères utilisées pour les textes à afficher sur la fenêtre */
+    TTF_Font* smaller_font;             /*!< Police de caractères utilisées pour les textes à afficher sur la fenêtre mais en plus petit */
     SDL_Color color;                    /*!< Couleur de la police d'écriture */
 };
 
@@ -168,11 +193,28 @@ void apply_text(SDL_Renderer * renderer, TTF_Font* font, SDL_Color color, char *
 void reward_message(world_t* world, SDL_Renderer * renderer, resources_t* resources);
 
 /**
- * \brief La fonction affiche un message de fin du jeu et mets en pause l'affichage pendant un peu de temps
+ * \brief La fonction affiche un message de fin du jeu selon la situations
+ * \param world les données du monde
+ * \param renderer la surface de l'écran de jeu
+ * \param resources les ressources
+ * \param event paramètre qui contient les événements
+ */
+void end_screen(world_t* world, SDL_Renderer * renderer, resources_t* resources);
+
+/**
+ * \brief La fonction affiche un message lorsque le jeu est en pause
  * \param world les données du monde
  * \param renderer la surface de l'écran de jeu
  * \param resources les ressources
  */
-void afficher_fin_du_jeu(world_t* world, SDL_Renderer * renderer, resources_t* resources);
+void pause_screen(world_t* world, SDL_Renderer * renderer, resources_t* resources);
+
+
+/**
+ * \brief La fonction affiche les messages de début du jeu
+ * \param renderer la surface de l'écran de jeu
+ * \param resources les ressources
+ */
+void start_screen(SDL_Renderer * renderer, resources_t* resources);
 
 #endif

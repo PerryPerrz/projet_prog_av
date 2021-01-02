@@ -66,7 +66,7 @@ void clean(SDL_Window *window, SDL_Renderer * renderer, resources_t *resources, 
 
 void init(SDL_Window **window, SDL_Renderer ** renderer, resources_t *resources, world_t * world){
     init_sdl(window,renderer,SCREEN_WIDTH, SCREEN_HEIGHT);
-    //init_ttf(); Pas encore codée mais bientôt
+    init_ttf();
     init_data(world);
     init_resources(*renderer,resources);
 }
@@ -88,37 +88,56 @@ int main(int argc, char* args[])
     SDL_Renderer *renderer;
     SDL_Window *window;
 
-    //initialisation du jeu
-    init(&window,&renderer,&resources,&world);
-    while(!is_game_over(&world)){ //tant que le jeu n'est pas fini
-        
-        //gestion des évènements
-        handle_events(&event,&world);
+    //On vérifie si le joueur veut rejouer
+    world.play_again = 1;
+    while(world.play_again == 1) {
+        //initialisation du jeu
+        init(&window,&renderer,&resources,&world);
 
-        //Gestion des animations
-        handle_animations(&world);
+        //On affiche les images du début du jeu
+        start_screen(renderer, &resources);
 
-        //mise à jour des données liée à la physique du monde
-        update_data(&world);
+        while(!is_game_over(&world)){ //tant que le jeu n'est pas fini
+            if (world.is_paused == 1) {
+                //gestion des évènements
+                handle_events(&event,&world);
 
-        //Gestion des données qui ont besoin d'un timer
-        handle_timers(&world);
-        
-        //rafraichissement de l'écran
-        refresh_graphics(renderer,&world,&resources);
-        
-        // pause de 10 ms pour controler la vitesse de rafraichissement
-        SDL_Delay(10);
+                //Gestion des animations
+                handle_animations(&world);
+
+                //mise à jour des données liée à la physique du monde
+                update_data(&world);
+
+                //Gestion des données qui ont besoin d'un timer
+                handle_timers(&world);
+            
+                //rafraichissement de l'écran
+                refresh_graphics(renderer,&world,&resources);
+            
+                // pause de 10 ms pour controler la vitesse de rafraichissement
+                SDL_Delay(10);
+            } 
+            else {
+                //Le jeu est en pause
+                pause_screen(&world, renderer, &resources);
+                handle_pause_events(&event, &world);
+                SDL_Delay(10);
+            }
+        }
+
+        //On sauvegarde les bonus gagnés
+        write_saved_file(&world);
+
+        //On indique que le jeu va s'éteindre
+        end_screen(&world, renderer, &resources);
+
+        //On demande au joueur si il veut rejouer
+        while (world.play_again == 2) {
+            handle_end_events(&event, &world);
+        }
+
+        //nettoyage final
+        clean(window,renderer,&resources,&world);
     }
-
-    //On sauvegarde les bonus gagnés
-    write_saved_file(&world);
-
-    //On indique que le jeu va s'éteindre
-    afficher_fin_du_jeu(&world, renderer, &resources);
-
-    //nettoyage final
-    clean(window,renderer,&resources,&world);
-
     return 0;
 }
