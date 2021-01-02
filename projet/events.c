@@ -21,7 +21,8 @@ void handle_events(SDL_Event *event,world_t *world){
             switch (event->key.keysym.sym)
             {
             case SDLK_ESCAPE:
-                //Ouvrir un menu peut-être
+                //On ferme le jeu
+                world->gameover = 1;
                 break;
 
             case SDLK_UP:
@@ -123,13 +124,33 @@ void handle_events(SDL_Event *event,world_t *world){
                         world->player->sprite->y = SCREEN_HEIGHT/2;
                     }
                     else {  //On est dans la salle du boss
-                        //Affichage d'un message de fin avec les bonus gagnés ?
+                        world->wants_reward = 0;
                     }
                 }
                 break;
                 
-            case SDLK_e:
-                //ramasse un objet proche du personnage
+            case SDLK_k:
+                //augmente le bonus d'hp
+                if (world->wants_reward == 1 && world->player->bonus_hp < 50) {
+                    world->player->bonus_hp += 5;
+                    world->gameover = 1;
+                }
+                break;
+
+            case SDLK_l:
+                //augmente le bonus d'attaque
+                if (world->wants_reward == 1 && world->player->bonus_atk_power < 50) {
+                    world->player->bonus_atk_power += 5;
+                    world->gameover = 1;
+                }
+                break;
+
+            case SDLK_m:
+                //augmente le bonus de vitesse d'attaque
+                if (world->wants_reward == 1 && world->player->bonus_atk_speed < 20) {
+                    world->player->bonus_atk_speed += 2;
+                    world->gameover = 1;
+                }
                 break;
             default:
                 break;

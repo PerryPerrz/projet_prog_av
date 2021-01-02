@@ -11,8 +11,14 @@
 
 /**
  * \brief Fonction qui ouvre le fichier de sauvegarde et redonne les bonus écrits dedans si le fichier existe, sinon les bonus sont mis à 0.
- * \param file_name Le nom du fichier à ouvrir ou créer.
+ * \param world Les données du monde.
  */
 void read_saved_file(world_t* world);
+
+/**
+ * \brief Fonction qui ouvre le fichier de sauvegarde, efface ce qu'il y a dedans et écris les bonus actuels, si il n'y a pas de fichier, on en créer un.
+ * \param world Les données du monde.
+ */
+void write_saved_file(world_t* world);
 
 #endif

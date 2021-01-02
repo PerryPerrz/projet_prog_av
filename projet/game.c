@@ -38,10 +38,18 @@ void init(SDL_Window **window, SDL_Renderer ** renderer, resources_t *resources,
 
 
 /**
- * \brief fonction Fonction qui gère les animations
+ * \brief Fonction qui gère les animations
  * \param world le monde
  */
 void handle_animations(world_t* world);
+
+
+/**
+ * \brief Fonction qui gère les timers
+ * \param world le monde
+ */
+void handle_timers(world_t* world);
+
 
 /**
  *  \brief programme principal qui implémente la boucle du jeu
@@ -67,6 +75,10 @@ void handle_animations(world_t* world) {
     handle_anim_player(world);
 }
 
+void handle_timers(world_t* world) {
+    handle_atk_speed_player(world);
+    handle_missile_timer(world);
+}
 
 int main(int argc, char* args[])
 {
@@ -86,11 +98,11 @@ int main(int argc, char* args[])
         //Gestion des animations
         handle_animations(&world);
 
-        //Gestion des données qui ont besoin d'un timer
-        handle_atk_speed_player(&world);
-
         //mise à jour des données liée à la physique du monde
         update_data(&world);
+
+        //Gestion des données qui ont besoin d'un timer
+        handle_timers(&world);
         
         //rafraichissement de l'écran
         refresh_graphics(renderer,&world,&resources);
@@ -98,6 +110,12 @@ int main(int argc, char* args[])
         // pause de 10 ms pour controler la vitesse de rafraichissement
         SDL_Delay(10);
     }
+
+    //On sauvegarde les bonus gagnés
+    write_saved_file(&world);
+
+    //On indique que le jeu va s'éteindre
+    afficher_fin_du_jeu(&world, renderer, &resources);
 
     //nettoyage final
     clean(window,renderer,&resources,&world);

@@ -52,7 +52,7 @@ void init_player(world_t* world) {
     world->player->weapon_element = 0;
     world->player->animation_timer = 0;
     world->player->invincibility_timer = 0;
-    world->player->is_invincible = 0;
+    world->player->is_invincible = 1;
 }
 
 void handle_anim_player(world_t * world) {
@@ -121,7 +121,7 @@ void handle_anim_player(world_t * world) {
 }
 
 void handle_atk_speed_player (world_t* world) {
-    if (world->player->atk_speed_timer >= 1 && world->player->atk_speed_timer < 20) {
+    if (world->player->atk_speed_timer >= 1 && world->player->atk_speed_timer < 40) {
         world->player->atk_speed_timer++;
     }
     else {

@@ -43,14 +43,6 @@ void handle_invincibility(world_t* world);
 
 
 /**
- * \brief Procédure qui annule la vitesse de deux sprites en collision et qui les rends invisible.
- * \param sp1 sprite n°1
- * \param sp2 sprite n°2
- */
-//void handle_sprites_collision(sprite_t *sp2, sprite_t *sp1);
-
-
-/**
  * \brief Procédure qui gère la collision entre un objet et le joueur.
  * \param sp1 sprite n°1 (objet)
  * \param sp2 sprite n°2
