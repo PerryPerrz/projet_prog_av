@@ -31,6 +31,9 @@ void  init_resources(SDL_Renderer *renderer, resources_t *resources){
     resources->player_attack_hori = load_transparent_image("ressources/player/atk_hori_sprite_sheet.bmp", renderer,230,80,235);
     resources->player_attack_verti = load_transparent_image("ressources/player/atk_verti_sprite_sheet.bmp", renderer,230,80,235);
     resources->slime = load_transparent_image("ressources/monsters/slime.bmp", renderer,230,80,235);
+    resources->vertical_skull = load_transparent_image("ressources/monsters/vertical_skull.bmp", renderer,230,80,235);
+    resources->skull_turret = load_transparent_image("ressources/monsters/skull_turret.bmp", renderer,230,80,235);
+    resources->skull_projectile = load_transparent_image("ressources/monsters/skull_projectile.bmp", renderer,230,80,235);
 
     //On s'occupe des textures de la salle
     resources->room = malloc(sizeof(room_resources_t));
@@ -62,6 +65,10 @@ void clean_resources(resources_t *resources){
     clean_image(resources->player_attack_hori);
     clean_image(resources->player_attack_verti);
     clean_image(resources->slime);
+    clean_image(resources->vertical_skull);
+    clean_image(resources->skull_turret);
+    clean_image(resources->skull_projectile);
+
     //On s'occupe des textures de la salle
     clean_image(resources->room->background);
     clean_image(resources->room->door_down_close);
@@ -109,11 +116,12 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world, resources_t *resou
     //On gère l'affichage des sprites
     apply_sprite(renderer, resources->player, world->player->sprite);
     apply_monsters(renderer, world, resources);
+    apply_missiles(renderer, world, resources);
     apply_sprite(renderer, resources->player_attack_hori, world->player->atk_sprite_hori);
     apply_sprite(renderer, resources->player_attack_verti, world->player->atk_sprite_verti);
 
     //On gère l'affichage des textes 
-    char player_hp_string[8];
+    char player_hp_string[10];
     sprintf(player_hp_string, "HP = %d", world->player->hp);
     apply_text(renderer, resources->font, resources->color, player_hp_string, 50, 50);
 
@@ -123,7 +131,14 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world, resources_t *resou
             apply_text(renderer, resources->font, resources->color, "Appuyez sur la barre espace pour avancer vers la prochaine salle !", SCREEN_WIDTH/2 - 180, SCREEN_HEIGHT/2 - 12);
         }
         else {
-            //Message de fin
+            if (world->wants_reward == 1) {
+                apply_text(renderer, resources->font, resources->color, "Bravo, vous avez reussi a vous echapper !", SCREEN_WIDTH/2 - 110, SCREEN_HEIGHT/2 - 24);
+                apply_text(renderer, resources->font, resources->color, "Appuyez sur espace pour reclamer vos recompenses !", SCREEN_WIDTH/2 - 140, SCREEN_HEIGHT/2 + 12);
+            }
+            else
+            {
+                reward_message(world, renderer, resources);
+            }
         }
     }
     
@@ -192,7 +207,21 @@ void apply_monsters(SDL_Renderer* renderer, world_t* world, resources_t* resourc
             case 1:
                 apply_sprite(renderer, resources->slime, world->enemies[i]->sprite);
                 break;
+
+            case 2:
+                apply_sprite(renderer, resources->vertical_skull, world->enemies[i]->sprite);
+                break;
+
+            case 3:
+                apply_sprite(renderer, resources->skull_turret, world->enemies[i]->sprite);
+                break;
         }
+    }
+}
+
+void apply_missiles(SDL_Renderer* renderer, world_t* world, resources_t* resources) {
+    for (int i = 0; i < world->nb_missiles; i++) {
+        apply_sprite(renderer, resources->skull_projectile, world->missiles[i]->sprite);
     }
 }
 
@@ -201,4 +230,55 @@ void apply_text(SDL_Renderer * renderer, TTF_Font* font, SDL_Color color, char *
     SDL_Rect rect = {0,0,0,0};
     SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
     apply_image(texture, renderer, rect, x, y);
+}
+
+void reward_message(world_t* world, SDL_Renderer * renderer, resources_t* resources) {
+    //On change le fond d'écran
+    SDL_RenderClear(renderer);
+    clean_image(resources->room->background);
+    resources->room->background = load_image("ressources/map/brick_wall.bmp", renderer);
+    apply_background(renderer, resources);
+
+    //On fait apparaître les textes de fin
+    apply_text(renderer, resources->font, resources->color, "Pour vous recompenser de votre dur labeur, vous avez le droit d'ameliorer une de vos statistiques !", SCREEN_WIDTH/2 - 260, SCREEN_HEIGHT/4 - 12);    
+    
+    //On s'occupe du bonus d'hp
+    if (world->player->bonus_hp < 50) { //On pose une limite aux hp bonus
+        char player_bonus_hp_string[100];
+        sprintf(player_bonus_hp_string, "Bonus hp = %d, amelioration : %d + 5 | bouton K", world->player->bonus_hp, world->player->bonus_hp);
+        apply_text(renderer, resources->font, resources->color, player_bonus_hp_string, SCREEN_WIDTH/2 - 140, SCREEN_HEIGHT/3 - 12);
+    }
+    else {
+        apply_text(renderer, resources->font, resources->color, "Vous avez deja le maximum d'hp bonus possible !", SCREEN_WIDTH/2 - 140, SCREEN_HEIGHT/3 - 12);
+    }
+
+    //On s'occupe du bonus d'attaque
+    if (world->player->bonus_atk_power < 50) { //On pose une limite à l'attaque bonus
+        char player_bonus_atk_string[100];
+        sprintf(player_bonus_atk_string, "Bonus atk power = %d, amelioration : %d + 5 | bouton L", world->player->bonus_atk_power, world->player->bonus_atk_power);
+        apply_text(renderer, resources->font, resources->color, player_bonus_atk_string, SCREEN_WIDTH/2 - 140, SCREEN_HEIGHT/2 - SCREEN_HEIGHT/20 - 12);
+    }
+    else {
+        apply_text(renderer, resources->font, resources->color, "Vous avez deja le maximum d'attaque bonus possible !", SCREEN_WIDTH/2 - 140, SCREEN_HEIGHT/2 - SCREEN_HEIGHT/20 - 12);
+    }
+
+    //On s'occupe du bonus de vitesse d'attaque
+    if (world->player->bonus_atk_speed < 20) { //On pose une limite à la vitesse d'attaque bonus
+        char player_bonus_spd_string[100];
+        sprintf(player_bonus_spd_string, "Bonus atk speed = %d, amelioration : %d + 2 | bouton M", world->player->bonus_atk_speed, world->player->bonus_atk_speed);
+        apply_text(renderer, resources->font, resources->color, player_bonus_spd_string, SCREEN_WIDTH/2 - 140, SCREEN_HEIGHT/2 + SCREEN_HEIGHT/14 - 12);
+    }
+    else {
+        apply_text(renderer, resources->font, resources->color, "Vous avez deja le maximum de vitesse d'attaque bonus possible !", SCREEN_WIDTH/2 - 140, SCREEN_HEIGHT/2 + SCREEN_HEIGHT/14 - 12);
+    }
+
+    //On affiche les instructions
+    apply_text(renderer, resources->font, resources->color, "Pour prendre votre recompense, appuyez sur la touche correspondante.", SCREEN_WIDTH/2 - 180, (SCREEN_HEIGHT/3)*2 - 12);
+    apply_text(renderer, resources->font, resources->color, "Attention, vous n'avez le droit qu'a un seul bonus, reflechissez bien !", SCREEN_WIDTH/2 - 180, (SCREEN_HEIGHT/3)*2 + 12);
+}
+
+void afficher_fin_du_jeu(world_t* world, SDL_Renderer * renderer, resources_t* resources) {
+    apply_text(renderer, resources->font, resources->color, "Le jeu va se fermer, les bonus ont ete sauvegardes !", SCREEN_WIDTH/2 - 130, SCREEN_HEIGHT/2 - 12);
+    SDL_RenderPresent(renderer);
+    SDL_Delay(2500);
 }

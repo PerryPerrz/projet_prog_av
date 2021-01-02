@@ -12,6 +12,7 @@ void init_data(world_t * world){
     srand(time(NULL));
 
     init_enemies(world);
+    init_missiles(world);
     init_player(world);
 
     init_floor(world);
@@ -20,11 +21,13 @@ void init_data(world_t * world){
     world->gameover = 0;
     world->score = 0;
     world->game_state = 0;
+    world->wants_reward = 1;
 }
 
 
 void clean_data(world_t *world){
     free_player(world);
     free_enemies(world);
+    free_missiles(world);
     free_floor(world->floor);
 }

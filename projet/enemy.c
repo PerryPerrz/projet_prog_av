@@ -19,38 +19,76 @@ void init_enemies(world_t* world) {
 
 void create_enemies(world_t* world) {
     world->nb_enemies = generate_number(2,NB_ENEMIES_MAX);
+
     int type, x_temp, y_temp, too_close; 
-    int* w = malloc(sizeof(int)); //* nombre colonne du sprite sheet avec le plus de colonne des monstres
+    int* w1 = malloc(sizeof(int)); //largeur du monstre 1
+    w1[0] = ENEMY_1_WIDTH;
+    int* w2 = malloc(sizeof(int)); //largeur du monstre 2
+    w2[0] = ENEMY_2_WIDTH;
+    int* w3 = malloc(sizeof(int)); //largeur du monstre 3
+    w3[0] = ENEMY_3_WIDTH;
     for (int i = 0; i < world->nb_enemies; i++) {
-        type = generate_number(1,2); // 1 seul pour l'instant 
+        type = generate_number(1,4); // 3 ennemis différents
         //On gère le fait de faire apparaitre les monstres au hasard sur l'écran et également le fait qu'un monstre ne peut pas apparaîte trop près du joueur
         too_close = 0;
         while(too_close == 0) {
-            x_temp = generate_number(PLAY_ZONE_LEFT_WALL, PLAY_ZONE_RIGHT_WALL - ENEMY_1_HEIGHT/2);//hauteur du plus grand monstre
-            y_temp = generate_number(PLAY_ZONE_TOP_WALL, PLAY_ZONE_BOTTOM_WALL - ENEMY_1_WIDTH/2);//largeur du plus large monstre
-            if (!(x_temp < world->player->sprite->x + SPAWN_DISTANCE && x_temp > world->player->sprite->x - SPAWN_DISTANCE && y_temp < world->player->sprite->y + SPAWN_DISTANCE && y_temp < world->player->sprite->y - SPAWN_DISTANCE)) {
+            x_temp = generate_number(PLAY_ZONE_LEFT_WALL + ENEMY_1_WIDTH/2, PLAY_ZONE_RIGHT_WALL - ENEMY_1_WIDTH/2);//largeur du plus large monstre
+            y_temp = generate_number(PLAY_ZONE_TOP_WALL + ENEMY_1_HEIGHT/2, PLAY_ZONE_BOTTOM_WALL - ENEMY_2_HEIGHT/2);//hauteur du plus grand monstre
+            if (!(x_temp < SCREEN_WIDTH/2 + SPAWN_DISTANCE && x_temp > SCREEN_WIDTH/2 - SPAWN_DISTANCE && y_temp < SCREEN_HEIGHT/2 + SPAWN_DISTANCE && y_temp > SCREEN_HEIGHT/2 - SPAWN_DISTANCE)) {
                 too_close = 1;
             }
         }
         
         switch (type) {
             case 1:
-                w[0] = ENEMY_1_WIDTH;
-                init_sprite(world->enemies[i]->sprite, x_temp, y_temp, w, ENEMY_1_HEIGHT, ENEMY_1_SPEED);
-                world->enemies[i]->hp = ENEMY_1_HP; //+ bonus selon l'étage actuel
-                world->enemies[i]->atk_power = ENEMY_1_ATK_POWER; //+ bonus selon l'étage actuel
+                init_sprite(world->enemies[i]->sprite, x_temp, y_temp, w1, ENEMY_1_HEIGHT, ENEMY_1_SPEED);
+                world->enemies[i]->hp = ENEMY_1_HP;
+                world->enemies[i]->atk_power = ENEMY_1_ATK_POWER; 
                 world->enemies[i]->atk_speed = ENEMY_1_ATK_SPEED;
-                world->enemies[i]->type = 1;
                 break;
 
-            //à développer
+            case 2:
+                init_sprite(world->enemies[i]->sprite, x_temp, y_temp, w2, ENEMY_2_HEIGHT, ENEMY_2_SPEED);
+                world->enemies[i]->hp = ENEMY_2_HP; 
+                world->enemies[i]->atk_power = ENEMY_2_ATK_POWER;
+                world->enemies[i]->atk_speed = ENEMY_2_ATK_SPEED;
+                break;
 
-            default:
+            case 3:
+                init_sprite(world->enemies[i]->sprite, x_temp, y_temp, w3, ENEMY_3_HEIGHT, ENEMY_3_SPEED);
+                world->enemies[i]->hp = ENEMY_3_HP; 
+                world->enemies[i]->atk_power = ENEMY_3_ATK_POWER;
+                world->enemies[i]->atk_speed = ENEMY_3_ATK_SPEED;
                 break;
         }
-        world->enemies[i]->animation_timer = 0;
         world->enemies[i]->invincibility_timer = 0;
-        world->enemies[i]->is_invincible = 0;
+        world->enemies[i]->is_invincible = 1;
+        world->enemies[i]->type = type;
+    }
+}
+
+void init_missiles(world_t* world) {
+    world->missiles = malloc(sizeof(missile_t*)*NB_ENEMIES_MAX);
+    for (int i = 0; i < NB_ENEMIES_MAX; i++) {
+        world->missiles[i] = malloc(sizeof(missile_t));
+        world->missiles[i]->sprite = malloc(sizeof(sprite_t));
+    }
+}
+
+void create_missiles(world_t* world) {
+    world->nb_missiles = 0;
+    int* w = malloc(sizeof(int));
+    w[0] = MISSILE_WIDTH;
+    for (int i = 0; i < world->nb_enemies; i++) {
+        if (world->enemies[i]->type == 3) {
+            init_sprite(world->missiles[world->nb_missiles]->sprite, world->enemies[i]->sprite->x, world->enemies[i]->sprite->y, w, MISSILE_HEIGHT, MISSILE_SPEED);
+            set_invisible(world->missiles[world->nb_missiles]->sprite);
+            world->missiles[world->nb_missiles]->nb_turret = i;
+            world->missiles[world->nb_missiles]->atk_power = MISSILE_ATK_POWER;
+            world->missiles[world->nb_missiles]->timer_missile = 0;
+            world->missiles[world->nb_missiles]->turret_is_alive = 0;
+            world->nb_missiles++;
+        }
     }
 }
 
@@ -62,12 +100,20 @@ void free_enemies(world_t* world) {
     free(world->enemies);
 }
 
+void free_missiles(world_t* world) {
+    for (int i = 0; i < NB_ENEMIES_MAX; i++) {
+        free(world->missiles[i]->sprite);
+        free(world->missiles[i]);
+    }
+    free(world->missiles);
+}
+
 void update_enemies(world_t* world)
 {
     for (int i = 0; i < world->nb_enemies; ++i)
     {
-        if (world->enemies[i]->type == 1) {
-            int speed_restraint = generate_number(1,3); //On donne une chance sur deux aux monstres d'avancer pour qu'ils ne soient pas trop rapides et pour su'ils n'avancent pas tous à la même vitesse
+        if (world->enemies[i]->type == 1) { //Déplacement des slimes
+            int speed_restraint = generate_number(1,4); //On donne une chance sur trois aux slimes d'avancer pour qu'ils ne soient pas trop rapides et pour qu'ils n'avancent pas tous à la même vitesse
             if (speed_restraint == 1) {
                 //On fait avancer les monstres vers le joueur
                 if (world->player->sprite->x > world->enemies[i]->sprite->x) {
@@ -84,39 +130,52 @@ void update_enemies(world_t* world)
                 }
             }
         }
-        else {
-            //Monstres à distance se déplaçant au hasard
-            int direction = generate_number(1,5);
-            switch (direction)
-            {
-            case 1:
-                world->enemies[i]->sprite->x += world->enemies[i]->sprite->v;
-                if (sprite_is_out_of_bounds(world->enemies[i]->sprite) == 0) {
-                    world->enemies[i]->sprite->x -= world->enemies[i]->sprite->v;
-                }
-                break;
-            
-            case 2:
-                world->enemies[i]->sprite->x -= world->enemies[i]->sprite->v;
-                if (sprite_is_out_of_bounds(world->enemies[i]->sprite) == 0) {
-                    world->enemies[i]->sprite->x += world->enemies[i]->sprite->v;
-                }
-                break;
-
-            case 3:
+        else {  //Déplacement des cranes
+            world->enemies[i]->sprite->y += world->enemies[i]->sprite->v;
+            if (sprite_is_out_of_bounds(world->enemies[i]->sprite) == 0) {
+                world->enemies[i]->sprite->v = -world->enemies[i]->sprite->v;
                 world->enemies[i]->sprite->y += world->enemies[i]->sprite->v;
-                if (sprite_is_out_of_bounds(world->enemies[i]->sprite) == 0) {
-                    world->enemies[i]->sprite->y -= world->enemies[i]->sprite->v;
-                }
-                break;
-
-            case 4:
-                world->enemies[i]->sprite->y -= world->enemies[i]->sprite->v;
-                if (sprite_is_out_of_bounds(world->enemies[i]->sprite) == 0) {
-                    world->enemies[i]->sprite->y += world->enemies[i]->sprite->v;
-                }
-                break;
+                world->enemies[i]->sprite->wich_img[1] = (world->enemies[i]->sprite->wich_img[1] + 1)%2;
             }
+        }
+    }
+}
+
+void update_missiles(world_t* world) {
+    for (int i = 0; i < world->nb_missiles; i++) {
+        if (world->missiles[i]->sprite->is_visible == 1 && world->missiles[i]->turret_is_alive == 0) {  //Si le missile précédent est détruit, on le fait réapparaitre
+            world->missiles[i]->sprite->x = world->enemies[world->missiles[i]->nb_turret]->sprite->x;
+            world->missiles[i]->sprite->y = world->enemies[world->missiles[i]->nb_turret]->sprite->y;
+            world->missiles[i]->target_x = world->player->sprite->x;
+            world->missiles[i]->target_y = world->player->sprite->y;
+            world->missiles[i]->timer_missile = 1;
+            set_visible(world->missiles[i]->sprite);
+        }
+        else {
+            //Le missile se dirige vers sa cible
+            if (world->missiles[i]->target_x > world->missiles[i]->sprite->x) {
+                world->missiles[i]->sprite->x += world->missiles[i]->sprite->v;
+            }
+            else {
+                world->missiles[i]->sprite->x -= world->missiles[i]->sprite->v;
+            }
+            if (world->missiles[i]->target_y > world->missiles[i]->sprite->y) {
+                world->missiles[i]->sprite->y += world->missiles[i]->sprite->v;
+            }
+            else {
+                world->missiles[i]->sprite->y -= world->missiles[i]->sprite->v;
+            }
+        }
+    }
+}
+
+void handle_missile_timer(world_t* world) {
+    for (int i = 0; i < world->nb_missiles; i++) {
+        if (world->missiles[i]->timer_missile >= 1 && world->missiles[i]->timer_missile < 200) {
+            world->missiles[i]->timer_missile++;
+        }
+        else {
+            set_invisible(world->missiles[i]->sprite);
         }
     }
 }

@@ -57,6 +57,9 @@ struct resources_s{
     SDL_Texture* player_attack_hori;    /*!< Texture liée à l'image de l'attaque du personnage (forme horizontale) */
     SDL_Texture* player_attack_verti;   /*!< Texture liée à l'image de l'attaque du personnage (forme verticale)*/   
     SDL_Texture* slime;                 /*!< Texture liée à l'image des slimes. */
+    SDL_Texture* vertical_skull;        /*!< Texture liée à l'image des crânes qui trversent la salle verticalement */
+    SDL_Texture* skull_turret;          /*!< Texture liée à l'image de la tourelle. */
+    SDL_Texture* skull_projectile;      /*!< Texture liée à l'image des projectiles de la tourelle. */
     TTF_Font* font;                     /*!< Police de caractères utilisées por les textes à afficher sur la fenêtre */
     SDL_Color color;                    /*!< Couleur de la police d'écriture */
 };
@@ -138,6 +141,14 @@ void refresh_room(SDL_Renderer *renderer, world_t *world, resources_t *resources
 void apply_monsters(SDL_Renderer* renderer, world_t* world, resources_t* resources);
 
 /**
+ * \brief La fonction applique les missiles sur le renderer
+ * \param renderer la surface de l'écran de jeu
+ * \param world les données du monde
+ * \param resources les ressources
+ */
+void apply_missiles(SDL_Renderer* renderer, world_t* world, resources_t* resources);
+
+/**
  * \brief La procédure applique un texte sur le renderer
  * \param renderer Le renderer actuel
  * \param font La police d'écriture à appliquer
@@ -147,5 +158,21 @@ void apply_monsters(SDL_Renderer* renderer, world_t* world, resources_t* resourc
  * \param y la coordonnée en ordonnée de l'endroit où on compte afficher le texte
 */
 void apply_text(SDL_Renderer * renderer, TTF_Font* font, SDL_Color color, char * string, int x, int y);
+
+/**
+ * \brief La fonction affiche le menu des récompenses
+ * \param renderer la surface de l'écran de jeu
+ * \param world les données du monde
+ * \param resources les ressources
+ */
+void reward_message(world_t* world, SDL_Renderer * renderer, resources_t* resources);
+
+/**
+ * \brief La fonction affiche un message de fin du jeu et mets en pause l'affichage pendant un peu de temps
+ * \param world les données du monde
+ * \param renderer la surface de l'écran de jeu
+ * \param resources les ressources
+ */
+void afficher_fin_du_jeu(world_t* world, SDL_Renderer * renderer, resources_t* resources);
 
 #endif

@@ -83,18 +83,6 @@
 #define WALL_WITDH_LEFT_2 64
 
 /**
- * \brief Taille des munitions
-*/
-
-#define AMMO_SIZE 8
-
-/**
- * \brief Vitesse des munitions
-*/
-
-#define AMMO_SPEED 10
-
-/**
  * \brief Type qui correspond à un étage du jeu sous forme de liste
  */
 
@@ -145,7 +133,7 @@ struct character_s
     int atk_speed_timer;        /*!< Champ indiquant le nombre de boucles nécessaires à l'attaque du joueur */
     int animation_timer;        /*!< Champ indiquant le nombre de boucles nécessaires à l'animation du joueur */
     int invincibility_timer;    /*!< Champ indiquant le nombre de boucles durant lesquelles le joueur est invincible */
-    int is_invincible;          /*!< Champ indiquant si le joueur est actuellement invincible ou non (1 si oui, 0 si non)*/
+    int is_invincible;          /*!< Champ indiquant si le joueur est actuellement invincible ou non (0 si oui, 1 si non)*/
     int bonus_hp;               /*!< Champ indiquant le bonus de pv du personnage (obtenu en finissant une partie) */
     int bonus_atk_power;        /*!< Champ indiquant le bonus d'attaque du personnage (obtenu en finissant une partie) */   
     int bonus_atk_speed;        /*!< Champ indiquant le bonus de vitesse d'attaque du personnage (obtenu en finissant une partie) */   
@@ -157,6 +145,25 @@ struct character_s
 
 typedef struct character_s character_t;
 
+
+struct missile_s
+{
+    sprite_t *sprite;       /*!< Champ représentant le sprite du missile */
+    int atk_power;          /*!< Champ indiquant la puissance d'attaque du missile */
+    int target_x;           /*!< Champ indiquant la coordonnée en abscisse de la cible du missile */
+    int target_y;           /*!< Champ indiquant la coordonnée en ordonnée de la cible du missile */
+    int nb_turret;          /*!< Champ indiquant la coordonnée en abscisse de la tourelle du missile */
+    int timer_missile;      /*!< Champ indiquant un compteur avant la disparition du missile ce qui simule une portée maximum à la tourelle */
+    int turret_is_alive;    /*!< Champ indiquant si la tourelle reliée à ce missile est encore en vie (0 si oui, 1 si non) */
+};
+
+/**
+ * \brief Type qui correspond aux données des missiles
+ */
+
+typedef struct missile_s missile_t;
+
+
 struct monster_s
 {
     sprite_t *sprite;       /*!< Champ représentant le sprite du monstre */
@@ -164,9 +171,8 @@ struct monster_s
     int atk_power;          /*!< Champ indiquant la puissance d'attaque du monstre */
     int type;               /*!< Champ indiquant le type du monstre (1 = ... / 2 = ... / etc..) */
     int atk_speed;          /*!< Champ indiquant la vitesse d'attaque du monstre */
-    int animation_timer;    /*!< Champ indiquant le nombre de boucles nécessaires à l'animation du joueur */
     int invincibility_timer;/*!< Champ indiquant le nombre de boucles durant lesquelles le monstre est invincible */
-    int is_invincible;      /*!< Champ indiquant si le monstre est actuellement invincible ou non (1 si oui, 0 si non)*/
+    int is_invincible;      /*!< Champ indiquant si le monstre est actuellement invincible ou non (0 si oui, 1 si non)*/
 };
 
 /**
@@ -183,12 +189,15 @@ struct world_s
 {
     character_t *player;    /*!< Champ représentant le personnage du joueur */
     int gameover;           /*!< Champ indiquant si l'on est à la fin du jeu */
+    missile_t** missiles;   /*!< Champ représentant les missiles des monstre tourelle */
+    int nb_missiles;        /*!< Champ représentant le nombre de missiles en jeu */
     monster_t **enemies;    /*!< Champ représentant les ennemis en jeu */
     int nb_enemies;         /*!< Champ représentant le nombre d'ennemis en jeu */
     int score;              /*!< Champ représentant le score du joueur */
     int game_state;         /*!< Champ représentant l'état de la partie en cours (1 = J perdu / 2 = E tous détruits / 3 = partie pas finie) */
     int room_state;         /*!< Champ représentant l'état de la salle actuelle (0 = entrée dans la salle / 1 = bataille en cours /2 = E tous détruits / etc... boos, shop,...) */             
     Liste_t* floor;         /*!< Champ représentant un étage du jeu sous forme de liste chaînée */
+    int wants_reward;      /*!< Champ représentant le fait que le joueur ait demandé sa récompense (utile pour l'affichage) (0 si oui, 1 si non) */
 };
 
 /**
