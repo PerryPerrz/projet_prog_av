@@ -125,7 +125,8 @@ void free_enemies(world_t* world) {
 void free_missiles(world_t* world) {
     free(world->missiles[0]->sprite->w);
     for (int i = 0; i < NB_ENEMIES_MAX; i++) {
-        free_sprite(world->missiles[i]->sprite);
+        free(world->missiles[i]->sprite->wich_img);
+        free(world->missiles[i]->sprite);
         free(world->missiles[i]);
     }
     free(world->missiles);
