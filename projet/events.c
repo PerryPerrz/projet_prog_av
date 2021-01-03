@@ -250,6 +250,7 @@ void handle_events(SDL_Event *event, world_t *world)
                     }
                 }
                 break;
+            }
         }
     }
 }
@@ -301,5 +302,5 @@ void handle_end_events(SDL_Event *event, world_t *world) {
                 break;
             }
         } 
-    } 
+    }
 }
