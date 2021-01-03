@@ -24,7 +24,9 @@
  */
 void sprite_test_param(sprite_t *sprite, int x, int y, int w, int h, int v)
 {
-    init_sprite(sprite, x, y, w, h, v);
+    int* w1 = malloc(sizeof(int)); //largeur du sprite 1
+    w1[0] = w;
+    init_sprite(sprite, x, y, w1, h, v);
     print_sprite(sprite);
 }
 
@@ -100,58 +102,11 @@ Les deux sprites sont en collision !
 */
 
 /**
- * \brief Procédure qui teste la fonction handle_sprites_collision.
- * \param sp1 sprite n°1
- * \param sp2 sprite n°2
- */
-void handle_sprites_collision_test_param(sprite_t *sp2, sprite_t *sp1)
-{
-    handle_sprites_collision(sp1, sp2);
-    printf("La vitesse du sprite 1 est : %d\nLa vitesse du sprite 2 est : %d\n",
-        sp1->v, sp2->v);
-}
-
-/**
- * \brief Procédure qui teste la fonction handle_sprites_collision.
- */
-void handle_sprites_collision_test()
-{
-    sprite_t* sp1 = malloc(sizeof(sprite_t));
-    sprite_t* sp2 = malloc(sizeof(sprite_t));
-    sp1->h = PLAYER_HEIGHT;
-    sp2->h = PLAYER_HEIGHT;
-    sp1->v = 5;
-    sp2->v = 5;
-    
-
-    //Test alors qu'ils ne sont pas en collision
-    sp1->x = 0;
-    sp1->y = 0;
-    sp2->x = PLAYER_SPRITE_COLUMN_1_WIDTH + 6;
-    sp2->y = PLAYER_HEIGHT + 9;
-    handle_sprites_collision_test_param(sp1, sp2);
-
-    //Test alors qu'ils sont en collision
-    sp2->x = 0;
-    sp2->y = 0;
-    handle_sprites_collision_test_param(sp1, sp2);
-}
-
-
-/*Résultat attendu
-La vitesse du sprite 1 est : 5
-La vitesse du sprite 2 est : 5
-La vitesse du sprite 1 est : 0
-La vitesse du sprite 2 est : 0
-*/
-
-/**
  *  \brief programme principal qui effectue les tests
  */
 int main(int argc, char* args[])
 {
     sprite_test();
     sprites_collide_test();
-    handle_sprites_collision_test();
     return EXIT_SUCCESS;
 }
