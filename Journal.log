@@ -20,4 +20,5 @@ Mercredi 30/12/2020 : Gestion finale des slimes + apparition aléatoire des mons
 Jeudi 31/12/2020 : Implémentation affichage de texte sur l'écran + petite modification de coordonnées dans database.c + 
 Implémentation lecture de fichier de sauvegarde (en attente écriture) + vitesse d'attaque du personnage.
 Samedi 02/01/2021 : Implémentation missiles + Amélioration et complétion de la sauvegarde + petits ajouts diverses + 
-Gestion attaque sur missiles + petites améliorations + Ajouts d'écrans de transitions + gestion de pause et de rejouer. Dimanche 03/01/2021 : Mise à niveau des écrans d'affichages.
+Gestion attaque sur missiles + petites améliorations + Ajouts d'écrans de transitions + gestion de pause et de rejouer. 
+Dimanche 03/01/2021 : Mise à niveau des écrans d'affichages + Version Finale
