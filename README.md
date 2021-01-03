@@ -46,6 +46,7 @@ Ennemis :
     - Le boss de l'étage, c'est une dragonne.
     - Elle se déplace plutôt rapidement, possède beaucoup de point de vie et crache des flammes !
     - Faites attention, sa peau est robuste !
+    - Pupuce étant un dragon, elle est bien plus forte qu'un être humain, pour lui infliger des dégats, il faut surtout viser le ventre et le dos ! 
 
      - Les monstres sont différents selon la salle où ils apparaissent (Plus on avance dans le jeu, plus la difficulté augmente)
      - Il y a une monstre spécifique par étage.
@@ -61,6 +62,8 @@ Compiler le jeu :
 Il vous suffit d'executer le Makefile préalablement remplit par nos soins : dans le terminal, il faut compiler les fichiers nécessaires à notre jeu en éxecutant la commande "make". Une fois le fichier éxecutable créer, il suffit de l'exécuter en rentrant la commande "./main" dans le terminal. Les indications et les régles du jeu suivront, bonne chance ! 
 
 Idées non réalisées par manque de temps / trop compliqué à implémenter : 
+
+- Nous aurions aimée implémenter un élement supplémentaire aux attaques ce qui permettrai par exemple d'infliger une brulûre avec l'élement feu, les sprites sont déja fait mais malheureusement, nous n'avons pas eu le temps de l'implémenter dans le code.
 
 - Objets :
     - Bonus (2 types) : 
