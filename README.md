@@ -7,7 +7,6 @@ Règles du jeu :
     - Le personnage avance de salle en salle en éliminant tous les monstres présents dans les salles, une fois arrivé à la dernière salle, il doit vaincre le dragon "Pupuce" pour finir le jeu.
     - Le personnage paut améliorer ses statistiques quand il vainc le boss, ses bonus sont sauvegardés pour la prochaine fois.
  
-
 Commandes :
 
     - Le personnage avance avec 'z','q','s','d' ou les flèches directionnelles.
@@ -24,30 +23,41 @@ Personnage :
 
 Ennemis : 
 
-    - Il y a 3 types de monstres :
+    - Il y a 3 types de monstres et 1 boss :
+
     - Le slime :
+
         - Il se déplace constamment vers le joueur à une allure lente.
         - Il fait peu de dégats et possède un nombre moyen de point de vie. (5 points de dégats pour 100 points de vie)
+
     - Le Thwomp (la tête violette): 
+
         - Il se déplace verticalement à une vitesse élevée. (il rebondit sur les murs)
         - Il fait beaucoup de dégats mais à peu de point de vie.
+
     - Le Thados (la tourelle)
+
         - C'est une tourelle immobile qui tire des projectiles assez rapidement faisant un nombre moyen de dégats.
         - Ses projectiles ont une portée définie.
         - La tourelle à un nombre de point de vie plutôt élevée. (180 points de vie)
-    - Monstres différents selon la salle et l'étage où ils apparaissent
-    - Présence de Boss qui sont des monstres spéciaux apparaissant à des endroits fixes et qui sont bien plus fort que des monstres normaux
-    - Apparition de monstres d'élites peu fréquente (monstres normaux ayant des statistiques plus grandes)
 
+    - Pupuce :
 
-Mechaniques spéciales :
+    - Le boss de l'étage, c'est une dragonne.
+    - Elle se déplace plutôt rapidement, possède beaucoup de point de vie et crache des flammes !
 
-    - Possibilité de flotter et donc d'éviter les trous ou pièges du sol (joueur et monstres)
-    - Eventualité d'un mode coopération à 2 joueurs
+     - Les monstres sont différents selon la salle où ils apparaissent (Plus on avance dans le jeu, plus la difficulté augmente)
+     - Il y a une monstre spécifique par étage.
 
-Idées : 
+Les bonus : 
+
+De base, la sauvegarde est nulle : aucun bonus ne sont attribués au début du jeu.
+Si vous voulez tester les bonus, il vous suffit d'ouvrir le fichier sauvegarde.txt et de vous rajouter des bonus.
+De ce fait, le jeu sera plus facile à terminer.
+
+Idées non réalisées par manque de temps / trop compliqué à implémenter : 
+
 Objets :
-
     - Bonus (2 types) : 
 
         - Bonus Actif :
@@ -74,3 +84,7 @@ Objets :
 
             - Les clés apparaissent une fois par étage et permettent d'accèder à la salle du Boss.
             - Les clés apparaissent quand le joueur finit une certaine salle déterminée aléatoirement au début de l'étage.
+    
+- Eventualité d'un mode coopération à 2 joueurs
+
+- Plusieurs étages avec des boss différents, monstres différents, récompenses différentes...
