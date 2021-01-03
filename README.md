@@ -45,6 +45,7 @@ Ennemis :
 
     - Le boss de l'étage, c'est une dragonne.
     - Elle se déplace plutôt rapidement, possède beaucoup de point de vie et crache des flammes !
+    - Faites attention, sa peau est robuste !
 
      - Les monstres sont différents selon la salle où ils apparaissent (Plus on avance dans le jeu, plus la difficulté augmente)
      - Il y a une monstre spécifique par étage.
@@ -88,3 +89,7 @@ Idées non réalisées par manque de temps / trop compliqué à implémenter :
 - Eventualité d'un mode coopération à 2 joueurs
 
 - Plusieurs étages avec des boss différents, monstres différents, récompenses différentes...
+
+- Des pièges (sur le sol)
+
+- Différentes armes pour le joueur.
