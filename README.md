@@ -46,6 +46,7 @@ Ennemis :
     - Le boss de l'étage, c'est une dragonne.
     - Elle se déplace plutôt rapidement, possède beaucoup de point de vie et crache des flammes !
     - Faites attention, sa peau est robuste !
+    - Pupuce étant un dragon, elle est bien plus forte qu'un être humain, pour lui infliger des dégats, il faut surtout viser le ventre et le dos ! 
 
      - Les monstres sont différents selon la salle où ils apparaissent (Plus on avance dans le jeu, plus la difficulté augmente)
      - Il y a une monstre spécifique par étage.
