@@ -14,6 +14,7 @@ void init_data(world_t * world){
     init_enemies(world);
     init_missiles(world);
     init_player(world);
+    init_boss(world);
 
     init_floor(world);
     world->room_state = 0;
@@ -30,5 +31,6 @@ void clean_data(world_t *world){
     free_player(world);
     free_enemies(world);
     free_missiles(world);
+    free_boss(world);
     free_floor(world->floor);
 }

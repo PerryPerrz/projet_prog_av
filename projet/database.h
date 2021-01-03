@@ -128,7 +128,6 @@ struct character_s
     sprite_t *atk_sprite_verti; /*!< Champ représentant le sprite de l'attaque du personnage (forme verticale) */
     int hp;                     /*!< Champ indiquant le nombre de points de vie du personnage */   
     int atk_power;              /*!< Champ indiquant la puissance d'attaque du personnage */
-    int weapon_element;         /*!< Champ indiquant le type de l'arme du personnage (0 = normal / 1 = feu / 2 = eau / 3 = nature) */
     int atk_speed;              /*!< Champ indiquant la vitesse d'attaque du personnage */
     int atk_speed_timer;        /*!< Champ indiquant le nombre de boucles nécessaires à l'attaque du joueur */
     int animation_timer;        /*!< Champ indiquant le nombre de boucles nécessaires à l'animation du joueur */
@@ -180,6 +179,28 @@ struct monster_s
 
 typedef struct monster_s monster_t;
 
+
+struct boss_s
+{
+    sprite_t *sprite;           /*!< Champ représentant le sprite du boss */
+    sprite_t *atk_sprite;       /*!< Champ représentant le sprite de l'attaque du boss */
+    int hp;                     /*!< Champ indiquant le nombre de points de vie du boss */   
+    int atk_power;              /*!< Champ indiquant la puissance d'attaque du boss */
+    int atk_speed;              /*!< Champ indiquant la vitesse d'attaque du boss */
+    int atk_speed_timer;        /*!< Champ indiquant le nombre de boucles nécessaires à l'attaque du boss */
+    int animation_timer;        /*!< Champ indiquant le nombre de boucles nécessaires à l'animation du boss */
+    int atk_animation_timer;    /*!< Champ indiquant le nombre de boucles nécessaires à l'animation de l'attaque du boss */
+    int invincibility_timer;    /*!< Champ indiquant le nombre de boucles durant lesquelles le boss est invincible */
+    int is_invincible;          /*!< Champ indiquant si le boss est actuellement invincible ou non (0 si oui, 1 si non)*/
+};
+
+/**
+ * \brief Type qui correspond aux données du boss
+ */
+
+typedef struct boss_s boss_t;
+
+
 /**
  * \brief Représentation du monde du jeu
 */
@@ -187,6 +208,7 @@ typedef struct monster_s monster_t;
 struct world_s
 {
     character_t *player;    /*!< Champ représentant le personnage du joueur */
+    boss_t* boss;           /*!< Champ représentant le boss */
     int play_again;         /*!< Champ indiquant si le joueur souhaite rejouer (1 si oui, 0 si non, 2 si on ne sait pas encore) */
     int gameover;           /*!< Champ indiquant si l'on est à la fin du jeu (1 si oui, 0 si non) */
     missile_t** missiles;   /*!< Champ représentant les missiles des monstre tourelle */

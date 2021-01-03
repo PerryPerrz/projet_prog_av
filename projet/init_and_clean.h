@@ -11,6 +11,7 @@
 #include "player.h"
 #include "enemy.h"
 #include "map.h"
+#include "boss.h"
 
 
 /**

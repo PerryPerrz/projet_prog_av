@@ -13,6 +13,7 @@
 #include "update.h"
 #include "player.h"
 #include "enemy.h"
+#include "boss.h"
 
 //#include "update.h" à venir
 
@@ -73,11 +74,21 @@ void init(SDL_Window **window, SDL_Renderer ** renderer, resources_t *resources,
 
 void handle_animations(world_t* world) {
     handle_anim_player(world);
+    if (world->floor->type == 1) {
+        handle_anim_boss(world);
+        handle_anim_boss_atk(world);
+    }
 }
 
 void handle_timers(world_t* world) {
     handle_atk_speed_player(world);
-    handle_missile_timer(world);
+    if (world->floor->type == 0) {
+        handle_missile_timer(world);
+    }
+    else
+    {
+        handle_atk_speed_boss(world);
+    }
 }
 
 int main(int argc, char* args[])
@@ -102,11 +113,11 @@ int main(int argc, char* args[])
                 //gestion des évènements
                 handle_events(&event,&world);
 
-                //Gestion des animations
-                handle_animations(&world);
-
                 //mise à jour des données liée à la physique du monde
                 update_data(&world);
+
+                //Gestion des animations
+                handle_animations(&world);
 
                 //Gestion des données qui ont besoin d'un timer
                 handle_timers(&world);

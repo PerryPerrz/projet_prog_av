@@ -9,6 +9,7 @@
 #ifndef update_data
 #include "database.h"
 #include "enemy.h"
+#include "boss.h"
 #include <math.h>
 
 
@@ -36,6 +37,13 @@ void handle_attacks(world_t* world);
 
 
 /**
+ * \brief Procédure qui gère les attaques du personnage et du boss
+ * \param world Les données du monde
+ */
+void handle_boss_attacks(world_t* world);
+
+
+/**
  * \brief Procédure qui gère l'invincibilité du personnage et des monstres
  * \param world Les données du monde
  */
@@ -43,11 +51,10 @@ void handle_invincibility(world_t* world);
 
 
 /**
- * \brief Procédure qui gère la collision entre un objet et le joueur.
- * \param sp1 sprite n°1 (objet)
- * \param sp2 sprite n°2
+ * \brief Procédure qui gère l'invincibilité du personnage et du boss
+ * \param world Les données du monde
  */
-void handle_item_collision(sprite_t *item, sprite_t *sp);
+void handle_boss_invincibility(world_t* world);
 
 
 /**
@@ -55,13 +62,6 @@ void handle_item_collision(sprite_t *item, sprite_t *sp);
  * \param sprite Le sprite dont on veut afficher les données
  */
 void print_sprite(sprite_t * sprite);
-
-
-/**
- * \brief Procédure qui implémente les règles du jeu.
- * \param world Données du monde.
- */
-void compute_game(world_t *world);
 
 
 /**
