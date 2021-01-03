@@ -56,6 +56,10 @@ De base, la sauvegarde est nulle : aucun bonus ne sont attribués au début du j
 Si vous voulez tester les bonus, il vous suffit d'ouvrir le fichier sauvegarde.txt et de vous rajouter des bonus.
 De ce fait, le jeu sera plus facile à terminer.
 
+Compiler le jeu : 
+
+Il vous suffit d'executer le Makefile préalablement remplit par nos soins : dans le terminal, il faut compiler les fichiers nécessaires à notre jeu en éxecutant la commande "make". Une fois le fichier éxecutable créer, il suffit de l'exécuter en rentrant la commande "./main" dans le terminal. Les indications et les régles du jeu suivront, bonne chance ! 
+
 Idées non réalisées par manque de temps / trop compliqué à implémenter : 
 
 - Objets :
