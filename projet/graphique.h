@@ -84,6 +84,8 @@ struct resources_s{
     SDL_Texture* vertical_skull;        /*!< Texture liée à l'image des crânes qui trversent la salle verticalement */
     SDL_Texture* skull_turret;          /*!< Texture liée à l'image de la tourelle. */
     SDL_Texture* skull_projectile;      /*!< Texture liée à l'image des projectiles de la tourelle. */
+    SDL_Texture* boss;                  /*!< Texture liée à l'image du boss */
+    SDL_Texture* boss_atk;              /*!< Texture liée à l'image de l'attaque du boss */
     TTF_Font* font;                     /*!< Police de caractères utilisées pour les textes à afficher sur la fenêtre */
     TTF_Font* smaller_font;             /*!< Police de caractères utilisées pour les textes à afficher sur la fenêtre mais en plus petit */
     SDL_Color color;                    /*!< Couleur de la police d'écriture */

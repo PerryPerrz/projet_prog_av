@@ -191,7 +191,7 @@ void handle_events(SDL_Event *event, world_t *world)
                             world->player->atk_speed_timer = world->player->atk_speed;
 
                             //On fait apparaître l'attaque
-                            set_img_sprite(world->player->atk_sprite_verti, 1, world->player->weapon_element);
+                            set_img_sprite(world->player->atk_sprite_verti, 1, 0);
                             world->player->atk_sprite_verti->x = world->player->sprite->x - world->player->sprite->w[3] / 2 - world->player->atk_sprite_verti->w[1] * 2; //On fait apparaitre l'attaque en face du personnage
                             world->player->atk_sprite_verti->y = world->player->sprite->y;                                                                               //On fait apparaitre l'attaque en face du personnage
                             set_visible(world->player->atk_sprite_verti);
@@ -206,7 +206,7 @@ void handle_events(SDL_Event *event, world_t *world)
                             world->player->atk_speed_timer = world->player->atk_speed;
 
                             //On fait apparaître l'attaque
-                            set_img_sprite(world->player->atk_sprite_verti, 0, world->player->weapon_element);
+                            set_img_sprite(world->player->atk_sprite_verti, 0, 0);
                             world->player->atk_sprite_verti->x = world->player->sprite->x + world->player->sprite->w[3] / 2 + world->player->atk_sprite_verti->w[1] * 2; //On fait apparaitre l'attaque en face du personnage
                             world->player->atk_sprite_verti->y = world->player->sprite->y;                                                                               //On fait apparaitre l'attaque en face du personnage
                             set_visible(world->player->atk_sprite_verti);
@@ -224,7 +224,7 @@ void handle_events(SDL_Event *event, world_t *world)
                             world->player->atk_speed_timer = world->player->atk_speed;
 
                             //On fait apparaître l'attaque
-                            set_img_sprite(world->player->atk_sprite_hori, 1, world->player->weapon_element);
+                            set_img_sprite(world->player->atk_sprite_hori, 1, 0);
                             world->player->atk_sprite_hori->x = world->player->sprite->x;                                                                        //On fait apparaitre l'attaque en face du personnage
                             world->player->atk_sprite_hori->y = world->player->sprite->y - world->player->sprite->h / 2 - world->player->atk_sprite_hori->h * 2; //On fait apparaitre l'attaque en face du personnage
                             set_visible(world->player->atk_sprite_hori);
@@ -239,7 +239,7 @@ void handle_events(SDL_Event *event, world_t *world)
                             world->player->atk_speed_timer = world->player->atk_speed;
 
                             //On fait apparaître l'attaque
-                            set_img_sprite(world->player->atk_sprite_hori, 0, world->player->weapon_element);
+                            set_img_sprite(world->player->atk_sprite_hori, 0, 0);
                             world->player->atk_sprite_hori->x = world->player->sprite->x;                                                                        //On fait apparaitre l'attaque en face du personnage
                             world->player->atk_sprite_hori->y = world->player->sprite->y + world->player->sprite->h / 2 + world->player->atk_sprite_hori->h * 2; //On fait apparaitre l'attaque en face du personnage
                             set_visible(world->player->atk_sprite_hori);

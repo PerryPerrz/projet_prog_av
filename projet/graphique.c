@@ -34,6 +34,8 @@ void  init_resources(SDL_Renderer *renderer, resources_t *resources){
     resources->vertical_skull = load_transparent_image("ressources/monsters/vertical_skull.bmp", renderer,230,80,235);
     resources->skull_turret = load_transparent_image("ressources/monsters/skull_turret.bmp", renderer,230,80,235);
     resources->skull_projectile = load_transparent_image("ressources/monsters/skull_projectile.bmp", renderer,230,80,235);
+    resources->boss = load_transparent_image("ressources/boss/boss_sprite_sheet.bmp", renderer,230,80,235);
+    resources->boss_atk = load_transparent_image("ressources/boss/boss_atk_sprite_sheet.bmp", renderer,230,80,235);
 
     //On s'occupe des textures de la salle
     resources->room = malloc(sizeof(room_resources_t));
@@ -80,6 +82,8 @@ void clean_resources(resources_t *resources){
     clean_image(resources->vertical_skull);
     clean_image(resources->skull_turret);
     clean_image(resources->skull_projectile);
+    clean_image(resources->boss);
+    clean_image(resources->boss_atk);
 
     //On s'occupe des textures de la salle
     clean_image(resources->room->background);
@@ -139,15 +143,28 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world, resources_t *resou
     refresh_room(renderer, world, resources);
     //On gère l'affichage des sprites
     apply_sprite(renderer, resources->player, world->player->sprite);
-    apply_monsters(renderer, world, resources);
-    apply_missiles(renderer, world, resources);
+    if (world->floor->type == 0) {
+        apply_monsters(renderer, world, resources);
+        apply_missiles(renderer, world, resources);
+    }
+    else {
+        apply_sprite(renderer, resources->boss, world->boss->sprite);
+        apply_sprite(renderer, resources->boss_atk, world->boss->atk_sprite);
+    }
     apply_sprite(renderer, resources->player_attack_hori, world->player->atk_sprite_hori);
     apply_sprite(renderer, resources->player_attack_verti, world->player->atk_sprite_verti);
 
     //On gère l'affichage des textes 
+    //Affichage des points de vie
     char player_hp_string[10];
     sprintf(player_hp_string, "HP = %d", world->player->hp);
     apply_text(renderer, resources->font, resources->color, player_hp_string, 10, 50);
+
+    if (world->floor->type == 1) {
+        char boss_hp_string[10];
+        sprintf(boss_hp_string, "HP = %d", world->boss->hp);
+        apply_text(renderer, resources->font, resources->color, boss_hp_string, SCREEN_WIDTH - 100, 50);
+    }
 
     //On gère l'affichage d'un message pour passer d'une salle à l'autre
     if (sprite_is_out_of_additional_bounds(world->player->sprite, world->floor->direction, world->room_state) == 1) {
@@ -322,7 +339,7 @@ void start_screen(SDL_Renderer * renderer, resources_t* resources) {
     SDL_Delay(4000);
     apply_part_of_background(renderer, resources->add_disp->rules, 0, 0);
     SDL_RenderPresent(renderer);
-    SDL_Delay(10000);
+    SDL_Delay(8000);
     apply_part_of_background(renderer, resources->add_disp->waiting_screen_1, 0, 0);
     SDL_RenderPresent(renderer);
     SDL_Delay(1000);

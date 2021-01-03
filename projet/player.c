@@ -49,7 +49,6 @@ void init_player(world_t* world) {
     world->player->atk_power = PLAYER_ATK_POWER + world->player->bonus_atk_power;
     world->player->atk_speed = PLAYER_ATK_SPEED + world->player->bonus_atk_speed;
     world->player->atk_speed_timer = 0;
-    world->player->weapon_element = 0;
     world->player->animation_timer = 0;
     world->player->invincibility_timer = 0;
     world->player->is_invincible = 1;
