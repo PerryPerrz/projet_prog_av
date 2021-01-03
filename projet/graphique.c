@@ -152,12 +152,12 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world, resources_t *resou
     //On gère l'affichage d'un message pour passer d'une salle à l'autre
     if (sprite_is_out_of_additional_bounds(world->player->sprite, world->floor->direction, world->room_state) == 1) {
         if (world->floor->type == 0) {
-            apply_text(renderer, resources->smaller_font, resources->color, "Appuyez sur la barre espace pour avancer vers la prochaine salle !", SCREEN_WIDTH/2 - 260, SCREEN_HEIGHT/2 - 12);
+            apply_text(renderer, resources->smaller_font, resources->color, "Appuyez sur la barre espace pour changer de salle !", SCREEN_WIDTH/2 - 190, SCREEN_HEIGHT/2 - 12);
         }
         else {
             if (world->wants_reward == 1) {
-                apply_text(renderer, resources->smaller_font, resources->color, "Bravo, vous avez reussi a vous echapper !", SCREEN_WIDTH/2 - 260, SCREEN_HEIGHT/2 - 24);
-                apply_text(renderer, resources->smaller_font, resources->color, "Appuyez sur espace pour reclamer vos recompenses !", SCREEN_WIDTH/2 - 260, SCREEN_HEIGHT/2 + 12);
+                apply_text(renderer, resources->smaller_font, resources->color, "Bravo, vous avez reussi a vous echapper !", SCREEN_WIDTH/2 - 160, SCREEN_HEIGHT/2 - 24);
+                apply_text(renderer, resources->smaller_font, resources->color, "Appuyez sur espace pour reclamer vos recompenses !", SCREEN_WIDTH/2 - 200, SCREEN_HEIGHT/2 + 12);
             }
             else
             {
@@ -262,41 +262,42 @@ void reward_message(world_t* world, SDL_Renderer * renderer, resources_t* resour
     apply_part_of_background(renderer, resources->add_disp->black_background, 0, 0);
 
     //On fait apparaître les textes de fin
-    apply_text(renderer, resources->font, resources->color, "Vous pouvez ameliorer une de vos statistiques !", SCREEN_WIDTH/2 - 260, SCREEN_HEIGHT/4 - 12);    
+    apply_text(renderer, resources->font, resources->color, "Vous pouvez ameliorer une de vos statistiques !", SCREEN_WIDTH/2 - 280, SCREEN_HEIGHT/4 - 42);    
     
     //On s'occupe du bonus d'hp
     if (world->player->bonus_hp < 50) { //On pose une limite aux hp bonus
         char player_bonus_hp_string[100];
         sprintf(player_bonus_hp_string, "Bonus hp = %d, amelioration : %d + 5 | bouton K", world->player->bonus_hp, world->player->bonus_hp);
-        apply_text(renderer, resources->font, resources->color, player_bonus_hp_string, SCREEN_WIDTH/2 - 220, SCREEN_HEIGHT/3 - 12);
+        apply_text(renderer, resources->font, resources->color, player_bonus_hp_string, SCREEN_WIDTH/2 - 280, SCREEN_HEIGHT/3 - 12);
     }
     else {
-        apply_text(renderer, resources->font, resources->color, "Vous avez deja le maximum d'hp bonus possible !", SCREEN_WIDTH/2 - 220, SCREEN_HEIGHT/3 - 12);
+        apply_text(renderer, resources->font, resources->color, "Vous avez deja le maximum d'hp bonus possible !", SCREEN_WIDTH/2 - 280, SCREEN_HEIGHT/3 - 12);
     }
 
     //On s'occupe du bonus d'attaque
     if (world->player->bonus_atk_power < 50) { //On pose une limite à l'attaque bonus
         char player_bonus_atk_string[100];
         sprintf(player_bonus_atk_string, "Bonus atk power = %d, amelioration : %d + 5 | bouton L", world->player->bonus_atk_power, world->player->bonus_atk_power);
-        apply_text(renderer, resources->font, resources->color, player_bonus_atk_string, SCREEN_WIDTH/2 - 240, SCREEN_HEIGHT/2 - SCREEN_HEIGHT/20 - 12);
+        apply_text(renderer, resources->font, resources->color, player_bonus_atk_string, SCREEN_WIDTH/2 - 280, SCREEN_HEIGHT/2 - SCREEN_HEIGHT/20 - 12);
     }
     else {
-        apply_text(renderer, resources->font, resources->color, "Vous avez deja le maximum d'attaque bonus possible !", SCREEN_WIDTH/2 - 240, SCREEN_HEIGHT/2 - SCREEN_HEIGHT/20 - 12);
+        apply_text(renderer, resources->font, resources->color, "Vous avez deja le maximum d'attaque bonus possible !", SCREEN_WIDTH/2 - 280, SCREEN_HEIGHT/2 - SCREEN_HEIGHT/20 - 12);
     }
 
     //On s'occupe du bonus de vitesse d'attaque
     if (world->player->bonus_atk_speed < 20) { //On pose une limite à la vitesse d'attaque bonus
-        char player_bonus_spd_string[100];
+        char player_bonus_spd_string[100]; 
         sprintf(player_bonus_spd_string, "Bonus atk speed = %d, amelioration : %d + 2 | bouton M", world->player->bonus_atk_speed, world->player->bonus_atk_speed);
-        apply_text(renderer, resources->font, resources->color, player_bonus_spd_string, SCREEN_WIDTH/2 - 240, SCREEN_HEIGHT/2 + SCREEN_HEIGHT/14 - 12);
+        apply_text(renderer, resources->font, resources->color, player_bonus_spd_string, SCREEN_WIDTH/2 - 280, SCREEN_HEIGHT/2 + SCREEN_HEIGHT/14 - 12);
     }
     else {
-        apply_text(renderer, resources->font, resources->color, "Vous avez deja le maximum de vitesse d'attaque bonus possible !", SCREEN_WIDTH/2 - 240, SCREEN_HEIGHT/2 + SCREEN_HEIGHT/14 - 12);
+        apply_text(renderer, resources->font, resources->color, "Vous avez atteint la vitesse d'attaque bonus maximale !", SCREEN_WIDTH/2 - 280, SCREEN_HEIGHT/2 + SCREEN_HEIGHT/12 - 12);
     }
 
     //On affiche les instructions
-    apply_text(renderer, resources->smaller_font, resources->color, "Pour prendre votre recompense, appuyez sur la touche correspondante.", SCREEN_WIDTH/2 - 300, (SCREEN_HEIGHT/3)*2 - 12);
-    apply_text(renderer, resources->smaller_font, resources->color, "Attention, vous n'avez le droit qu'a un seul bonus, reflechissez bien !", SCREEN_WIDTH/2 - 300, (SCREEN_HEIGHT/3)*2 + 12);
+    apply_text(renderer, resources->smaller_font, resources->color, "Pour prendre votre recompense, appuyez sur la touche correspondante.", SCREEN_WIDTH/2 - 280, (SCREEN_HEIGHT/2) + 74);
+    apply_text(renderer, resources->smaller_font, resources->color, "Attention, vous n'avez le droit qu'a un seul bonus, reflechissez bien !", SCREEN_WIDTH/2 - 240, (SCREEN_HEIGHT/3)*2 + 72);
+    apply_text(renderer, resources->smaller_font, resources->color, "(Pour quitter, faites la croix)", SCREEN_WIDTH/2 - 100, (SCREEN_HEIGHT/3)*2 + 108);
 }
 
 void end_screen(world_t* world, SDL_Renderer * renderer, resources_t* resources) {
