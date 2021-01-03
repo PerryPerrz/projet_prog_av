@@ -63,6 +63,8 @@ Il vous suffit d'executer le Makefile préalablement remplit par nos soins : dan
 
 Idées non réalisées par manque de temps / trop compliqué à implémenter : 
 
+- Nous aurions aimée implémenter un élement supplémentaire aux attaques ce qui permettrai par exemple d'infliger une brulûre avec l'élement feu, les sprites sont déja fait mais malheureusement, nous n'avons pas eu le temps de l'implémenter dans le code.
+
 - Objets :
     - Bonus (2 types) : 
 
