@@ -250,12 +250,6 @@ void handle_events(SDL_Event *event, world_t *world)
                     }
                 }
                 break;
-
-            case SDL_BUTTON_RIGHT:
-                //Le joueur effectue un bond en avant
-                //animation perso
-                break;
-            }
         }
     }
 }

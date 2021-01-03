@@ -63,40 +63,40 @@ void handle_anim_player(world_t * world) {
             switch(world->player->sprite->wich_img[0]) {
                 case 0 :
                     world->player->sprite->y += world->player->sprite->v/7;
-                    //Je change temporairement le sprite en celui qui est le plus large sprite de marche pour éviter que le personnage reste coincé contre le mur dans certaines circonstances
+                    //On change temporairement le sprite en celui qui est le plus large sprite de marche pour éviter que le personnage reste coincé contre le mur dans certaines circonstances
                     set_img_sprite(world->player->sprite, 6, world->player->sprite->wich_img[1]);
                     if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
                         if (sprite_is_out_of_additional_bounds(world->player->sprite, world->floor->direction, world->room_state) == 0) {
                             world->player->sprite->y -= world->player->sprite->v/7;
                         }
                     }
-                    //Je le remets dans son êtat normal
+                    //On le remets dans son êtat normal
                     set_img_sprite(world->player->sprite, 0, world->player->sprite->wich_img[1]);
                     break;
 
                 case 2 :
                     world->player->sprite->x += world->player->sprite->v/7;
-                    //Je change temporairement le sprite en celui qui est le plus large sprite de marche pour éviter que le personnage reste coincé contre le mur dans certaines circonstances
+                    //On change temporairement le sprite en celui qui est le plus large sprite de marche pour éviter que le personnage reste coincé contre le mur dans certaines circonstances
                     set_img_sprite(world->player->sprite, 6, world->player->sprite->wich_img[1]);
                     if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
                         if (sprite_is_out_of_additional_bounds(world->player->sprite, world->floor->direction, world->room_state) == 0) {
                             world->player->sprite->x -= world->player->sprite->v/7;
                         }
                     }
-                    //Je le remets dans son êtat normal
+                    //On le remets dans son êtat normal
                     set_img_sprite(world->player->sprite, 2, world->player->sprite->wich_img[1]);
                     break;
 
                 case 4 :
                     world->player->sprite->x -= world->player->sprite->v/7;
-                    //Je change temporairement le sprite en celui qui est le plus large sprite de marche pour éviter que le personnage reste coincé contre le mur dans certaines circonstances
+                    //On change temporairement le sprite en celui qui est le plus large sprite de marche pour éviter que le personnage reste coincé contre le mur dans certaines circonstances
                     set_img_sprite(world->player->sprite, 6, world->player->sprite->wich_img[1]);
                     if (sprite_is_out_of_bounds(world->player->sprite) == 0) {
                         if (sprite_is_out_of_additional_bounds(world->player->sprite, world->floor->direction, world->room_state) == 0) {
                             world->player->sprite->x += world->player->sprite->v/7;
                         }
                     }
-                    //Je le remets dans son êtat normal
+                    //On le remets dans son êtat normal
                     set_img_sprite(world->player->sprite, 4, world->player->sprite->wich_img[1]);
                     break;
 
@@ -113,7 +113,7 @@ void handle_anim_player(world_t * world) {
         }
         world->player->animation_timer++;
     }
-    else { //bug se remet à son état initial après chaque action, tenter avec un else if
+    else {
         set_img_sprite(world->player->sprite, world->player->sprite->wich_img[0], 2); //On remet le sprite dans une position détente après son attaque (le -1 c'est parce que la colonne détente est à indice -1 de la colonne attaque)
         set_invisible(world->player->atk_sprite_hori);
         set_invisible(world->player->atk_sprite_verti);
