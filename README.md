@@ -57,7 +57,7 @@ De ce fait, le jeu sera plus facile à terminer.
 
 Idées non réalisées par manque de temps / trop compliqué à implémenter : 
 
-Objets :
+- Objets :
     - Bonus (2 types) : 
 
         - Bonus Actif :
