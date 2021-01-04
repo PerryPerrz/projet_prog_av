@@ -26,7 +26,7 @@ void create_boss(world_t *world)
     w[4] = BOSS_SPRITE_COLUMN_2_5_WIDTH;
     w[5] = BOSS_SPRITE_COLUMN_1_6_WIDTH;
 
-    init_sprite(world->boss->sprite, SCREEN_WIDTH/4, SCREEN_HEIGHT/2, w, BOSS_HEIGHT, BOSS_SPEED);
+    init_sprite(world->boss->sprite, SCREEN_WIDTH / 4, SCREEN_HEIGHT / 2, w, BOSS_HEIGHT, BOSS_SPEED);
     set_img_sprite(world->player->sprite, 2, 0); //On affiche l'image de repos du boss en premier
 
     //On initialise l'attaque du personnage
@@ -72,7 +72,7 @@ void update_boss(world_t *world)
             if (world->player->sprite->x > world->boss->sprite->x)
             {
                 set_img_sprite(world->boss->sprite, 0, 0);
-                world->boss->atk_sprite->x = world->boss->sprite->x + world->boss->sprite->w[0] / 2 + world->boss->atk_sprite->w[2]/2;
+                world->boss->atk_sprite->x = world->boss->sprite->x + world->boss->sprite->w[0] / 2 + world->boss->atk_sprite->w[2] / 2;
                 world->boss->atk_sprite->y = world->boss->sprite->y;
                 set_visible(world->boss->atk_sprite);
                 set_img_sprite(world->boss->atk_sprite, 0, 0);
@@ -84,7 +84,7 @@ void update_boss(world_t *world)
             else
             {
                 set_img_sprite(world->boss->sprite, 5, 0);
-                world->boss->atk_sprite->x = world->boss->sprite->x - world->boss->sprite->w[6] / 2 - world->boss->atk_sprite->w[2];
+                world->boss->atk_sprite->x = world->boss->sprite->x - world->boss->sprite->w[5] / 2 - world->boss->atk_sprite->w[2];
                 world->boss->atk_sprite->y = world->boss->sprite->y;
                 set_visible(world->boss->atk_sprite);
                 set_img_sprite(world->boss->atk_sprite, 15, 0);
@@ -97,7 +97,8 @@ void update_boss(world_t *world)
         else
         { //Le boss se déplace si le joueur n'est pas à portée
             int slow_animation = generate_number(1, 5);
-            if (slow_animation == 1) {
+            if (slow_animation == 1)
+            {
                 //On fait avancer le boss vers le joueur verticalement
                 if (world->player->sprite->y > world->boss->sprite->y)
                 {
@@ -151,7 +152,7 @@ void handle_anim_boss(world_t *world)
 {
     if (world->boss->animation_timer >= 1 && world->boss->animation_timer < 25)
     { //25 = 3*8 + 1 car on fait un changement de sprite toutes les 8 boucles de jeu pour une animation moins rapide et on a 4 sprites dans une animation (notés de 0 à 3)
-        if (world->boss->animation_timer%8 == 0)
+        if (world->boss->animation_timer % 8 == 0)
         {
             world->boss->sprite->wich_img[1]++;
             //On fait avancer le boss si il en train d'avancer
@@ -196,6 +197,8 @@ void handle_anim_boss(world_t *world)
                     }
                 }
                 break;
+                default:
+                break;
             }
         }
         world->boss->animation_timer++;
@@ -213,8 +216,8 @@ void handle_anim_boss(world_t *world)
 
 void handle_anim_boss_atk(world_t *world)
 {
-    if (world->boss->atk_animation_timer >= 1 && world->boss->atk_animation_timer < 25)
-    { //25 = 8*3 + 1 car on fait un changement de sprite toutes les 8 boucles de jeu pour une animation moyenne et on a 8 sprites dans une animation (notés de 0 à 7)
+    if (world->boss->atk_animation_timer >= 1 && world->boss->atk_animation_timer < 29)
+    { //29 = 7*4 + 1 car on fait un changement de sprite toutes les 4 boucles de jeu pour une animation moyenne et on a 8 sprites dans une animation (notés de 0 à 7)
         if (world->boss->atk_animation_timer % 4 == 0)
         {
             //Comme la sprite sheet à été conçue en miroir il faut savoir où nous nous trouvons dessus pour l'animation

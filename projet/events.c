@@ -250,6 +250,8 @@ void handle_events(SDL_Event *event, world_t *world)
                     }
                 }
                 break;
+                default:
+                break;
             }
         }
     }
@@ -274,12 +276,17 @@ void handle_pause_events(SDL_Event *event, world_t *world)
                 //On finit la pause
                 world->is_paused = 1;
                 break;
+                default:
+                break;
             }
+            default:
+            break;
         }
     }
 }
 
-void handle_end_events(SDL_Event *event, world_t *world) {
+void handle_end_events(SDL_Event *event, world_t *world)
+{
     while (SDL_PollEvent(event))
     {
         switch (event->type)
@@ -300,7 +307,11 @@ void handle_end_events(SDL_Event *event, world_t *world) {
                 world->play_again = 1;
                 world->gameover = 0;
                 break;
+                default:
+                break;
             }
-        } 
+            default:
+            break;
+        }
     }
 }

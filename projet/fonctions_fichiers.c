@@ -19,10 +19,11 @@ void read_saved_file(world_t* world) {
         world->player->bonus_atk_speed = 0;
     }
     else
-    {
-        fscanf(pfile, "bonus_hp : %d\n", &(world->player->bonus_hp));
-        fscanf(pfile, "bonus_atk_power : %d\n", &(world->player->bonus_atk_power));
-        fscanf(pfile, "bonus_atk_speed : %d", &(world->player->bonus_atk_speed));
+    {   
+        int temp;
+        temp = fscanf(pfile, "bonus_hp : %d\n", &(world->player->bonus_hp));
+        temp = fscanf(pfile, "bonus_atk_power : %d\n", &(world->player->bonus_atk_power));
+        temp = fscanf(pfile, "bonus_atk_speed : %d", &(world->player->bonus_atk_speed));
         fclose(pfile);
     }
 }
