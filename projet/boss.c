@@ -10,7 +10,7 @@
 
 void init_boss(world_t *world)
 {
-    world->boss = malloc(sizeof(character_t));
+    world->boss = malloc(sizeof(boss_t));
     world->boss->sprite = malloc(sizeof(sprite_t));
     world->boss->atk_sprite = malloc(sizeof(sprite_t));
 }
